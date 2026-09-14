@@ -29,3 +29,9 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Documentation & AI Customizations (Local only)
+docs/
+.gemini/
+.agent/
+skills/
