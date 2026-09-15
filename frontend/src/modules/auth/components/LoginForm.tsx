@@ -1,12 +1,12 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Mail, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
+import { Phone, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
 import { Input } from '@/common/components/ui/Input';
 import { Button } from '@/common/components/ui/Button';
 
 export const LoginForm: React.FC = () => {
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,13 +23,13 @@ export const LoginForm: React.FC = () => {
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
       <Input
-        label="Email hoặc Số điện thoại"
-        type="text"
-        placeholder="Nhập email hoặc SĐT..."
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
+        label="Số điện thoại"
+        type="tel"
+        placeholder="Nhập số điện thoại..."
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
         isRequired
-        leftIcon={<Mail className="w-5 h-5" />}
+        leftIcon={<Phone className="w-5 h-5" />}
       />
 
       <div className="space-y-1">
