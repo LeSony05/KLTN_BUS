@@ -9,117 +9,140 @@ import {
   Settings,
   Building2,
   ExternalLink,
-  ShieldCheck,
 } from 'lucide-react';
 import { ADMIN_CONFIG } from '../../config/constants';
+import { useAdminStore } from '../../config/useAdminStore';
 
 export const AdminSidebar: React.FC = () => {
+  const { isSidebarCollapsed } = useAdminStore();
+
   const menuItems = [
     {
       to: '/',
       label: 'Bảng điều khiển',
-      icon: <LayoutDashboard className="w-4 h-4" />,
+      icon: <LayoutDashboard className="w-5 h-5 flex-shrink-0" />,
     },
     {
       to: '/posts',
       label: 'Kiểm duyệt tin đăng',
-      icon: <FileCheck2 className="w-4 h-4" />,
+      icon: <FileCheck2 className="w-5 h-5 flex-shrink-0" />,
       badge: '15',
-      badgeColor: 'bg-amber-500/20 text-amber-300 border border-amber-500/30',
+      badgeColor: 'bg-amber-100 text-amber-700 border border-amber-200/80',
     },
     {
       to: '/members',
       label: 'Quản lý hội viên',
-      icon: <Users className="w-4 h-4" />,
+      icon: <Users className="w-5 h-5 flex-shrink-0" />,
       badge: '1.2k',
-      badgeColor: 'bg-emerald-950/60 text-emerald-300 border border-emerald-800/40',
+      badgeColor: 'bg-indigo-100 text-indigo-700 border border-indigo-200/80',
     },
     {
       to: '/contacts',
       label: 'Yêu cầu liên hệ',
-      icon: <MessageSquareText className="w-4 h-4" />,
+      icon: <MessageSquareText className="w-5 h-5 flex-shrink-0" />,
       badge: '6',
-      badgeColor: 'bg-amber-500/20 text-amber-300 border border-amber-500/30',
+      badgeColor: 'bg-amber-100 text-amber-700 border border-amber-200/80',
     },
     {
       to: '/settings',
       label: 'Cài đặt hệ thống',
-      icon: <Settings className="w-4 h-4" />,
+      icon: <Settings className="w-5 h-5 flex-shrink-0" />,
     },
   ];
 
   return (
-    <aside className="w-64 bg-[#113327] text-slate-200 flex flex-col flex-shrink-0 border-r border-emerald-950 min-h-screen">
-      {/* Brand Header */}
-      <div className="h-18 px-5 border-b border-emerald-900/50 flex items-center justify-between">
-        <div className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-amber-500 text-[#113327] flex items-center justify-center font-bold shadow-sm">
+    <aside
+      className={`bg-white text-slate-700 flex flex-col flex-shrink-0 border-r border-slate-100 min-h-screen select-none ${
+        isSidebarCollapsed ? 'w-20' : 'w-64'
+      }`}
+    >
+      {/* Brand Header (FreeDash Clean) */}
+      <div className="h-16 flex items-center bg-white border-b border-slate-100/50">
+        {/* Fixed 80px width container for logo icon - never shifts */}
+        <div className="w-20 h-16 flex items-center justify-center flex-shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 text-white flex items-center justify-center font-bold shadow-md shadow-indigo-500/20">
             <Building2 className="w-5 h-5" />
-          </div>
-          <div className="flex flex-col">
-            <div className="text-sm font-bold tracking-tight">
-              <span className="text-white">King</span>{' '}
-              <span className="text-amber-400">Connect</span>
-            </div>
-            <span className="text-[10px] font-semibold text-emerald-400 tracking-wider uppercase">
-              Quản Trị Hệ Thống
-            </span>
           </div>
         </div>
 
-        <span className="p-1 rounded-md bg-emerald-950/60 text-emerald-400" title="Bảo mật">
-          <ShieldCheck className="w-4 h-4" />
-        </span>
+        {!isSidebarCollapsed && (
+          <div className="flex flex-col min-w-0 pr-4">
+            <div className="text-base font-extrabold tracking-tight truncate">
+              <span className="text-slate-900">King</span>
+              <span className="text-indigo-600">Connect</span>
+            </div>
+            <span className="text-[10px] font-bold text-slate-400 tracking-wider uppercase truncate">
+              QUẢN TRỊ HỆ THỐNG
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Navigation Menu */}
-      <nav className="flex-1 p-3 space-y-1 overflow-y-auto">
-        <p className="text-[11px] font-bold text-emerald-400/60 uppercase tracking-wider px-3 pt-3 pb-1">
-          Chức Năng Quản Lý
-        </p>
+      <nav className="flex-1 px-3 py-2 space-y-1 overflow-y-auto">
+        {!isSidebarCollapsed && (
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-3 pt-2 pb-2">
+            CHỨC NĂNG QUẢN LÝ
+          </p>
+        )}
 
         {menuItems.map((item) => (
           <NavLink
             key={item.to}
             to={item.to}
             end={item.to === '/'}
+            title={isSidebarCollapsed ? item.label : undefined}
             className={({ isActive }) =>
-              `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold ${
+              `flex items-center text-xs font-semibold transition-colors ${
                 isActive
-                  ? 'bg-[#143D30] text-white border border-emerald-700/50 shadow-sm'
-                  : 'text-slate-300 hover:bg-white/5 hover:text-white'
+                  ? 'bg-gradient-to-r from-indigo-500 to-blue-600 text-white font-bold shadow-md shadow-indigo-500/25'
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-indigo-600 font-medium'
+              } ${
+                isSidebarCollapsed
+                  ? 'w-10 h-10 mx-auto justify-center rounded-xl p-0'
+                  : 'px-3 py-3 justify-between rounded-2xl'
               }`
             }
           >
-            <div className="flex items-center gap-2.5">
-              <span className="flex-shrink-0">{item.icon}</span>
-              <span>{item.label}</span>
-            </div>
+            {isSidebarCollapsed ? (
+              <span className="flex items-center justify-center flex-shrink-0">{item.icon}</span>
+            ) : (
+              <>
+                <div className="flex items-center gap-3 min-w-0">
+                  <span className="w-8 flex items-center justify-center flex-shrink-0">{item.icon}</span>
+                  <span className="truncate">{item.label}</span>
+                </div>
 
-            {item.badge && (
-              <span
-                className={`text-[11px] px-2 py-0.5 rounded-full font-bold ${item.badgeColor}`}
-              >
-                {item.badge}
-              </span>
+                {item.badge && (
+                  <span
+                    className={`text-[10px] px-2 py-0.5 rounded-full font-bold flex-shrink-0 ${item.badgeColor}`}
+                  >
+                    {item.badge}
+                  </span>
+                )}
+              </>
             )}
           </NavLink>
         ))}
       </nav>
 
       {/* Footer Info */}
-      <div className="p-3 border-t border-emerald-900/50">
+      <div className="p-3 border-t border-slate-100">
         <a
           href={ADMIN_CONFIG.MAIN_SITE_URL}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-between px-3 py-2.5 rounded-xl bg-emerald-950/40 hover:bg-emerald-950/80 text-amber-400 hover:text-amber-300 text-xs font-semibold border border-emerald-900/40"
+          title={isSidebarCollapsed ? 'Mở Website User' : undefined}
+          className={`flex items-center bg-slate-50 hover:bg-indigo-50 text-slate-700 hover:text-indigo-600 text-xs font-semibold border border-slate-200/60 transition-colors ${
+            isSidebarCollapsed
+              ? 'w-10 h-10 mx-auto justify-center rounded-xl p-0'
+              : 'px-3 py-3 gap-3 rounded-2xl'
+          }`}
         >
-          <div className="flex items-center gap-2">
-            <ExternalLink className="w-3.5 h-3.5" />
-            <span>Mở Website User</span>
-          </div>
-          <span className="text-[10px] text-emerald-400 font-mono">KC Land</span>
+          <span className={isSidebarCollapsed ? '' : 'w-8 flex items-center justify-center flex-shrink-0'}>
+            <ExternalLink className="w-4 h-4 text-slate-400" />
+          </span>
+          {!isSidebarCollapsed && <span className="truncate">Mở Website User</span>}
         </a>
       </div>
     </aside>

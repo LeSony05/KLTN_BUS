@@ -1,14 +1,61 @@
 // admin/src/modules/settings/components/SettingsView.tsx
 import React, { useState } from 'react';
-import { Save, Building2, CheckCircle2 } from 'lucide-react';
-import type { AdminBankConfig } from '../models/settings.model';
+import { Save, CheckCircle2, Building, Layout, Building2 } from 'lucide-react';
+import type {
+  AdminBrandConfig,
+  AdminBannerConfig,
+  AdminBankConfig,
+} from '../models/settings.model';
+import { GeneralBrandSettings } from './GeneralBrandSettings';
+import { BannerSettings } from './BannerSettings';
+import { BankDonationSettings } from './BankDonationSettings';
 
 export const SettingsView: React.FC = () => {
+  const [activeTab, setActiveTab] = useState<'brand' | 'banner' | 'bank'>('brand');
+  const [isSaved, setIsSaved] = useState(false);
+
+  // State Cấu hình Thương hiệu
+  const [brandConfig, setBrandConfig] = useState<AdminBrandConfig>({
+    brandName: 'King Connect Land',
+    slogan: 'Kết nối Nhu Cầu BĐS Cần Mua & Cần Thuê Trực Tiếp',
+    hotline: '0912.345.678',
+    email: 'hotro@kingconnectland.vn',
+    address: 'Số 100 Nguyễn Thị Thập, Phường Tân Quy, Quận 7, TP. Hồ Chí Minh',
+    logoUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=300&auto=format&fit=crop&q=80',
+    faviconUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=64&auto=format&fit=crop&q=80',
+  });
+
+  // State Cấu hình Banner
+  const [bannerConfig, setBannerConfig] = useState<AdminBannerConfig>({
+    heroTitle: 'Sàn Nhu Cầu Bất Động Sản Hàng Đầu Việt Nam',
+    heroSubtitle: 'Đăng tin Cần Mua & Cần Thuê miễn phí, kết nối trực tiếp chủ nhà và môi giới chuyên nghiệp.',
+    banners: [
+      {
+        id: 'banner-1',
+        title: 'Chương trình Kết nối Hội viên Q3/2026',
+        imageUrl: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop&q=80',
+        linkUrl: 'https://kingconnectland.vn/tin-tuc',
+        position: 'HERO',
+        isActive: true,
+      },
+      {
+        id: 'banner-2',
+        title: 'Hướng dẫn Đăng tin Cần Thuê chuẩn SEO',
+        imageUrl: 'https://images.unsplash.com/photo-1582407947304-fd86f028f716?w=800&auto=format&fit=crop&q=80',
+        linkUrl: 'https://kingconnectland.vn/huong-dan',
+        position: 'SIDEBAR',
+        isActive: true,
+      },
+    ],
+  });
+
+  // State Cấu hình Ngân hàng
   const [bank1, setBank1] = useState<AdminBankConfig>({
     bankName: 'Ngân hàng TMCP Ngoại Thương Việt Nam (Vietcombank)',
     accountNumber: '1029384756',
     accountHolder: 'NGUYEN TAN DONG - HOI KING CONNECT LAND',
     branch: 'Chi nhánh TP. Hồ Chí Minh',
+    qrCodeUrl: '',
   });
 
   const [bank2, setBank2] = useState<AdminBankConfig>({
@@ -16,158 +63,98 @@ export const SettingsView: React.FC = () => {
     accountNumber: '888899998888',
     accountHolder: 'HOI BAT DONG SAN KING CONNECT LAND',
     branch: 'Hội sở chính',
+    qrCodeUrl: '',
   });
 
-  const [isSaved, setIsSaved] = useState(false);
-
-  const handleSave = (e: React.FormEvent) => {
+  const handleSaveAll = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
+    setTimeout(() => setIsSaved(false), 3500);
   };
 
+  const tabs = [
+    {
+      id: 'brand',
+      label: 'Thương Hiệu & Logo',
+      icon: <Building className="w-4 h-4" />,
+    },
+    {
+      id: 'banner',
+      label: 'Banner Quảng Cáo & Hero Header',
+      icon: <Layout className="w-4 h-4" />,
+    },
+    {
+      id: 'bank',
+      label: 'Tài Khoản Đóng Góp Quỹ',
+      icon: <Building2 className="w-4 h-4" />,
+    },
+  ];
+
   return (
-    <div className="space-y-6 font-sans">
+    <div className="space-y-6 font-sans pb-10">
+      {/* Header section */}
       <div>
         <h1 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight">
-          Cài Đặt Banner & Thông Tin Quỹ Đóng Góp
+          Cài Đặt Hệ Thống & Thương Hiệu
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
-          Cấu hình 2 tài khoản ngân hàng hiển thị trên trang Đóng góp tự nguyện của User Portal.
+          Quản lý Logo sàn, Banner quảng cáo, Thông tin liên hệ và Tài khoản đóng góp.
         </p>
       </div>
 
+      {/* Success Notification */}
       {isSaved && (
-        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl font-bold flex items-center gap-2 text-sm shadow-xs">
+        <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-2xl font-semibold flex items-center gap-2.5 text-sm shadow-xs animate-in fade-in duration-200">
           <CheckCircle2 className="w-5 h-5 text-emerald-700 flex-shrink-0" />
-          <span>Đã lưu cấu hình tài khoản đóng góp thành công!</span>
+          <span>Đã lưu toàn bộ cấu hình hệ thống thành công! Tất cả các thay đổi đã được cập nhật.</span>
         </div>
       )}
 
-      <form onSubmit={handleSave} className="space-y-6">
-        {/* Tài khoản 1 */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-4">
-          <div className="flex items-center gap-2 text-sm font-extrabold text-[#143D30] border-b border-slate-100 pb-3">
-            <Building2 className="w-4 h-4 text-amber-600" />
-            <span>Tài Khoản Ngân Hàng Số 1 (Chính)</span>
-          </div>
+      {/* Navigation Tabs */}
+      <div className="flex items-center gap-2 border-b border-slate-200 overflow-x-auto no-scrollbar">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id as any)}
+            className={`flex items-center gap-2 px-4 py-3 border-b-2 text-xs sm:text-sm font-semibold whitespace-nowrap transition-all cursor-pointer ${
+              activeTab === tab.id
+                ? 'border-[#3c50e0] text-[#3c50e0] bg-[#ebf3fe] rounded-t-xl font-bold'
+                : 'border-transparent text-slate-500 hover:text-slate-800 hover:bg-slate-50/50'
+            }`}
+          >
+            {tab.icon}
+            <span>{tab.label}</span>
+          </button>
+        ))}
+      </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Tên Ngân hàng:
-              </label>
-              <input
-                type="text"
-                value={bank1.bankName}
-                onChange={(e) => setBank1({ ...bank1, bankName: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
+      {/* Tab Contents */}
+      <form onSubmit={handleSaveAll} className="space-y-6">
+        {activeTab === 'brand' && (
+          <GeneralBrandSettings brandConfig={brandConfig} onChange={setBrandConfig} />
+        )}
 
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Số Tài Khoản:
-              </label>
-              <input
-                type="text"
-                value={bank1.accountNumber}
-                onChange={(e) => setBank1({ ...bank1, accountNumber: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-bold text-amber-700 focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
+        {activeTab === 'banner' && (
+          <BannerSettings bannerConfig={bannerConfig} onChange={setBannerConfig} />
+        )}
 
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Tên Chủ Tài Khoản:
-              </label>
-              <input
-                type="text"
-                value={bank1.accountHolder}
-                onChange={(e) => setBank1({ ...bank1, accountHolder: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
+        {activeTab === 'bank' && (
+          <BankDonationSettings
+            bank1={bank1}
+            bank2={bank2}
+            onBank1Change={setBank1}
+            onBank2Change={setBank2}
+          />
+        )}
 
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Chi Nhánh:
-              </label>
-              <input
-                type="text"
-                value={bank1.branch}
-                onChange={(e) => setBank1({ ...bank1, branch: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Tài khoản 2 */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-4">
-          <div className="flex items-center gap-2 text-sm font-extrabold text-[#143D30] border-b border-slate-100 pb-3">
-            <Building2 className="w-4 h-4 text-amber-600" />
-            <span>Tài Khoản Ngân Hàng Số 2 (Dự phòng)</span>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Tên Ngân hàng:
-              </label>
-              <input
-                type="text"
-                value={bank2.bankName}
-                onChange={(e) => setBank2({ ...bank2, bankName: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Số Tài Khoản:
-              </label>
-              <input
-                type="text"
-                value={bank2.accountNumber}
-                onChange={(e) => setBank2({ ...bank2, accountNumber: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-bold text-amber-700 focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Tên Chủ Tài Khoản:
-              </label>
-              <input
-                type="text"
-                value={bank2.accountHolder}
-                onChange={(e) => setBank2({ ...bank2, accountHolder: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-slate-700 block mb-1">
-                Chi Nhánh:
-              </label>
-              <input
-                type="text"
-                value={bank2.branch}
-                onChange={(e) => setBank2({ ...bank2, branch: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl p-2.5 text-xs sm:text-sm font-medium focus:bg-white focus:border-[#143D30] outline-none transition-all"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-end">
+        <div className="flex justify-end pt-4 border-t border-slate-200">
           <button
             type="submit"
-            className="flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#143D30] hover:bg-[#0e2a20] text-white font-bold text-xs sm:text-sm shadow-sm transition-all cursor-pointer"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#3c50e0] hover:bg-[#3142bd] text-white font-bold text-xs sm:text-sm shadow-xs cursor-pointer transition-all"
           >
             <Save className="w-4 h-4" />
-            <span>LƯU CẤU HÌNH</span>
+            <span>Lưu thay đổi</span>
           </button>
         </div>
       </form>

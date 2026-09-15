@@ -10,6 +10,7 @@ import {
   User,
   Eye,
   ShieldCheck,
+  XCircle,
 } from 'lucide-react';
 import type { AdminPostItem } from '../models/post-management.model';
 
@@ -86,15 +87,9 @@ export const PostManagementCard: React.FC<PostManagementCardProps> = ({
                 Người đăng: <strong className="text-slate-800 font-bold">{post.authorName}</strong>
               </span>
             </span>
-            <span className="font-mono text-[11px] text-slate-400">({post.authorPhone})</span>
+            <span className="text-[11px] text-slate-400 font-semibold">({post.authorPhone})</span>
           </div>
         </div>
-
-        {post.rejectReason && (
-          <div className="p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700 font-semibold">
-            Lý do từ chối: {post.rejectReason}
-          </div>
-        )}
       </div>
 
       {/* Actions Toolbar */}
@@ -132,6 +127,13 @@ export const PostManagementCard: React.FC<PostManagementCardProps> = ({
           <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700">
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Đã duyệt hiển thị</span>
+          </span>
+        )}
+
+        {post.status === 'REJECTED' && (
+          <span className="inline-flex items-center gap-1 text-xs font-bold text-rose-600">
+            <XCircle className="w-3.5 h-3.5" />
+            <span>Đã từ chối</span>
           </span>
         )}
       </div>

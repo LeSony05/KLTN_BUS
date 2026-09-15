@@ -14,7 +14,7 @@ export const AdminLayout: React.FC = () => {
       <div className="flex-1 flex flex-col min-w-0">
         <AdminHeader />
         <main className="flex-1 p-6 md:p-8 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">
+          <div className="w-full max-w-[1700px] mx-auto">
             <Outlet />
           </div>
         </main>

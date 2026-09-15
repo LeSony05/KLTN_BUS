@@ -33,13 +33,13 @@ export const MemberTable: React.FC<MemberTableProps> = ({
           <tbody className="divide-y divide-slate-100 text-xs text-slate-700 font-medium">
             {members.map((m) => (
               <tr key={m.id} className="hover:bg-slate-50/50 transition-colors">
-                <td className="py-3.5 px-4 font-mono font-bold text-slate-600">
+                <td className="py-3.5 px-4 font-bold text-slate-600">
                   {m.memberCode}
                 </td>
                 <td className="py-3.5 px-4 font-bold text-slate-900">
                   {m.fullName}
                 </td>
-                <td className="py-3.5 px-4 font-mono text-slate-600">{m.phone}</td>
+                <td className="py-3.5 px-4 text-slate-600">{m.phone}</td>
                 <td className="py-3.5 px-4 text-slate-500">{m.address}</td>
                 <td className="py-3.5 px-4 text-slate-400">{m.joinedDate}</td>
                 <td className="py-3.5 px-4 text-center">
