@@ -1,6 +1,6 @@
 // /src/modules/client/my-posts/components/MyPostsStats.tsx
 import React from 'react';
-import { FileText, CheckCircle2, Clock, AlertTriangle, EyeOff, CheckCheck, History } from 'lucide-react';
+import { FileText, CheckCircle2, Clock, AlertTriangle, EyeOff, CheckCheck } from 'lucide-react';
 
 interface MyPostsStatsProps {
   totalCount: number;
@@ -19,7 +19,6 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
   rejectedCount,
   hiddenCount,
   completedCount,
-  expiredCount,
 }) => {
   return (
     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
@@ -29,7 +28,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <FileText className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tổng tin</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tổng vé</p>
           <p className="text-lg font-extrabold text-slate-900">{totalCount}</p>
         </div>
       </div>
@@ -40,7 +39,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <CheckCircle2 className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đang hiển thị</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đã thanh toán</p>
           <p className="text-lg font-extrabold text-emerald-700">{approvedCount}</p>
         </div>
       </div>
@@ -51,7 +50,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <Clock className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Chờ duyệt</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Chờ thanh toán</p>
           <p className="text-lg font-extrabold text-amber-600">{pendingCount}</p>
         </div>
       </div>
@@ -62,7 +61,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <AlertTriangle className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Từ chối</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Thanh toán lỗi</p>
           <p className="text-lg font-extrabold text-rose-600">{rejectedCount}</p>
         </div>
       </div>
@@ -73,7 +72,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <EyeOff className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Tạm ẩn</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đã hủy</p>
           <p className="text-lg font-extrabold text-slate-700">{hiddenCount}</p>
         </div>
       </div>
@@ -84,7 +83,7 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
           <CheckCheck className="w-4 h-4" />
         </div>
         <div>
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đã hoàn tất</p>
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đã sử dụng</p>
           <p className="text-lg font-extrabold text-sky-700">{completedCount}</p>
         </div>
       </div>

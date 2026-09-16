@@ -4,95 +4,139 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Layers,
-  Home,
-  Building2,
-  Building,
-  Store,
-  Warehouse,
-  MapPin,
-  Flame,
+  Bus,
+  CalendarCheck,
+  MapPinned,
+  PackageCheck,
+  Route,
+  WalletCards,
 } from 'lucide-react';
 
 export const CategoryClient: React.FC = () => {
-  const categories = [
+  const popularRoutes = [
     {
-      id: 'land',
-      title: 'Đất nền',
-      desc: 'Nhu cầu mua & thuê',
-      icon: <Layers className="w-6 h-6 text-[#143D30]" />,
+      id: 'hcm-dalat',
+      title: 'TP. Hồ Chí Minh → Đà Lạt',
+      desc: 'Từ 320.000đ · 12 chuyến/ngày',
     },
     {
-      id: 'townhouse',
-      title: 'Nhà phố',
-      desc: 'Mặt tiền & hẻm xe hơi',
-      icon: <Home className="w-6 h-6 text-[#143D30]" />,
+      id: 'hcm-nhatrang',
+      title: 'TP. Hồ Chí Minh → Nha Trang',
+      desc: 'Từ 260.000đ · xe đêm',
     },
     {
-      id: 'villa',
-      title: 'Biệt thự / Liền kề',
-      desc: 'Khu đô thị & nghỉ dưỡng',
-      icon: <Building2 className="w-6 h-6 text-[#143D30]" />,
+      id: 'hanoi-danang',
+      title: 'Hà Nội → Đà Nẵng',
+      desc: 'Từ 550.000đ · limousine',
     },
     {
-      id: 'apartment',
-      title: 'Căn hộ chung cư',
-      desc: '1 - 3 phòng ngủ cao cấp',
-      icon: <Building className="w-6 h-6 text-[#143D30]" />,
+      id: 'hcm-vungtau',
+      title: 'TP. Hồ Chí Minh → Vũng Tàu',
+      desc: 'Từ 180.000đ · đón nội thành',
+    },
+  ];
+
+  const steps = [
+    {
+      title: 'Chọn tuyến',
+      desc: 'Nhập điểm đi, điểm đến, ngày đi và số vé.',
+      icon: <Route className="w-5 h-5" />,
     },
     {
-      id: 'shophouse',
-      title: 'Mặt bằng kinh doanh',
-      desc: 'Khu phố sầm uất',
-      icon: <Store className="w-6 h-6 text-[#143D30]" />,
+      title: 'Chọn chuyến',
+      desc: 'So sánh giờ đi, loại xe, giá và số ghế trống.',
+      icon: <Bus className="w-5 h-5" />,
     },
     {
-      id: 'warehouse',
-      title: 'Kho xưởng / Nhà máy',
-      desc: 'Khu công nghiệp',
-      icon: <Warehouse className="w-6 h-6 text-[#143D30]" />,
+      title: 'Chọn ghế',
+      desc: 'Chọn vị trí, điểm đón trả và nhập thông tin khách.',
+      icon: <MapPinned className="w-5 h-5" />,
     },
     {
-      id: 'garden',
-      title: 'Đất vườn & Nghỉ dưỡng',
-      desc: 'Ven đô & trang trại',
-      icon: <MapPin className="w-6 h-6 text-[#143D30]" />,
-    },
-    {
-      id: 'urgent',
-      title: 'Nhu cầu mua gấp',
-      desc: 'Tài chính sẵn sàng',
-      icon: <Flame className="w-6 h-6 text-amber-600" />,
+      title: 'Thanh toán',
+      desc: 'Nhận vé điện tử hoặc mã vận đơn sau khi thanh toán.',
+      icon: <WalletCards className="w-5 h-5" />,
     },
   ];
 
   return (
-    <section className="py-16 bg-[#F8FAF9]">
+    <section className="py-12 bg-[#F8FAF9]">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Danh Mục Nhu Cầu Bất Động Sản
-          </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Khám phá các phân khúc bất động sản được nhiều hội viên quan tâm tìm kiếm nhất
-          </p>
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-3 mb-6">
+          <div>
+            <h2 className="text-2xl font-black text-slate-950 tracking-normal">
+              Tuyến phổ biến
+            </h2>
+            <p className="text-sm text-slate-500 mt-1">
+              Gợi ý tuyến có nhiều khách đặt và còn chuyến trong ngày.
+            </p>
+          </div>
+          <Link href="/posts" className="text-sm font-black text-[#143D30] hover:text-[#0e2a20]">
+            Xem tất cả tuyến
+          </Link>
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-          {categories.map((cat) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {popularRoutes.map((route) => (
             <Link
-              key={cat.id}
-              href={`/posts?category=${cat.id}`}
-              className="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] hover:shadow-md hover:border-emerald-700/40 cursor-pointer flex flex-col items-center text-center group"
+              key={route.id}
+              href="/posts?needType=BUY"
+              className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:shadow-md hover:border-[#143D30]/40 transition-all"
             >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50/80 border border-emerald-100 flex items-center justify-center mb-3">
-                {cat.icon}
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-black text-slate-950 text-sm">{route.title}</h3>
+                  <p className="text-xs text-slate-500 font-semibold mt-1">{route.desc}</p>
+                </div>
+                <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 text-[#143D30] flex items-center justify-center">
+                  <Bus className="w-5 h-5" />
+                </div>
               </div>
-              <h3 className="font-bold text-slate-900 text-sm mb-1 group-hover:text-[#143D30]">
-                {cat.title}
-              </h3>
-              <p className="text-xs text-slate-400 font-medium">{cat.desc}</p>
             </Link>
+          ))}
+        </div>
+
+        <div className="mt-10 bg-white rounded-lg border border-slate-200 p-4 md:p-5 shadow-sm">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 mb-5">
+            <div>
+              <h2 className="text-xl font-black text-slate-950">Quy trình đặt vé</h2>
+              <p className="text-sm text-slate-500 mt-1">Tối ưu cho thao tác nhanh trên mobile và desktop.</p>
+            </div>
+            <div className="inline-flex items-center gap-2 rounded-lg bg-amber-50 border border-amber-100 px-3 py-2 text-xs font-black text-amber-800 w-fit">
+              <CalendarCheck className="w-4 h-4" />
+              Giữ ghế 10 phút
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
+            {steps.map((step, idx) => (
+              <div key={step.title} className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
+                <div className="w-9 h-9 rounded-lg bg-[#143D30] text-white flex items-center justify-center mb-3">
+                  {step.icon}
+                </div>
+                <p className="text-[11px] font-black text-amber-700">Bước {idx + 1}</p>
+                <h3 className="text-sm font-black text-slate-950 mt-1">{step.title}</h3>
+                <p className="text-xs text-slate-500 font-medium leading-relaxed mt-1">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3">
+          {[
+            ['Tra cứu vé', 'Tìm bằng mã vé hoặc số điện thoại.'],
+            ['Gửi hàng hóa', 'Tạo vận đơn theo tuyến xe đang chạy.'],
+            ['Thông báo chủ động', 'Nhắc lịch và cảnh báo khi chuyến thay đổi.'],
+          ].map(([title, desc]) => (
+            <div key={title} className="rounded-lg border border-slate-200 bg-white p-4 flex items-start gap-3">
+              <div className="w-9 h-9 rounded-lg bg-emerald-50 text-[#143D30] flex items-center justify-center">
+                <PackageCheck className="w-5 h-5" />
+              </div>
+              <div>
+                <h3 className="text-sm font-black text-slate-950">{title}</h3>
+                <p className="text-xs text-slate-500 mt-1 font-medium">{desc}</p>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -22,16 +22,16 @@ export const ContactClient: React.FC = () => {
 
   return (
     <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4 font-sans">
-      <Breadcrumb items={[{ label: 'Liên hệ BQT' }]} />
+      <Breadcrumb items={[{ label: 'Liên hệ hỗ trợ' }]} />
 
       <div className="max-w-5xl mx-auto space-y-6">
 
       <div className="text-center max-w-xl mx-auto space-y-2">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Liên Hệ Ban Quản Trị
+          Liên Hệ Hỗ Trợ Khách Hàng
         </h1>
         <p className="text-xs sm:text-sm text-slate-500">
-          Mọi thắc mắc về tài khoản hội viên, hỗ trợ kỹ thuật hoặc hợp tác, vui lòng gửi tin nhắn.
+          Cần hỗ trợ đặt vé, hủy vé, tra cứu hóa đơn, gửi hàng hoặc thanh toán, vui lòng gửi yêu cầu.
         </p>
       </div>
 
@@ -41,7 +41,7 @@ export const ContactClient: React.FC = () => {
           <div className="space-y-4">
             <h3 className="text-base font-bold text-amber-400">Thông Tin Liên Hệ</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Hệ thống kết nối bất động sản King Connect Land hoạt động 24/7 nhằm hỗ trợ hội viên tối đa.
+              BusWay hỗ trợ khách hàng trước, trong và sau chuyến đi qua hotline, email và chat realtime.
             </p>
 
             <div className="space-y-3 pt-2 text-xs text-slate-200">
@@ -55,13 +55,13 @@ export const ContactClient: React.FC = () => {
               </p>
               <p className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>contact@kingconnectland.vn</span>
+                <span>support@busway.vn</span>
               </p>
             </div>
           </div>
 
           <div className="p-4 bg-white/10 rounded-xl text-[11px] text-slate-300 border border-white/10">
-            Giờ làm việc: Thứ 2 — Thứ 7 (8:00 — 18:00)
+            Hỗ trợ: 24/7 cho vé xe, vận đơn và sự cố chuyến đi
           </div>
         </div>
 
@@ -111,7 +111,7 @@ export const ContactClient: React.FC = () => {
                 />
                 <Input
                   label="Tiêu đề yêu cầu"
-                  placeholder="Ví dụ: Hỗ trợ kích hoạt tài khoản"
+                  placeholder="Ví dụ: Hỗ trợ hủy vé"
                   value={subject}
                   onChange={(e) => setSubject(e.target.value)}
                   isRequired

@@ -9,7 +9,7 @@ import {
   Mail,
   Heart,
   ShieldCheck,
-  Building2,
+  Bus,
 } from 'lucide-react';
 
 export const Footer: React.FC = () => {
@@ -21,16 +21,15 @@ export const Footer: React.FC = () => {
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
-                <Building2 className="w-5 h-5 text-emerald-400" />
+                <Bus className="w-5 h-5 text-emerald-400" />
               </div>
               <div className="text-xl font-extrabold tracking-tight">
-                <span className="text-white">King</span>{' '}
-                <span className="text-amber-400">Connect</span>{' '}
-                <span className="text-white">Land</span>
+                <span className="text-white">Bus</span>{' '}
+                <span className="text-amber-400">Way</span>
               </div>
             </Link>
             <p className="text-xs text-slate-300 leading-relaxed">
-              Hệ thống kết nối nhu cầu bất động sản trực tiếp, minh bạch và hiệu quả hàng đầu dành cho cộng đồng môi giới và khách hàng có nhu cầu thực tế.
+              Hệ thống đặt vé xe khách trực tuyến, chọn ghế, thanh toán điện tử, tra cứu vé và gửi hàng theo tuyến xe.
             </p>
             <div className="flex items-center gap-3 pt-1">
               {/* Facebook */}
@@ -61,30 +60,30 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Cột 2: Danh mục BĐS */}
+          {/* Cột 2: Dịch vụ */}
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-white uppercase tracking-wider">
-              Bất Động Sản Mua & Thuê
+              Dịch vụ
             </h4>
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/posts?needType=BUY" className="hover:text-amber-400">
-                  Cần Mua nhà đất
+                  Chuyến xe
                 </Link>
               </li>
               <li>
                 <Link href="/posts?needType=RENT" className="hover:text-amber-400">
-                  Cần Thuê mặt bằng & căn hộ
+                  Gửi hàng
                 </Link>
               </li>
               <li>
-                <Link href="/posts?type=RESIDENTIAL_LAND" className="hover:text-amber-400">
-                  Tìm kiếm Đất nền thổ cư
+                <Link href="/my-posts" className="hover:text-amber-400">
+                  Vé của tôi
                 </Link>
               </li>
               <li>
-                <Link href="/posts?type=TOWNHOUSE" className="hover:text-amber-400">
-                  Tìm kiếm Nhà phố trung tâm
+                <Link href="/posts?type=Limousine" className="hover:text-amber-400">
+                  Limousine
                 </Link>
               </li>
             </ul>
@@ -98,22 +97,17 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2 text-xs">
               <li>
                 <Link href="/about" className="hover:text-amber-400">
-                  Về King Connect Land
+                  Về BusWay
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-amber-400">
-                  Liên hệ ban quản trị
+                  Liên hệ hỗ trợ
                 </Link>
               </li>
               <li>
                 <Link href="/donate" className="hover:text-amber-400">
                   Quỹ đóng góp phát triển hội
-                </Link>
-              </li>
-              <li>
-                <Link href="/post-property/create" className="hover:text-amber-400">
-                  Đăng tin nhu cầu BĐS
                 </Link>
               </li>
             </ul>
@@ -127,15 +121,15 @@ export const Footer: React.FC = () => {
             <div className="space-y-2.5 text-xs text-slate-300">
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                <span>TP. Hồ Chí Minh & các tỉnh lân cận</span>
+                <span>TP. Hồ Chí Minh & các tuyến liên tỉnh</span>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>Hotline: 0900.000.000</span>
+                <span>Hotline: 1900 6789</span>
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>contact@kingconnectland.vn</span>
+                <span>support@busway.vn</span>
               </p>
             </div>
           </div>
@@ -143,7 +137,7 @@ export const Footer: React.FC = () => {
 
         {/* Bản quyền */}
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400">
-          <p>© {new Date().getFullYear()} King Connect Land. Tất cả quyền được bảo lưu.</p>
+          <p>© {new Date().getFullYear()} BusWay. Tất cả quyền được bảo lưu.</p>
           <div className="flex items-center gap-4 text-slate-400">
             <span>Bảo mật dữ liệu</span>
             <span>·</span>
@@ -156,4 +150,3 @@ export const Footer: React.FC = () => {
 };
 
 export default Footer;
-

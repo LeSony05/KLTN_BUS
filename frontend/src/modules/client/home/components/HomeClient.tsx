@@ -1,13 +1,12 @@
-// frontend/src/modules/client/home/components/HomeClient.tsx
 'use client';
 
 import React, { useState } from 'react';
 import { HeroClient } from './HeroClient';
-import { CategoryClient } from './CategoryClient';
-import { LatestDemandClient } from './LatestDemandClient';
+import { PromotionsClient } from './PromotionsClient';
+import { PopularRoutesClient } from './PopularRoutesClient';
 import { WhyUsClient } from './WhyUsClient';
-import { CTASection } from './CTASection';
-import { MOCK_PROPERTY_DEMANDS } from '../../property/models/property.data';
+import { NewsClient } from './NewsClient';
+import { EcosystemClient } from './EcosystemClient';
 
 export const HomeClient: React.FC = () => {
   const [activeSearchTab, setActiveSearchTab] = useState<'BUY' | 'RENT'>('BUY');
@@ -15,10 +14,9 @@ export const HomeClient: React.FC = () => {
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [selectedType, setSelectedType] = useState('');
   const [selectedPrice, setSelectedPrice] = useState('');
-  const [postFilterTab, setPostFilterTab] = useState<'ALL' | 'BUY' | 'RENT'>('ALL');
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-[#F5F5F5]">
       <HeroClient
         activeSearchTab={activeSearchTab}
         setActiveSearchTab={setActiveSearchTab}
@@ -32,17 +30,15 @@ export const HomeClient: React.FC = () => {
         setSelectedPrice={setSelectedPrice}
       />
 
-      <CategoryClient />
-
-      <LatestDemandClient
-        postFilterTab={postFilterTab}
-        setPostFilterTab={setPostFilterTab}
-        posts={MOCK_PROPERTY_DEMANDS}
-      />
-
+      <PromotionsClient />
+      
+      <PopularRoutesClient />
+      
       <WhyUsClient />
-
-      <CTASection />
+      
+      <NewsClient />
+      
+      <EcosystemClient />
     </div>
   );
 };

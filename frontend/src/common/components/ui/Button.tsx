@@ -37,7 +37,7 @@ export const Button: React.FC<ButtonProps> = ({
     primary:
       'bg-[#143D30] text-white hover:bg-[#0e2a20] active:bg-[#081a13] focus:ring-[#143D30] shadow-md hover:shadow-lg',
     accent:
-      'bg-[#D97706] text-white hover:bg-[#B45309] active:bg-[#92400E] focus:ring-[#D97706] shadow-md hover:shadow-lg',
+      'bg-[#FFC700] text-[#113327] hover:bg-[#E6B200] active:bg-[#D4A100] focus:ring-[#FFC700] shadow-md hover:shadow-lg',
     success:
       'bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-800 focus:ring-emerald-600 shadow-md',
     danger:

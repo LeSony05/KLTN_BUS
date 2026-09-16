@@ -1,6 +1,6 @@
 // /src/modules/client/my-posts/components/MyPostDetailModal.tsx
 import React from 'react';
-import { X, Building, KeyRound, Clock, ShieldCheck, XCircle, MapPin, Coins, Ruler, Phone, User, Calendar } from 'lucide-react';
+import { X, Bus, PackageCheck, Clock, ShieldCheck, XCircle, MapPin, Coins, Armchair, Phone, User, Calendar } from 'lucide-react';
 import type { MyPostItem } from '../models/my-posts.model';
 
 interface MyPostDetailModalProps {
@@ -26,7 +26,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               {post.id}
             </span>
             <span className="text-slate-300">|</span>
-            <h3 className="text-base font-bold text-slate-900">Chi Tiết Tin Đăng Nhu Cầu</h3>
+            <h3 className="text-base font-bold text-slate-900">Chi Tiết Vé / Vận Đơn</h3>
           </div>
           <button
             type="button"
@@ -49,29 +49,29 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               }`}
             >
               {post.needType === 'BUY' ? (
-                <Building className="w-3.5 h-3.5" />
+                <Bus className="w-3.5 h-3.5" />
               ) : (
-                <KeyRound className="w-3.5 h-3.5" />
+                <PackageCheck className="w-3.5 h-3.5" />
               )}
-              <span>{post.needType === 'BUY' ? 'CẦN MUA' : 'CẦN THUÊ'}</span>
+              <span>{post.needType === 'BUY' ? 'ĐẶT VÉ' : 'GỬI HÀNG'}</span>
             </span>
 
             {post.status === 'PENDING' && (
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200/80">
                 <Clock className="w-3.5 h-3.5" />
-                <span>Trạng thái: Chờ duyệt</span>
+                <span>Trạng thái: Chờ thanh toán</span>
               </span>
             )}
             {post.status === 'APPROVED' && (
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Trạng thái: Đã duyệt hiển thị sàn</span>
+                <span>Trạng thái: Đã thanh toán</span>
               </span>
             )}
             {post.status === 'REJECTED' && (
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200/80">
                 <XCircle className="w-3.5 h-3.5" />
-                <span>Trạng thái: Từ chối duyệt</span>
+                <span>Trạng thái: Thanh toán lỗi</span>
               </span>
             )}
           </div>
@@ -84,20 +84,20 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               <p className="flex items-center gap-1.5">
                 <Coins className="w-4 h-4 text-amber-600 flex-shrink-0" />
                 <span>
-                  Ngân sách:{' '}
+                  Giá vé / cước phí:{' '}
                   <strong className="text-emerald-900 font-extrabold text-sm">{post.priceRange}</strong>
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
-                <Ruler className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                <Armchair className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <span>
-                  Diện tích yêu cầu: <strong className="text-slate-900 font-semibold">{post.areaRange}</strong>
+                  Ghế / khối lượng: <strong className="text-slate-900 font-semibold">{post.areaRange}</strong>
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
                 <MapPin className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <span>
-                  Khu vực: <strong className="text-slate-900 font-semibold">{post.location}</strong>
+                  Tuyến: <strong className="text-slate-900 font-semibold">{post.location}</strong>
                 </span>
               </p>
             </div>
@@ -106,7 +106,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               <p className="flex items-center gap-1.5">
                 <User className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <span>
-                  Người liên hệ: <strong className="text-slate-900 font-semibold">{post.contactName}</strong>
+                  Hành khách / người gửi: <strong className="text-slate-900 font-semibold">{post.contactName}</strong>
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
@@ -119,7 +119,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               <p className="flex items-center gap-1.5">
                 <Calendar className="w-4 h-4 text-slate-400 flex-shrink-0" />
                 <span>
-                  Ngày gửi tin: <strong className="text-slate-800">{post.createdAt}</strong>
+                  Ngày tạo: <strong className="text-slate-800">{post.createdAt}</strong>
                 </span>
               </p>
             </div>
@@ -128,7 +128,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
           {/* Description */}
           <div className="space-y-2">
             <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-              Nội dung mô tả chi tiết:
+              Ghi chú nghiệp vụ:
             </h4>
             <div className="text-sm leading-relaxed text-slate-700 bg-slate-50/60 p-4 rounded-2xl border border-slate-200/80 whitespace-pre-wrap">
               {post.description}
@@ -138,7 +138,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
           {/* Reject Reason (If Rejected) */}
           {post.status === 'REJECTED' && post.rejectReason && (
             <div className="p-4 bg-rose-50 border border-rose-200 rounded-2xl text-xs text-rose-800 space-y-1">
-              <span className="font-extrabold block text-rose-900">Lý do từ chối duyệt:</span>
+              <span className="font-extrabold block text-rose-900">Lý do thanh toán lỗi:</span>
               <p className="font-medium leading-relaxed text-rose-700">{post.rejectReason}</p>
             </div>
           )}
@@ -162,7 +162,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
             }}
             className="px-6 py-2.5 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-slate-900 font-bold text-xs shadow-md cursor-pointer transition-all"
           >
-            Chỉnh sửa tin
+            Chỉnh sửa
           </button>
         </div>
       </div>

@@ -32,7 +32,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
     switch (variant) {
       case 'danger':
         return (
-          <div className="w-12 h-12 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center flex-shrink-0">
+          <div className="w-12 h-12 rounded-2xl bg-[#FFFBEB] text-[#F5A623] flex items-center justify-center flex-shrink-0">
             <AlertTriangle className="w-6 h-6" />
           </div>
         );
@@ -61,7 +61,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
   const getButtonClass = () => {
     switch (variant) {
       case 'danger':
-        return 'bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/20';
+        return 'bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] shadow-amber-500/20';
       case 'warning':
         return 'bg-amber-500 hover:bg-amber-600 text-slate-900 shadow-amber-500/20';
       case 'success':

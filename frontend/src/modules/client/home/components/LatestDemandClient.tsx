@@ -27,25 +27,25 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
   });
 
   return (
-    <section className="py-16 bg-white border-y border-slate-200/80 font-sans">
+    <section className="py-12 bg-white border-y border-slate-200/80 font-sans">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header + Tabs Filter */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
           <div>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-              Tin Đăng Cần Mua & Cần Thuê Mới Nhất
+            <h2 className="text-2xl font-black text-slate-950 tracking-normal">
+              Chuyến xe đang mở bán
             </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Các yêu cầu mua và thuê được hội viên đăng tải và duyệt xác thực
+            <p className="text-sm text-slate-500 mt-1">
+              Các chuyến còn chỗ, có thể chọn ghế và thanh toán online ngay.
             </p>
           </div>
 
-          {/* 3 Tabs: Tất cả, Cần Mua, Cần Thuê */}
-          <div className="flex items-center gap-1.5 bg-slate-100 p-1.5 rounded-xl self-start md:self-auto">
+          {/* 3 Tabs: Tất cả, Đặt vé, Gửi hàng */}
+          <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-lg self-start md:self-auto">
             <button
               type="button"
               onClick={() => setPostFilterTab('ALL')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${
+              className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'ALL'
                   ? 'bg-[#143D30] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
@@ -56,31 +56,30 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
             <button
               type="button"
               onClick={() => setPostFilterTab('BUY')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${
+              className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'BUY'
                   ? 'bg-[#143D30] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Cần Mua
+              Đặt vé
             </button>
             <button
               type="button"
               onClick={() => setPostFilterTab('RENT')}
-              className={`px-4 py-2 rounded-lg text-xs font-bold cursor-pointer transition-colors ${
+              className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'RENT'
                   ? 'bg-[#143D30] text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
-              Cần Thuê
+              Gửi hàng
             </button>
           </div>
         </div>
 
-        {/* Grid 6 Thẻ BĐS */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredPosts.slice(0, 6).map((post) => (
+        <div className="grid grid-cols-1 gap-3">
+          {filteredPosts.slice(0, 4).map((post) => (
             <PropertyCard
               key={post.id}
               post={post}
@@ -94,9 +93,9 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
           <Link href="/posts">
             <button
               type="button"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm shadow-xs cursor-pointer transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm shadow-xs cursor-pointer transition-colors"
             >
-              <span>Xem tất cả tin Cần Mua & Cần Thuê</span>
+              <span>Xem tất cả chuyến xe</span>
               <ArrowRight className="w-4 h-4 text-[#143D30]" />
             </button>
           </Link>

@@ -2,10 +2,10 @@
 import React from 'react';
 import {
   Calendar,
-  Building,
-  KeyRound,
+  Bus,
+  PackageCheck,
   Coins,
-  Ruler,
+  Armchair,
   MapPin,
   Eye,
   Edit,
@@ -55,48 +55,48 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
               }`}
             >
               {post.needType === 'BUY' ? (
-                <Building className="w-3.5 h-3.5" />
+                <Bus className="w-3.5 h-3.5" />
               ) : (
-                <KeyRound className="w-3.5 h-3.5" />
+                <PackageCheck className="w-3.5 h-3.5" />
               )}
-              <span>{post.needType === 'BUY' ? 'CẦN MUA' : 'CẦN THUÊ'}</span>
+              <span>{post.needType === 'BUY' ? 'ĐẶT VÉ' : 'GỬI HÀNG'}</span>
             </span>
 
             {/* Status Badges */}
             {post.status === 'APPROVED' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
                 <ShieldCheck className="w-3 h-3" />
-                <span>Đang hiển thị</span>
+                <span>Đã thanh toán</span>
               </span>
             )}
             {post.status === 'PENDING' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200/80">
                 <Clock className="w-3 h-3" />
-                <span>Chờ duyệt</span>
+                <span>Chờ thanh toán</span>
               </span>
             )}
             {post.status === 'REJECTED' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200/80">
                 <XCircle className="w-3 h-3" />
-                <span>Từ chối</span>
+                <span>Thanh toán lỗi</span>
               </span>
             )}
             {post.status === 'HIDDEN' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-slate-100 text-slate-700 border border-slate-200">
                 <EyeOff className="w-3 h-3" />
-                <span>Tạm ẩn</span>
+                <span>Đã hủy</span>
               </span>
             )}
             {post.status === 'COMPLETED' && (
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-sky-50 text-sky-700 border border-sky-200">
                 <CheckCheck className="w-3 h-3" />
-                <span>Đã hoàn tất</span>
+                <span>Đã sử dụng</span>
               </span>
             )}
             {post.status === 'EXPIRED' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-orange-50 text-orange-700 border border-orange-200">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-amber-50 text-orange-700 border border-orange-200">
                 <History className="w-3 h-3" />
-                <span>Hết hạn</span>
+                <span>Quá hạn</span>
               </span>
             )}
             {post.status === 'DRAFT' && (
@@ -115,7 +115,7 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
             {post.viewsCount !== undefined && (
               <span className="flex items-center gap-1 text-slate-500 font-semibold bg-slate-100 px-2 py-0.5 rounded-full text-[11px]">
                 <Eye className="w-3 h-3 text-slate-400" />
-                <span>{post.viewsCount} lượt xem</span>
+                <span>{post.viewsCount} lượt tra cứu</span>
               </span>
             )}
           </div>
@@ -132,13 +132,13 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
             <span className="inline-flex items-center gap-1.5">
               <Coins className="w-4 h-4 text-amber-600 flex-shrink-0" />
               <span>
-                Ngân sách: <strong className="text-emerald-900 font-extrabold">{post.priceRange}</strong>
+                Giá/cước: <strong className="text-emerald-900 font-extrabold">{post.priceRange}</strong>
               </span>
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Ruler className="w-4 h-4 text-slate-400 flex-shrink-0" />
+              <Armchair className="w-4 h-4 text-slate-400 flex-shrink-0" />
               <span>
-                Diện tích: <strong className="text-slate-800 font-bold">{post.areaRange}</strong>
+                Ghế/kg: <strong className="text-slate-800 font-bold">{post.areaRange}</strong>
               </span>
             </span>
           </div>
@@ -154,7 +154,7 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
           <div className="p-3.5 bg-rose-50 border border-rose-200/90 rounded-xl text-xs text-rose-800 space-y-1">
             <div className="flex items-center gap-1.5 font-extrabold text-rose-900">
               <AlertCircle className="w-4 h-4 text-rose-600 flex-shrink-0" />
-              <span>Lý do Admin từ chối duyệt:</span>
+              <span>Lý do thanh toán lỗi:</span>
             </div>
             <p className="font-medium leading-relaxed pl-5 text-rose-700">{post.rejectReason}</p>
           </div>
@@ -179,10 +179,10 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
               type="button"
               onClick={() => onToggleHide(post)}
               className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-slate-600 hover:bg-slate-100 border border-slate-200 transition-colors cursor-pointer"
-              title="Tạm ẩn tin khỏi giao diện công khai"
+              title="Hủy vé hoặc vận đơn"
             >
               <EyeOff className="w-3.5 h-3.5" />
-              <span>Ẩn tin</span>
+              <span>Hủy</span>
             </button>
           )}
 
@@ -191,10 +191,10 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
               type="button"
               onClick={() => onToggleHide(post)}
               className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-emerald-700 hover:bg-emerald-50 border border-emerald-200 transition-colors cursor-pointer"
-              title="Hiển thị tin công khai trở lại"
+              title="Khôi phục yêu cầu"
             >
               <Eye className="w-3.5 h-3.5" />
-              <span>Hiện lại</span>
+              <span>Khôi phục</span>
             </button>
           )}
 
@@ -204,27 +204,27 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
               type="button"
               onClick={() => onMarkCompleted(post)}
               className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-sky-700 hover:bg-sky-50 border border-sky-200 transition-colors cursor-pointer"
-              title="Đánh dấu đã xong nhu cầu Mua/Thuê"
+              title="Đánh dấu đã dùng xong"
             >
               <CheckCheck className="w-3.5 h-3.5" />
               <span>Hoàn tất</span>
             </button>
           )}
 
-          {/* Action: Renew Expired Post */}
+          {/* Action: Retry Payment */}
           {post.status === 'EXPIRED' && (
             <button
               type="button"
               onClick={() => onRenew(post)}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-orange-700 hover:bg-orange-50 border border-orange-200 transition-colors cursor-pointer"
-              title="Gia hạn hiển thị tin"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-orange-700 hover:bg-amber-50 border border-orange-200 transition-colors cursor-pointer"
+              title="Thanh toán lại yêu cầu quá hạn"
             >
               <RotateCw className="w-3.5 h-3.5" />
-              <span>Gia hạn</span>
+              <span>Thanh toán lại</span>
             </button>
           )}
 
-          {/* Action: Edit (for DRAFT, REJECTED, APPROVED) */}
+          {/* Action: Edit */}
           {(post.status === 'DRAFT' || post.status === 'REJECTED' || post.status === 'APPROVED') && (
             <button
               type="button"

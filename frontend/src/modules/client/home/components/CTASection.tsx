@@ -3,41 +3,43 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Plus, ArrowRight } from 'lucide-react';
+import { Search, ArrowRight } from 'lucide-react';
 
 export const CTASection: React.FC = () => {
   return (
-    <section className="py-16 bg-[#113327] text-white relative overflow-hidden">
-      <div className="absolute right-0 top-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section className="py-10 bg-[#113327] text-white">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="rounded-lg border border-white/15 bg-white/10 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <div>
+            <h2 className="text-2xl font-black tracking-normal">
+              Sẵn sàng đặt chuyến đi tiếp theo?
+            </h2>
+            <p className="mt-2 text-sm text-slate-300 max-w-2xl leading-relaxed">
+              Tìm tuyến phù hợp, chọn ghế, áp dụng mã giảm giá, thanh toán online và nhận vé điện tử ngay sau khi xác nhận.
+            </p>
+          </div>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 text-center space-y-6 relative z-10">
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight">
-          Bạn Đang Có Nhu Cầu Tìm Mua Hoặc Thuê Bất Động Sản?
-        </h2>
-        <p className="text-xs sm:text-sm text-slate-300 max-w-2xl mx-auto leading-relaxed">
-          Đăng nhu cầu ngay hôm nay để nhận thông tin báo giá và liên hệ trực tiếp từ hàng nghìn hội viên môi giới uy tín trong hệ thống King Connect Land.
-        </p>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <Link href="/posts?needType=BUY">
+              <button
+                type="button"
+                className="w-full sm:w-auto h-11 px-5 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] font-black text-sm flex items-center justify-center gap-2 cursor-pointer"
+              >
+                <Search className="w-4 h-4" />
+                Tìm chuyến xe
+              </button>
+            </Link>
 
-        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
-          <Link href="/post-property/create">
-            <button
-              type="button"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-white font-bold text-sm shadow-md flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <Plus className="w-4 h-4" />
-              <span>ĐĂNG NHU CẦU NGAY (MIỄN PHÍ)</span>
-            </button>
-          </Link>
-
-          <Link href="/register">
-            <button
-              type="button"
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center justify-center gap-2 cursor-pointer"
-            >
-              <span>ĐĂNG KÝ HỘI VIÊN CHÍNH THỨC</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </Link>
+            <Link href="/register">
+              <button
+                type="button"
+                className="w-full sm:w-auto h-11 px-5 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold text-sm border border-white/20 flex items-center justify-center gap-2 cursor-pointer"
+              >
+                Đăng ký tích điểm
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </section>

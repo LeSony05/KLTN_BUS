@@ -4,7 +4,7 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { User, Plus, Building2, Menu, X, ChevronDown, FileText, Settings, LogOut } from 'lucide-react';
+import { User, Bus, Menu, X, ChevronDown, FileText, Settings, LogOut } from 'lucide-react';
 import { useAuthStore } from '../../../context/useAuthStore';
 
 interface NavLinksNavProps {
@@ -19,8 +19,8 @@ const NavLinksList: React.FC<NavLinksNavProps> = ({ onItemClick, isMobile }) => 
 
   const navLinks = [
     { href: '/', label: 'Trang chủ' },
-    { href: '/posts?needType=BUY', label: 'Cần Mua' },
-    { href: '/posts?needType=RENT', label: 'Cần Thuê' },
+    { href: '/posts?needType=BUY', label: 'Chuyến xe' },
+    { href: '/posts?needType=RENT', label: 'Gửi hàng' },
     { href: '/about', label: 'Giới thiệu' },
     { href: '/contact', label: 'Liên hệ' },
   ];
@@ -95,12 +95,11 @@ export const ClientHeader: React.FC = () => {
         {/* Logo bên trái */}
         <Link href="/" className="flex items-center gap-2.5">
           <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
-            <Building2 className="w-5 h-5 text-emerald-400" />
+            <Bus className="w-5 h-5 text-emerald-400" />
           </div>
           <div className="flex items-center gap-1.5 font-bold text-lg sm:text-xl tracking-tight">
-            <span className="text-white">King</span>
-            <span className="text-amber-400">Connect</span>
-            <span className="text-white">Land</span>
+            <span className="text-white">Bus</span>
+            <span className="text-amber-400">Way</span>
           </div>
         </Link>
 
@@ -148,7 +147,7 @@ export const ClientHeader: React.FC = () => {
                       className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
                     >
                       <FileText className="w-4 h-4 text-emerald-700 flex-shrink-0" />
-                      <span>Quản lý tin đã đăng</span>
+                      <span>Vé của tôi</span>
                     </Link>
 
                     <Link
@@ -183,17 +182,6 @@ export const ClientHeader: React.FC = () => {
             </Link>
           )}
 
-          {/* Nút Đăng tin màu vàng sáng */}
-          <Link href="/post-property/create">
-            <button
-              type="button"
-              className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-slate-950 font-extrabold text-sm shadow-sm cursor-pointer transition-colors"
-            >
-              <Plus className="w-4 h-4 stroke-[2.5]" />
-              <span>Đăng tin</span>
-            </button>
-          </Link>
-
           {/* Mobile Menu Button */}
           <button
             type="button"
@@ -220,7 +208,7 @@ export const ClientHeader: React.FC = () => {
                   className="flex items-center gap-2 px-3 py-2 text-sm font-bold text-amber-300 bg-white/5 rounded-lg"
                 >
                   <FileText className="w-4 h-4" />
-                  <span>Quản lý tin đã đăng</span>
+                  <span>Vé của tôi</span>
                 </Link>
                 <button
                   type="button"

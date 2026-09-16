@@ -2,20 +2,20 @@
 import { NeedType, PropertyType, PostStatus } from './enums';
 
 export const APP_CONFIG = {
-  NAME: 'King Connect Land',
-  SHORT_NAME: 'KC Land',
-  SLOGAN: 'Kết nối giá trị · Kiến tạo thành công',
-  HOTLINE: '0901 888 999',
-  EMAIL: 'support@kingconnectland.vn',
-  ADDRESS: 'Tầng 12, Tòa nhà Landmark, TP. Hồ Chí Minh',
+  NAME: 'BusWay',
+  SHORT_NAME: 'BusWay',
+  SLOGAN: 'Chọn chuyến · Chọn ghế · Di chuyển an tâm',
+  HOTLINE: '1900 6789',
+  EMAIL: 'support@busway.vn',
+  ADDRESS: 'Tầng 8, Tòa nhà Landmark, TP. Hồ Chí Minh',
   API_BASE_URL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000',
 };
 
 export const STORAGE_KEYS = {
-  ACCESS_TOKEN: 'kcl_access_token',
-  REFRESH_TOKEN: 'kcl_refresh_token',
-  USER_INFO: 'kcl_user_info',
-  SAVED_SEARCHES: 'kcl_saved_searches',
+  ACCESS_TOKEN: 'busway_access_token',
+  REFRESH_TOKEN: 'busway_refresh_token',
+  USER_INFO: 'busway_user_info',
+  SAVED_SEARCHES: 'busway_saved_searches',
 };
 
 export const PROPERTY_TYPE_LABELS: Record<PropertyType, string> = {
@@ -30,8 +30,8 @@ export const PROPERTY_TYPE_LABELS: Record<PropertyType, string> = {
 };
 
 export const NEED_TYPE_LABELS: Record<NeedType, string> = {
-  [NeedType.BUY]: 'Cần mua',
-  [NeedType.RENT]: 'Cần thuê',
+  [NeedType.BUY]: 'Đặt vé',
+  [NeedType.RENT]: 'Gửi hàng',
 };
 
 export const POST_STATUS_CONFIG: Record<

@@ -1,58 +1,60 @@
-// frontend/src/modules/client/home/components/WhyUsClient.tsx
 'use client';
 
 import React from 'react';
-import { ShieldCheck, Users, Zap, Lock } from 'lucide-react';
+import { Building2, Users, Bus } from 'lucide-react';
 
 export const WhyUsClient: React.FC = () => {
-  const features = [
+  const stats = [
     {
-      icon: <ShieldCheck className="w-6 h-6 text-[#143D30]" />,
-      title: 'Nhu Cầu Xác Thực 100%',
-      desc: 'Mỗi bài đăng đều được kiểm duyệt kỹ lưỡng trước khi hiển thị, loại bỏ hoàn toàn tin ảo và môi giới rác.',
+      icon: <Users className="w-6 h-6 text-[#F5A623]" />,
+      title: 'Hơn 40 Triệu',
+      subtitle: 'Lượt khách',
+      desc: 'BUSWAY phục vụ hơn 40 triệu lượt khách bình quân 1 năm trên toàn quốc'
     },
     {
-      icon: <Users className="w-6 h-6 text-[#143D30]" />,
-      title: 'Cộng Đồng Hội Viên Uy Tín',
-      desc: 'Mạng lưới chuyên nghiệp các nhà đầu tư và môi giới chính thống với mã hội viên định danh rõ ràng.',
+      icon: <Building2 className="w-6 h-6 text-[#F5A623]" />,
+      title: 'Hơn 350',
+      subtitle: 'Phòng vé - Bưu cục',
+      desc: 'Hơn 350 phòng vé, trạm trung chuyển, bến xe... trên toàn hệ thống'
     },
     {
-      icon: <Zap className="w-6 h-6 text-[#143D30]" />,
-      title: 'Kết Nối Trực Tiếp & Nhanh Chóng',
-      desc: 'Liên hệ người đăng qua Zalo hoặc Hotline chỉ với một chạm, rút ngắn 80% thời gian tìm kiếm nguồn hàng.',
-    },
-    {
-      icon: <Lock className="w-6 h-6 text-[#143D30]" />,
-      title: 'Bảo Mật & Minh Bạch Tuyệt Đối',
-      desc: 'Thông tin cá nhân được bảo vệ theo tiêu chuẩn, quy chế hoạt động công khai và công bằng cho mọi hội viên.',
-    },
+      icon: <Bus className="w-6 h-6 text-[#F5A623]" />,
+      title: 'Hơn 6,500',
+      subtitle: 'Chuyến xe',
+      desc: 'Phục vụ hơn 6,500 chuyến xe đường dài và liên tỉnh mỗi ngày'
+    }
   ];
 
   return (
-    <section className="py-16 bg-white border-t border-slate-200/80 font-sans">
-      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-            Vì Sao Chọn King Connect Land?
+    <section className="py-12 bg-white">
+      <div className="max-w-[1050px] mx-auto px-4 sm:px-6">
+        <div className="text-center mb-10">
+          <h2 className="text-xl md:text-2xl font-black text-[#00613D] uppercase">
+            BUSWAY - CHẤT LƯỢNG LÀ DANH DỰ
           </h2>
-          <p className="text-xs sm:text-sm text-slate-500 mt-1">
-            Giải pháp chuyên biệt giải quyết bài toán tìm kiếm khách hàng và nguồn hàng bất động sản
-          </p>
+          <p className="text-sm text-slate-500 font-semibold mt-1">23 Năm Vững Tin & Phát Triển</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-3"
-            >
-              <div className="w-12 h-12 rounded-xl bg-emerald-50/80 border border-emerald-100 flex items-center justify-center">
-                {item.icon}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div className="space-y-6">
+            {stats.map((stat, idx) => (
+              <div key={idx} className="flex gap-4 items-start">
+                <div className="w-14 h-14 rounded-full bg-amber-50 flex items-center justify-center shrink-0 border border-red-100">
+                  {stat.icon}
+                </div>
+                <div>
+                  <h3 className="text-xl font-black text-slate-900">
+                    {stat.title} <span className="text-base font-bold text-slate-600">{stat.subtitle}</span>
+                  </h3>
+                  <p className="text-sm text-slate-500 mt-1 font-medium">{stat.desc}</p>
+                </div>
               </div>
-              <h3 className="font-bold text-slate-900 text-base">{item.title}</h3>
-              <p className="text-xs text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
+            ))}
+          </div>
+          
+          <div className="hidden md:flex justify-center items-center">
+             <img src="/images/promo1.jpg" alt="Chất lượng là danh dự" className="max-w-full rounded-2xl shadow-lg border border-slate-100" />
+          </div>
         </div>
       </div>
     </section>

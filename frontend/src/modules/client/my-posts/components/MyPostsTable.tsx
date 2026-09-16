@@ -1,8 +1,8 @@
 // /src/modules/client/my-posts/components/MyPostsTable.tsx
 import React from 'react';
 import {
-  Building,
-  KeyRound,
+  Bus,
+  PackageCheck,
   Eye,
   Edit,
   Trash2,
@@ -62,7 +62,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
     if (post.status === 'DRAFT' || post.status === 'REJECTED' || post.status === 'APPROVED') {
       items.push({
         key: 'edit',
-        label: 'Chỉnh sửa tin',
+        label: 'Chỉnh sửa yêu cầu',
         icon: <Edit className="w-4 h-4 text-emerald-700" />,
         variant: 'success',
         onClick: () => onEdit(post),
@@ -72,7 +72,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
     if (post.status === 'APPROVED') {
       items.push({
         key: 'hide',
-        label: 'Tạm ẩn tin',
+        label: 'Hủy vé / vận đơn',
         icon: <EyeOff className="w-4 h-4 text-slate-500" />,
         onClick: () => onToggleHide(post),
       });
@@ -81,7 +81,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
     if (post.status === 'HIDDEN') {
       items.push({
         key: 'unhide',
-        label: 'Hiển thị lại tin',
+        label: 'Khôi phục yêu cầu',
         icon: <Eye className="w-4 h-4 text-emerald-700" />,
         variant: 'success',
         onClick: () => onToggleHide(post),
@@ -91,7 +91,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
     if (post.status === 'APPROVED' || post.status === 'HIDDEN') {
       items.push({
         key: 'complete',
-        label: 'Đánh dấu hoàn tất',
+        label: 'Đánh dấu đã sử dụng',
         icon: <CheckCheck className="w-4 h-4 text-sky-600" />,
         onClick: () => onMarkCompleted(post),
       });
@@ -100,7 +100,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
     if (post.status === 'EXPIRED') {
       items.push({
         key: 'renew',
-        label: 'Gia hạn tin đăng',
+        label: 'Thanh toán lại',
         icon: <RotateCw className="w-4 h-4 text-orange-600" />,
         variant: 'warning',
         onClick: () => onRenew(post),
@@ -109,7 +109,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
 
     items.push({
       key: 'delete',
-      label: 'Xóa tin đăng',
+      label: 'Xóa khỏi danh sách',
       icon: <Trash2 className="w-4 h-4 text-rose-500" />,
       variant: 'danger',
       onClick: () => onDelete(post.id),
@@ -124,11 +124,11 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="bg-slate-50/80 border-b border-slate-200/80 text-[11px] font-extrabold text-slate-500 uppercase tracking-wider">
-              <th className="py-3.5 px-4 min-w-[280px]">Nội Dung Nhu Cầu & Vị Trí</th>
-              <th className="py-3.5 px-4 w-28 whitespace-nowrap">Nhu Cầu</th>
-              <th className="py-3.5 px-4 w-36 whitespace-nowrap">Ngân Sách & Diện Tích</th>
-              <th className="py-3.5 px-4 w-32 whitespace-nowrap">Ngày Đăng</th>
-              <th className="py-3.5 px-4 w-28 text-center whitespace-nowrap">Lượt Xem</th>
+              <th className="py-3.5 px-4 min-w-[280px]">Tuyến / Dịch Vụ</th>
+              <th className="py-3.5 px-4 w-28 whitespace-nowrap">Loại</th>
+              <th className="py-3.5 px-4 w-36 whitespace-nowrap">Giá & Ghế/Kg</th>
+              <th className="py-3.5 px-4 w-32 whitespace-nowrap">Ngày Tạo</th>
+              <th className="py-3.5 px-4 w-28 text-center whitespace-nowrap">Tra Cứu</th>
               <th className="py-3.5 px-4 w-36 whitespace-nowrap">Trạng Thái</th>
               <th className="py-3.5 px-4 w-20 text-center whitespace-nowrap">Thao Tác</th>
             </tr>
@@ -166,11 +166,11 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
                     }`}
                   >
                     {post.needType === 'BUY' ? (
-                      <Building className="w-3 h-3" />
+                      <Bus className="w-3 h-3" />
                     ) : (
-                      <KeyRound className="w-3 h-3" />
+                      <PackageCheck className="w-3 h-3" />
                     )}
-                    <span>{post.needType === 'BUY' ? 'CẦN MUA' : 'CẦN THUÊ'}</span>
+                    <span>{post.needType === 'BUY' ? 'ĐẶT VÉ' : 'GỬI HÀNG'}</span>
                   </span>
                 </td>
 
@@ -203,37 +203,37 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
                   {post.status === 'APPROVED' && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
                       <ShieldCheck className="w-3 h-3" />
-                      <span>Đang hiển thị</span>
+                      <span>Đã thanh toán</span>
                     </span>
                   )}
                   {post.status === 'PENDING' && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-50 text-amber-700 border border-amber-200">
                       <Clock className="w-3 h-3" />
-                      <span>Chờ duyệt</span>
+                      <span>Chờ thanh toán</span>
                     </span>
                   )}
                   {post.status === 'REJECTED' && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-rose-50 text-rose-700 border border-rose-200">
                       <XCircle className="w-3 h-3" />
-                      <span>Từ chối</span>
+                      <span>Thanh toán lỗi</span>
                     </span>
                   )}
                   {post.status === 'HIDDEN' && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-slate-100 text-slate-700 border border-slate-200">
                       <EyeOff className="w-3 h-3" />
-                      <span>Tạm ẩn</span>
+                      <span>Đã hủy</span>
                     </span>
                   )}
                   {post.status === 'COMPLETED' && (
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-sky-50 text-sky-700 border border-sky-200">
                       <CheckCheck className="w-3 h-3" />
-                      <span>Đã hoàn tất</span>
+                      <span>Đã sử dụng</span>
                     </span>
                   )}
                   {post.status === 'EXPIRED' && (
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-orange-50 text-orange-700 border border-orange-200">
+                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-amber-50 text-orange-700 border border-orange-200">
                       <History className="w-3 h-3" />
-                      <span>Hết hạn</span>
+                      <span>Quá hạn</span>
                     </span>
                   )}
                   {post.status === 'DRAFT' && (
@@ -259,7 +259,7 @@ export const MyPostsTable: React.FC<MyPostsTableProps> = ({
         <div className="text-xs font-semibold text-slate-500">
           Hiển thị <strong className="text-slate-800 font-bold">{Math.min((currentPage - 1) * pageSize + 1, totalItems)}</strong> -{' '}
           <strong className="text-slate-800 font-bold">{Math.min(currentPage * pageSize, totalItems)}</strong> trên tổng số{' '}
-          <strong className="text-slate-800 font-bold">{totalItems}</strong> tin đăng
+          <strong className="text-slate-800 font-bold">{totalItems}</strong> vé/vận đơn
         </div>
 
         <Pagination

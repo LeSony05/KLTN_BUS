@@ -1,10 +1,5 @@
-import ClientLayout from '@/modules/client/common/layouts/ClientLayout';
-import CreatePropertyPage from '@/modules/client/pages/CreatePropertyPage';
+import { redirect } from 'next/navigation';
 
 export default function CreatePropertyApp() {
-  return (
-    <ClientLayout>
-      <CreatePropertyPage />
-    </ClientLayout>
-  );
+  redirect('/posts?needType=BUY');
 }

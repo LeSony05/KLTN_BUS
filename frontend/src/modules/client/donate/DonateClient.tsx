@@ -10,13 +10,13 @@ export const DonateClient: React.FC = () => {
       <div className="text-center max-w-xl mx-auto space-y-2">
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-50 text-amber-800 text-xs font-bold border border-amber-200">
           <Heart className="w-4 h-4 text-amber-600 fill-amber-600" />
-          <span>Quỹ Đóng Góp Tự Nguyện</span>
+          <span>Thanh toán và đối soát</span>
         </div>
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
-          Đóng Góp Xây Dựng Hội King Connect Land
+          Thông Tin Thanh Toán Chuyển Khoản
         </h1>
         <p className="text-xs sm:text-sm text-slate-500 leading-relaxed">
-          Mọi khoản đóng góp của quý hội viên đều được quản lý minh bạch và sử dụng để duy trì máy chủ, nâng cấp hệ thống kết nối BĐS.
+          Khách hàng có thể dùng thông tin này để đối soát vé, vận đơn hoặc thanh toán khi cổng ví điện tử cần xác nhận thủ công.
         </p>
       </div>
 
@@ -68,7 +68,7 @@ export const DonateClient: React.FC = () => {
             </p>
             <p className="flex justify-between">
               <span className="text-slate-400 font-medium">Chủ tài khoản:</span>
-              <strong className="text-slate-900">HOI BĐS KING CONNECT LAND</strong>
+              <strong className="text-slate-900">CONG TY BUSWAY</strong>
             </p>
             <p className="flex justify-between">
               <span className="text-slate-400 font-medium">Chi nhánh:</span>

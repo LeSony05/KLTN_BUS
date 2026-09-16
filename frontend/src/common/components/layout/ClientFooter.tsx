@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'next/link';
 import {
-  Building2,
+  Bus,
   Phone,
   Mail,
   MapPin,
@@ -18,14 +18,14 @@ export const ClientFooter: React.FC = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-lg bg-amber-500 text-[#113327] flex items-center justify-center font-bold">
-                <Building2 className="w-5 h-5" />
+                <Bus className="w-5 h-5" />
               </div>
               <span className="text-xl font-bold text-white tracking-tight">
-                King <span className="text-amber-400">Connect</span> Land
+                Bus<span className="text-amber-400">Way</span>
               </span>
             </div>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-normal">
-              Nền tảng kết nối nhu cầu bất động sản trực tiếp giữa người cần mua, cần thuê và chủ BĐS — nhanh chóng, minh bạch và hoàn toàn miễn phí.
+              Nền tảng đặt vé xe khách trực tuyến, tra cứu vé, thanh toán điện tử và gửi hàng theo tuyến xe một cách nhanh chóng, minh bạch.
             </p>
           </div>
 
@@ -42,17 +42,12 @@ export const ClientFooter: React.FC = () => {
               </li>
               <li>
                 <Link href="/posts?needType=BUY" className="hover:text-amber-400 transition-colors">
-                  Cần Mua
+                  Chuyến xe
                 </Link>
               </li>
               <li>
                 <Link href="/posts?needType=RENT" className="hover:text-amber-400 transition-colors">
-                  Cần Thuê
-                </Link>
-              </li>
-              <li>
-                <Link href="/post-property/create" className="hover:text-amber-400 transition-colors">
-                  Đăng Tin Mua / Thuê
+                  Gửi hàng
                 </Link>
               </li>
               <li>
@@ -68,30 +63,30 @@ export const ClientFooter: React.FC = () => {
             </ul>
           </div>
 
-          {/* Cột 3: Loại BĐS phổ biến */}
+          {/* Cột 3: Dịch vụ phổ biến */}
           <div className="space-y-3">
             <h4 className="text-white text-sm font-bold tracking-wide">
-              Loại BĐS phổ biến
+              Dịch vụ phổ biến
             </h4>
             <ul className="space-y-2 text-xs sm:text-sm text-slate-300">
               <li>
                 <Link href="/posts?propertyType=RESIDENTIAL_LAND" className="hover:text-amber-400 transition-colors">
-                  Đất nền
+                  Đặt vé xe
                 </Link>
               </li>
               <li>
                 <Link href="/posts?propertyType=TOWNHOUSE" className="hover:text-amber-400 transition-colors">
-                  Nhà phố
+                  Tra cứu vé
                 </Link>
               </li>
               <li>
                 <Link href="/posts?propertyType=APARTMENT" className="hover:text-amber-400 transition-colors">
-                  Căn hộ
+                  Hủy vé
                 </Link>
               </li>
               <li>
                 <Link href="/posts?propertyType=COMMERCIAL" className="hover:text-amber-400 transition-colors">
-                  Mặt bằng - Kho xưởng
+                  Gửi hàng hóa
                 </Link>
               </li>
             </ul>
@@ -109,7 +104,7 @@ export const ClientFooter: React.FC = () => {
               </p>
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4 text-amber-400 flex-shrink-0" />
-                <span>info@kingconnectland.vn</span>
+                <span>support@busway.vn</span>
               </p>
               <p className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-0.5" />
@@ -123,7 +118,7 @@ export const ClientFooter: React.FC = () => {
 
         {/* Dưới cùng */}
         <div className="border-t border-emerald-900/60 pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <p>© 2026 King Connect Land. Bảo lưu mọi quyền.</p>
+          <p>© 2026 BusWay. Bảo lưu mọi quyền.</p>
 
           <div className="flex items-center gap-6">
             <a

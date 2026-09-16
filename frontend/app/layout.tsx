@@ -10,8 +10,8 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'King Connect Land — Nền tảng kết nối nhu cầu Bất Động Sản',
-  description: 'Kết nối nhu cầu bất động sản nhanh chóng, minh bạch và hoàn toàn miễn phí.',
+  title: 'BusWay — Hệ thống đặt vé xe khách trực tuyến',
+  description: 'Tìm chuyến, chọn ghế, thanh toán online, tra cứu vé và gửi hàng theo tuyến xe.',
 };
 
 export default function RootLayout({

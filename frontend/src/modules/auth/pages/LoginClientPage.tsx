@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Building2, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Bus, CheckCircle2 } from 'lucide-react';
 import { LoginForm } from '../components/LoginForm';
 
 export const LoginClientPage: React.FC = () => {
@@ -27,24 +27,24 @@ export const LoginClientPage: React.FC = () => {
           
           <div className="space-y-8 max-w-xl">
             <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-[#143D30] text-sm font-bold shadow-lg shadow-black/10">
-              <Building2 className="w-5 h-5" />
-              <span>King Connect Land</span>
+              <Bus className="w-5 h-5" />
+              <span>BUSWAY</span>
             </div>
             
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight">
-              Nền tảng kết nối <br />
-              <span className="text-emerald-400">Bất Động Sản</span> thực tế.
+              Nền tảng đặt vé <br />
+              <span className="text-emerald-400">Xe Khách</span> hàng đầu.
             </h1>
             
             <p className="text-lg text-emerald-100/90 leading-relaxed font-medium">
-              Kết nối trực tiếp người có nhu cầu và nhà môi giới chuyên nghiệp. Trải nghiệm nhanh chóng, minh bạch và hoàn toàn miễn phí.
+              Đặt vé xe khách trực tuyến dễ dàng, an toàn và tiện lợi. Hàng ngàn chuyến đi với nhiều sự lựa chọn đang chờ đón bạn.
             </p>
             
             <div className="pt-6 space-y-4">
               {[
-                'Hàng ngàn tin đăng được kiểm duyệt mỗi ngày',
-                'Kết nối nhu cầu trực tiếp, loại bỏ tin rác',
-                'Cộng đồng môi giới chuyên nghiệp, uy tín'
+                'Hàng ngàn chuyến xe được cập nhật mỗi ngày',
+                'Đặt vé nhanh chóng, giữ chỗ tức thì',
+                'Thanh toán an toàn, đa dạng hình thức'
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />

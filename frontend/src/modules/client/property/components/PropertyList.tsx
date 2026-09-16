@@ -1,7 +1,7 @@
 // frontend/src/modules/client/property/components/PropertyList.tsx
 'use client';
 
-import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import React, { useState, useMemo, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   SlidersHorizontal,
@@ -16,6 +16,7 @@ import { INITIAL_FILTER_STATE } from '../models/property.model';
 import { PropertyFilterSidebar } from './PropertyFilterSidebar';
 import { PropertyCard } from './PropertyCard';
 import { QuoteModal } from './QuoteModal';
+import { PropertySearchForm } from './PropertySearchForm';
 import { Breadcrumb } from '@/common/components/ui/Breadcrumb';
 
 interface PropertyListProps {
@@ -24,38 +25,33 @@ interface PropertyListProps {
 
 const ITEMS_PER_PAGE = 9;
 
+const getTimeSlotFromDeparture = (departure?: string) => {
+  const hour = Number(departure?.match(/\d{1,2}/)?.[0]);
+  if (Number.isNaN(hour)) return '';
+  if (hour < 12) return 'morning';
+  if (hour < 18) return 'afternoon';
+  if (hour < 23) return 'evening';
+  return 'night';
+};
+
 const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
   const searchParams = useSearchParams();
   const urlNeedType = searchParams?.get('needType');
-  const urlCategory = searchParams?.get('category');
+  const urlCategory = searchParams?.get('category') || searchParams?.get('type');
   const urlKeyword = searchParams?.get('keyword');
+  const urlDirection = searchParams?.get('direction');
 
   const [filters, setFilters] = useState<PropertyFilterState>(() => ({
     ...INITIAL_FILTER_STATE,
     needType: (urlNeedType === 'BUY' || urlNeedType === 'RENT') ? urlNeedType : 'ALL',
     propertyType: urlCategory || '',
     keyword: urlKeyword || '',
+    direction: urlDirection || '',
   }));
 
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   const [quotePost, setQuotePost] = useState<PropertyDemand | null>(null);
-
-  // Sync filter state when URL search parameters change
-  useEffect(() => {
-    if (urlNeedType === 'BUY' || urlNeedType === 'RENT') {
-      setFilters((prev) => ({ ...prev, needType: urlNeedType }));
-    } else if (urlNeedType === 'ALL') {
-      setFilters((prev) => ({ ...prev, needType: 'ALL' }));
-    }
-    if (urlCategory) {
-      setFilters((prev) => ({ ...prev, propertyType: urlCategory }));
-    }
-    if (urlKeyword !== null && urlKeyword !== undefined) {
-      setFilters((prev) => ({ ...prev, keyword: urlKeyword }));
-    }
-    setCurrentPage(1);
-  }, [urlNeedType, urlCategory, urlKeyword]);
 
   // Filter and sort logic
   const filteredPosts = useMemo(() => {
@@ -86,6 +82,11 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
       }
 
       // 5. Price Range Filter
+      if (filters.direction && getTimeSlotFromDeparture(post.direction) !== filters.direction) {
+        return false;
+      }
+
+      // 6. Price Range Filter
       if (filters.priceRange) {
         const [minStr, maxStr] = filters.priceRange.split('-');
         const min = Number(minStr) || 0;
@@ -95,13 +96,13 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
         }
       }
 
-      // 6. Area Range Filter
+      // 7. Area Range Filter
       if (filters.areaRange) {
         const [minStr, maxStr] = filters.areaRange.split('-');
         const min = Number(minStr) || 0;
         const max = Number(maxStr) || 999999;
         if (post.minAreaNum !== undefined) {
-          if (post.minAreaNum > max) return false;
+          if (post.minAreaNum < min || post.minAreaNum > max) return false;
         }
       }
 
@@ -126,7 +127,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
     const chips: { label: string; key: keyof PropertyFilterState }[] = [];
     if (filters.needType !== 'ALL') {
       chips.push({
-        label: filters.needType === 'BUY' ? 'Cần mua' : 'Cần thuê',
+        label: filters.needType === 'BUY' ? 'Đặt vé' : 'Gửi hàng',
         key: 'needType',
       });
     }
@@ -140,10 +141,19 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
       chips.push({ label: `Tỉnh/Thành: ${filters.province}`, key: 'province' });
     }
     if (filters.priceRange) {
-      chips.push({ label: `Ngân sách lọc`, key: 'priceRange' });
+      chips.push({ label: `Khoảng giá`, key: 'priceRange' });
+    }
+    if (filters.direction) {
+      const labels: Record<string, string> = {
+        morning: 'Sáng',
+        afternoon: 'Chiều',
+        evening: 'Tối',
+        night: 'Đêm',
+      };
+      chips.push({ label: `Khung giờ: ${labels[filters.direction] || filters.direction}`, key: 'direction' });
     }
     if (filters.areaRange) {
-      chips.push({ label: `Diện tích lọc`, key: 'areaRange' });
+      chips.push({ label: `Ghế trống / khối lượng`, key: 'areaRange' });
     }
     return chips;
   }, [filters]);
@@ -169,13 +179,42 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
   }, [filteredPosts, currentPage]);
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-sans space-y-4">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-5 font-sans space-y-4 bg-[#F8FAF9]">
       {/* Breadcrumb Navigation Trail */}
       <Breadcrumb
         items={[
-          { label: filters.needType === 'BUY' ? 'Nhu cầu Cần Mua BĐS' : filters.needType === 'RENT' ? 'Nhu cầu Cần Thuê BĐS' : 'Tất cả nhu cầu BĐS' },
+          { label: filters.needType === 'BUY' ? 'Danh sách chuyến xe' : filters.needType === 'RENT' ? 'Dịch vụ gửi hàng' : 'Tất cả chuyến xe và dịch vụ' },
         ]}
       />
+
+      <PropertySearchForm />
+
+      <div className="bg-white rounded-lg border border-slate-200 p-4 md:p-5 shadow-sm">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="text-xl md:text-2xl font-black text-slate-950">
+              {filters.needType === 'RENT' ? 'Dịch vụ gửi hàng theo tuyến' : 'Chọn chuyến xe phù hợp'}
+            </h1>
+            <p className="mt-1 text-sm text-slate-500 font-medium">
+              So sánh giờ đi, loại xe, số ghế trống, giá vé và chính sách trước khi chọn chỗ.
+            </p>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-3 py-2">
+              <p className="text-base font-black text-[#143D30]">{filteredPosts.length}</p>
+              <p className="text-[10px] font-bold text-emerald-800">kết quả</p>
+            </div>
+            <div className="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
+              <p className="text-base font-black text-amber-700">10p</p>
+              <p className="text-[10px] font-bold text-amber-800">giữ ghế</p>
+            </div>
+            <div className="rounded-lg bg-slate-50 border border-slate-200 px-3 py-2">
+              <p className="text-base font-black text-slate-800">QR</p>
+              <p className="text-[10px] font-bold text-slate-500">vé điện tử</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Main Grid: Sidebar Filter + Results */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 xl:gap-8 items-start relative">
@@ -225,10 +264,10 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
         {/* Post Results List (3 Cols of Grid - Each Row has 3 Cards on XL) */}
         <div className="lg:col-span-3 space-y-5">
           {/* Top Bar: Total Count + Sort Dropdown */}
-          <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+          <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-slate-700">
-                Tìm thấy <strong className="text-[#143D30] font-black text-sm">{filteredPosts.length}</strong> tin đăng phù hợp
+                Tìm thấy <strong className="text-[#143D30] font-black text-sm">{filteredPosts.length}</strong> chuyến/dịch vụ phù hợp
               </span>
             </div>
 
@@ -241,29 +280,29 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
               <select
                 value={filters.sortBy}
                 onChange={(e) => {
-                  setFilters({ ...filters, sortBy: e.target.value as any });
+                  setFilters({ ...filters, sortBy: e.target.value as PropertyFilterState['sortBy'] });
                   setCurrentPage(1);
                 }}
-                className="px-3 py-1.5 text-xs font-bold text-slate-800 bg-slate-50 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] cursor-pointer"
+                className="px-3 py-1.5 text-xs font-bold text-slate-800 bg-slate-50 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] cursor-pointer"
               >
-                <option value="NEWEST">Tin mới nhất</option>
+                <option value="NEWEST">Mới cập nhật</option>
                 <option value="PRICE_ASC">Giá tăng dần</option>
                 <option value="PRICE_DESC">Giá giảm dần</option>
-                <option value="AREA_DESC">Diện tích lớn nhất</option>
+                <option value="AREA_DESC">Nhiều ghế nhất</option>
               </select>
             </div>
           </div>
 
           {/* Active Filter Chips */}
           {activeChips.length > 0 && (
-            <div className="flex flex-wrap items-center gap-2 bg-emerald-50/50 p-3 rounded-2xl border border-emerald-100">
+            <div className="flex flex-wrap items-center gap-2 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
               <span className="text-[11px] font-bold text-[#143D30] uppercase tracking-wider">
                 Đang lọc:
               </span>
               {activeChips.map((chip) => (
                 <span
                   key={chip.key}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-2xs"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-white border border-slate-200 text-xs font-semibold text-slate-700 shadow-2xs"
                 >
                   <span>{chip.label}</span>
                   <button
@@ -285,9 +324,9 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
             </div>
           )}
 
-          {/* 3 Cards Per Row Grid */}
+          {/* Trip rows */}
           {paginatedPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-3">
               {paginatedPosts.map((post) => (
                 <PropertyCard
                   key={post.id}
@@ -303,10 +342,10 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
               </div>
               <div className="space-y-1">
                 <h3 className="text-base font-extrabold text-slate-900">
-                  Không tìm thấy tin đăng phù hợp
+                  Không tìm thấy chuyến xe phù hợp
                 </h3>
                 <p className="text-xs text-slate-500 max-w-md mx-auto">
-                  Rất tiếc, hiện tại không có tin đăng nào phù hợp với bộ lọc tìm kiếm của bạn. Hãy thử nới lỏng hoặc đặt lại bộ lọc.
+                  Rất tiếc, hiện tại không có chuyến hoặc dịch vụ nào phù hợp với bộ lọc tìm kiếm của bạn. Hãy thử nới lỏng hoặc đặt lại bộ lọc.
                 </p>
               </div>
               <button

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowLeft, Building2, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Bus, CheckCircle2 } from 'lucide-react';
 import { RegisterForm } from '../components/RegisterForm';
 
 export const RegisterClientPage: React.FC = () => {
@@ -27,24 +27,24 @@ export const RegisterClientPage: React.FC = () => {
           
           <div className="space-y-8 max-w-xl">
             <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-[#143D30] text-sm font-bold shadow-lg shadow-black/10">
-              <Building2 className="w-5 h-5" />
-              <span>Cộng Đồng Hội Viên</span>
+              <Bus className="w-5 h-5" />
+              <span>BUSWAY</span>
             </div>
             
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight">
-              Bắt đầu kết nối <br />
-              <span className="text-emerald-400">cơ hội</span> của bạn.
+              Bắt đầu hành trình <br />
+              <span className="text-emerald-400">mới</span> của bạn.
             </h1>
             
             <p className="text-lg text-emerald-100/90 leading-relaxed font-medium">
-              Tạo tài khoản hoàn toàn miễn phí để tiếp cận hàng ngàn bất động sản và khách hàng tiềm năng.
+              Tạo tài khoản hoàn toàn miễn phí để dễ dàng đặt vé và quản lý chuyến đi của bạn.
             </p>
             
             <div className="pt-6 space-y-4">
               {[
-                'Đăng tin miễn phí không giới hạn',
-                'Nhận thông báo khi có BĐS phù hợp',
-                'Quản lý danh sách yêu thích dễ dàng'
+                'Đặt vé nhanh chóng, tiện lợi',
+                'Nhận thông báo lịch trình chuyến đi',
+                'Quản lý vé và lịch sử đi lại dễ dàng'
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
                   <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
@@ -69,7 +69,7 @@ export const RegisterClientPage: React.FC = () => {
           {/* Logo on Mobile Only */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6 mt-12 lg:mt-0 lg:mb-8">
              <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-[#143D30] flex items-center justify-center border border-emerald-100 shadow-sm lg:hidden">
-              <Building2 className="w-8 h-8" />
+              <Bus className="w-8 h-8" />
             </div>
           </div>
 
@@ -78,7 +78,7 @@ export const RegisterClientPage: React.FC = () => {
               Tạo tài khoản mới
             </h2>
             <p className="text-slate-500 text-base">
-              Điền thông tin bên dưới để trở thành hội viên của King Connect Land.
+              Điền thông tin bên dưới để trở thành thành viên của BUSWAY.
             </p>
           </div>
 

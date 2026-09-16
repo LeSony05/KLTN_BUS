@@ -6,10 +6,11 @@ import {
   Search,
   Filter,
   RotateCcw,
-  Building2,
+  Bus,
   MapPin,
   Coins,
-  Ruler,
+  Armchair,
+  Clock3,
 } from 'lucide-react';
 import type { PropertyFilterState } from '../models/property.model';
 
@@ -21,15 +22,13 @@ interface PropertyFilterSidebarProps {
 }
 
 const PROPERTY_TYPES = [
-  'Tất cả loại BĐS',
-  'Đất thổ cư / Đất nền',
-  'Nhà phố',
-  'Căn hộ chung cư',
-  'Mặt bằng kinh doanh',
-  'Kho xưởng',
-  'Biệt thự',
-  'Shophouse',
-  'Đất vườn / Trang trại',
+  'Tất cả loại xe',
+  'Limousine',
+  'Limousine VIP',
+  'Limousine giường phòng',
+  'Giường nằm',
+  'Ghế ngồi',
+  'Gửi hàng hóa',
 ];
 
 const PROVINCES = [
@@ -37,41 +36,39 @@ const PROVINCES = [
   'Hồ Chí Minh',
   'Hà Nội',
   'Đà Nẵng',
-  'Bình Dương',
-  'Đồng Nai',
   'Lâm Đồng',
-  'Long An',
-  'Bà Rịa - Vũng Tàu',
+  'Vũng Tàu',
   'Cần Thơ',
 ];
 
 const PRICE_RANGES_BUY = [
   { label: 'Tất cả mức giá', value: '' },
-  { label: 'Dưới 1 tỷ', value: '0-1000' },
-  { label: '1 - 3 tỷ', value: '1000-3000' },
-  { label: '3 - 5 tỷ', value: '3000-5000' },
-  { label: '5 - 10 tỷ', value: '5000-10000' },
-  { label: '10 - 20 tỷ', value: '10000-20000' },
-  { label: 'Trên 20 tỷ', value: '20000-999999' },
+  { label: 'Dưới 200.000đ', value: '0-200' },
+  { label: '200.000đ - 350.000đ', value: '200-350' },
+  { label: '350.000đ - 500.000đ', value: '350-500' },
+  { label: 'Trên 500.000đ', value: '500-9999' },
 ];
 
 const PRICE_RANGES_RENT = [
   { label: 'Tất cả mức giá', value: '' },
-  { label: 'Dưới 5 triệu/tháng', value: '0-5' },
-  { label: '5 - 10 triệu/tháng', value: '5-10' },
-  { label: '10 - 20 triệu/tháng', value: '10-20' },
-  { label: '20 - 40 triệu/tháng', value: '20-40' },
-  { label: 'Trên 40 triệu/tháng', value: '40-9999' },
+  { label: 'Dưới 100.000đ', value: '0-100' },
+  { label: '100.000đ - 200.000đ', value: '100-200' },
+  { label: 'Trên 200.000đ', value: '200-9999' },
 ];
 
 const AREA_RANGES = [
-  { label: 'Tất cả diện tích', value: '' },
-  { label: 'Dưới 30 m²', value: '0-30' },
-  { label: '30 - 50 m²', value: '30-50' },
-  { label: '50 - 80 m²', value: '50-80' },
-  { label: '80 - 150 m²', value: '80-150' },
-  { label: '150 - 300 m²', value: '150-300' },
-  { label: 'Trên 300 m²', value: '300-99999' },
+  { label: 'Tất cả tình trạng', value: '' },
+  { label: 'Còn dưới 10 ghế', value: '0-10' },
+  { label: 'Còn 10 - 20 ghế', value: '10-20' },
+  { label: 'Còn trên 20 ghế', value: '20-99999' },
+];
+
+const TIME_SLOTS = [
+  { label: 'Tất cả khung giờ', value: '' },
+  { label: 'Sáng 00:00 - 11:59', value: 'morning' },
+  { label: 'Chiều 12:00 - 17:59', value: 'afternoon' },
+  { label: 'Tối 18:00 - 22:59', value: 'evening' },
+  { label: 'Đêm 23:00 - 23:59', value: 'night' },
 ];
 
 export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
@@ -90,13 +87,13 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
   const priceOptions = isRent ? PRICE_RANGES_RENT : PRICE_RANGES_BUY;
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-5 space-y-5 shadow-sm">
+    <div className="bg-white rounded-lg border border-slate-200 p-4 space-y-4 shadow-sm">
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
           <Filter className="w-4 h-4 text-[#143D30]" />
           <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-wide">
-            Bộ lọc tìm kiếm
+            Lọc chuyến
           </h2>
         </div>
         <button
@@ -109,14 +106,14 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
         </button>
       </div>
 
-      {/* Type Toggle: Tất cả / Cần Mua / Cần Thuê */}
+      {/* Type Toggle: Tất cả / Đặt vé / Gửi hàng */}
       <div className="space-y-1.5">
-        <label className="text-xs font-bold text-slate-700">Phân loại tin đăng</label>
-        <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-xl">
+        <label className="text-xs font-bold text-slate-700">Loại dịch vụ</label>
+        <div className="grid grid-cols-3 gap-1 p-1 bg-slate-100 rounded-lg">
           <button
             type="button"
             onClick={() => handleChange('needType', 'ALL')}
-            className={`py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'ALL'
                 ? 'bg-[#143D30] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
@@ -127,24 +124,24 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
           <button
             type="button"
             onClick={() => handleChange('needType', 'BUY')}
-            className={`py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'BUY'
                 ? 'bg-[#143D30] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Cần mua
+            Đặt vé
           </button>
           <button
             type="button"
             onClick={() => handleChange('needType', 'RENT')}
-            className={`py-2 text-xs font-bold rounded-lg transition-colors cursor-pointer ${
+            className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'RENT'
                 ? 'bg-[#143D30] text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Cần thuê
+            Gửi hàng
           </button>
         </div>
       </div>
@@ -158,8 +155,8 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             type="text"
             value={filters.keyword}
             onChange={(e) => handleChange('keyword', e.target.value)}
-            placeholder="Khu vực, loại nhà đất, đường..."
-            className="w-full pl-9 pr-3 py-2 text-xs rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent"
+            placeholder="Điểm đi, điểm đến, loại xe..."
+            className="w-full pl-9 pr-3 py-2.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent"
           />
         </div>
       </div>
@@ -167,36 +164,38 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       {/* Property Type */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-          <Building2 className="w-3.5 h-3.5 text-[#143D30]" />
-          <span>Loại bất động sản</span>
+          <Bus className="w-3.5 h-3.5 text-[#143D30]" />
+          <span>Loại xe / dịch vụ</span>
         </label>
         <select
           value={filters.propertyType}
           onChange={(e) => handleChange('propertyType', e.target.value)}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
         >
           {PROPERTY_TYPES.map((type) => (
-            <option key={type} value={type === 'Tất cả loại BĐS' ? '' : type}>
+            <option key={type} value={type === 'Tất cả loại xe' ? '' : type}>
               {type}
             </option>
           ))}
         </select>
       </div>
 
-      {/* Province */}
+
+
+      {/* Price Range */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-          <MapPin className="w-3.5 h-3.5 text-rose-500" />
-          <span>Tỉnh / Thành phố</span>
+          <Clock3 className="w-3.5 h-3.5 text-[#143D30]" />
+          <span>Khung giờ</span>
         </label>
         <select
-          value={filters.province}
-          onChange={(e) => handleChange('province', e.target.value)}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          value={filters.direction}
+          onChange={(e) => handleChange('direction', e.target.value)}
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
         >
-          {PROVINCES.map((p) => (
-            <option key={p} value={p === 'Tất cả Tỉnh/Thành' ? '' : p}>
-              {p}
+          {TIME_SLOTS.map((item) => (
+            <option key={item.value} value={item.value}>
+              {item.label}
             </option>
           ))}
         </select>
@@ -206,12 +205,12 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
           <Coins className="w-3.5 h-3.5 text-amber-600" />
-          <span>Khoảng ngân sách</span>
+          <span>Khoảng giá</span>
         </label>
         <select
           value={filters.priceRange}
           onChange={(e) => handleChange('priceRange', e.target.value)}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
         >
           {priceOptions.map((item) => (
             <option key={item.value} value={item.value}>
@@ -224,13 +223,13 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       {/* Area Range */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-          <Ruler className="w-3.5 h-3.5 text-emerald-600" />
-          <span>Khoảng diện tích</span>
+          <Armchair className="w-3.5 h-3.5 text-emerald-600" />
+          <span>Ghế trống / khối lượng</span>
         </label>
         <select
           value={filters.areaRange}
           onChange={(e) => handleChange('areaRange', e.target.value)}
-          className="w-full px-3 py-2 text-xs rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
         >
           {AREA_RANGES.map((item) => (
             <option key={item.value} value={item.value}>
@@ -238,6 +237,18 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             </option>
           ))}
         </select>
+      </div>
+
+      <div className="space-y-2 pt-3 border-t border-slate-100">
+        <p className="text-xs font-bold text-slate-700">Tiêu chí phổ biến</p>
+        <div className="space-y-2">
+          {['Chọn trước chỗ ngồi', 'Có trung chuyển', 'Có mã giảm giá', 'Hủy vé linh hoạt'].map((label) => (
+            <label key={label} className="flex items-center gap-2 text-xs font-semibold text-slate-600">
+              <input type="checkbox" className="accent-[#143D30]" />
+              <span>{label}</span>
+            </label>
+          ))}
+        </div>
       </div>
     </div>
   );
