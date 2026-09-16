@@ -12,7 +12,7 @@ export const RegisterClientPage: React.FC = () => {
       <div className="hidden lg:flex lg:w-1/2 relative bg-[#143D30] overflow-hidden">
         {/* Background Image & Gradient overlay */}
         <div 
-          className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-30 mix-blend-overlay"
+          className="absolute inset-0 bg-[url('/images/bg-register.jpg')] bg-cover bg-center opacity-30 mix-blend-overlay"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#091f18] via-[#143D30]/80 to-transparent" />
         

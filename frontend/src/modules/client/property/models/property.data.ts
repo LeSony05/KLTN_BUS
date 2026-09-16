@@ -4,33 +4,55 @@ import { PropertyDemand } from './property.model';
 export const MOCK_PROPERTY_DEMANDS: PropertyDemand[] = [
   {
     id: '1',
-    title: 'Cần mua gấp đất nền thổ cư TP. Thủ Đức ngân sách 3.5 tỷ',
+    title: 'Biệt Thự Vườn Thảo Điền Phong Cách Bắc Âu Hiện Đại',
     needType: 'BUY',
-    propertyType: 'Đất thổ cư / Đất nền',
-    price: '3.5 Tỷ - 4.2 Tỷ VNĐ',
-    minPriceNum: 3500,
-    maxPriceNum: 4200,
-    area: '80 - 120 m²',
-    minAreaNum: 80,
-    location: 'Phường Long Trường, TP. Thủ Đức, TP. Hồ Chí Minh',
+    propertyType: 'Biệt thự vườn',
+    price: '6.8 Tỷ VNĐ',
+    minPriceNum: 6800,
+    maxPriceNum: 6800,
+    area: '185 m²',
+    minAreaNum: 185,
+    location: 'Đường Nguyễn Văn Hưởng, Phường Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh',
     province: 'Hồ Chí Minh',
     district: 'TP. Thủ Đức',
-    legal: 'Sổ hồng riêng chính chủ',
+    legal: 'Sổ hồng riêng',
     direction: 'Đông Nam',
-    note: 'Đường trước nhà tối thiểu 5m, ô tô tránh nhau thoải mái',
-    description: `Khách hàng có sẵn tiền mặt 100%, không vay ngân hàng. Cần tìm mua gấp 01 lô đất nền thổ cư tại TP. Thủ Đức (ưu tiên khu vực Long Trường, Trường Thạnh, Hiệp Phú).
-Yêu cầu cụ thể:
-- Diện tích: từ 80m² đến 120m², mặt tiền tối thiểu 5m.
-- Pháp lý: Sổ hồng riêng chính chủ, xây dựng tự do, không dính quy hoạch hay tranh chấp.
-- Hướng ưu tiên: Đông Nam hoặc Chính Nam.
-- Đường trước nhà: Hẻm 5m trở lên, xe hơi vào tận nơi.
-- Công chứng mua bán nhanh trong 3 ngày nếu giá hợp lý.`,
+    note: 'Đường trước nhà 12m (Ô tô tránh nhau)',
+    description: `Cần chuyển nhượng gấp căn biệt thự song lập phong cách Bắc Âu tại khu dân cư cao cấp Thảo Điền, TP. Thủ Đức. Không gian sống yên tĩnh, nhiều cây xanh, an ninh khép kín 24/7.
+
+Thông tin kết cấu: 1 trệt, 2 lầu, 1 sân thượng ngắm trọn hoàng hôn sông Sài Gòn. Toàn bộ nội thất nhập khẩu cao cấp từ Châu Âu, gỗ sồi tự nhiên, thiết bị vệ sinh Kohler, hệ thống bếp Hafele hiện đại.
+
+Pháp lý & Quy hoạch: Sổ hồng chính chủ, đã hoàn công đầy đủ, pháp lý chuẩn chỉnh sẵn sàng công chứng sang tên ngay trong ngày.
+
+Vị trí kết nối: Cách trường Quốc tế BIS chỉ 3 phút, cách trạm Metro An Phú 5 phút di chuyển, xung quanh đầy đủ nhà hàng cao cấp, siêu thị An Nam Gourmet.`,
     timeAgo: '10 phút trước',
     createdAt: '12/09/2026',
-    authorName: 'Nguyễn Văn Hùng',
+    authorName: 'Trần Quốc Anh',
     authorCode: 'KC-001',
     authorPhone: '0912.345.678',
     isVerified: true,
+    memberSince: '2024',
+    bedrooms: 4,
+    bathrooms: 3,
+    interior: 'Đầy đủ nội thất cao cấp',
+    floors: '3 tầng + Sân thượng',
+    facade: '9.5 mét',
+    roadWidth: '12m (Ô tô tránh nhau)',
+    amenities: [
+      'Hồ bơi nóng', 
+      'Camera an ninh 24/7', 
+      'Gara để 2 ô tô', 
+      'Khóa cửa vân tay', 
+      'Sân vườn cây xanh', 
+      'Gần trạm Metro'
+    ],
+    images: [
+      '/images/mock/prop1.jpg',
+      '/images/mock/prop2.jpg',
+      '/images/mock/prop3.jpg',
+      '/images/mock/prop4.jpg',
+      '/images/mock/prop5.jpg'
+    ]
   },
   {
     id: '2',
@@ -60,6 +82,10 @@ Yêu cầu:
     authorCode: 'KC-088',
     authorPhone: '0988.765.432',
     isVerified: true,
+    images: [
+      '/images/mock/prop4.jpg',
+      '/images/mock/prop5.jpg'
+    ]
   },
   {
     id: '3',

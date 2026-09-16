@@ -1,4 +1,3 @@
-// frontend/src/modules/client/property/components/DetailPropertyPost.tsx
 'use client';
 
 import React, { useState } from 'react';
@@ -10,9 +9,6 @@ import {
   Phone,
   MessageCircle,
   Ruler,
-  Coins,
-  ShieldCheck,
-  CheckCircle2,
   Compass,
   FileText,
   AlertTriangle,
@@ -20,6 +16,12 @@ import {
   Send,
   Eye,
   Check,
+  X,
+  BedDouble,
+  Bath,
+  CheckCircle,
+  CheckCircle2,
+  Map,
 } from 'lucide-react';
 import type { PropertyDemand } from '../models/property.model';
 import { MOCK_PROPERTY_DEMANDS } from '../models/property.data';
@@ -34,6 +36,7 @@ export interface DetailPropertyPostProps {
 export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) => {
   const [copied, setCopied] = useState(false);
   const [quoteModalPost, setQuoteModalPost] = useState<PropertyDemand | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const isBuy = post.needType === 'BUY';
   const cleanPhone = post.authorPhone.replace(/\./g, '').replace(/\s+/g, '');
@@ -46,244 +49,327 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
     }
   };
 
-  // Related posts (same needType, different id)
+  // Related posts
   const relatedPosts = MOCK_PROPERTY_DEMANDS.filter(
     (p) => p.needType === post.needType && p.id !== post.id
-  ).slice(0, 2);
+  ).slice(0, 3);
 
   return (
-    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4 font-sans">
-      {/* Top Bar: Breadcrumb + Share Button */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+    <div className="w-full bg-[#fcfcfd] min-h-screen pb-12 font-sans">
+      <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 space-y-6">
+        
+        {/* Breadcrumb */}
         <Breadcrumb
           items={[
-            { label: post.needType === 'BUY' ? 'Nhu cầu cần mua' : 'Nhu cầu cần thuê', href: '/posts' },
-            { label: post.title },
+            { label: post.needType === 'BUY' ? 'Bất động sản bán' : 'Bất động sản thuê', href: '/posts' },
+            { label: post.district, href: '/posts' },
           ]}
         />
 
-        <button
-          type="button"
-          onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-600 transition-colors shadow-2xs cursor-pointer self-end sm:self-auto"
-        >
-          {copied ? (
-            <>
-              <Check className="w-3.5 h-3.5 text-emerald-600" />
-              <span className="text-emerald-700">Đã chép link!</span>
-            </>
-          ) : (
-            <>
-              <Share2 className="w-3.5 h-3.5 text-slate-400" />
-              <span>Chia sẻ tin</span>
-            </>
-          )}
-        </button>
-      </div>
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-start justify-between gap-4">
+          <div className="space-y-3 flex-1">
+            <div className="flex flex-wrap items-center gap-3">
+              <span
+                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-bold uppercase tracking-wider ${
+                  isBuy
+                    ? 'bg-emerald-500 text-white'
+                    : 'bg-blue-500 text-white'
+                }`}
+              >
+                {isBuy ? 'ĐANG BÁN' : 'CHO THUÊ'}
+              </span>
+              <span className="text-xs font-medium text-slate-400 flex items-center gap-1">
+                <Calendar className="w-3.5 h-3.5" /> {post.timeAgo}
+              </span>
+              <span className="text-xs font-medium text-slate-400">
+                • Mã tin: #{post.id.padStart(4, '0')}
+              </span>
+            </div>
+            
+            <h1 className="text-2xl sm:text-3xl lg:text-[32px] font-black text-[#0f2e24] leading-tight">
+              {post.title}
+            </h1>
+            
+            <div className="flex items-start gap-1.5 text-sm text-slate-500 font-medium">
+              <MapPin className="w-4 h-4 text-rose-500 flex-shrink-0 mt-0.5" />
+              <span>{post.location}</span>
+            </div>
+          </div>
 
-      {/* Main Post Container */}
-      <div className="bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
-        {/* Top Badges & Meta */}
-        <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-100">
-          <div className="flex items-center gap-2">
-            <span
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold uppercase tracking-wider ${
-                isBuy
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                  : 'bg-blue-50 text-blue-800 border border-blue-200'
-              }`}
+          <div className="flex flex-col md:items-end text-left md:text-right shrink-0">
+            <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">Giá Niêm Yết</p>
+            <p className="text-3xl sm:text-4xl font-black text-red-600 leading-none mb-1">{post.price}</p>
+            <p className="text-xs font-bold text-slate-400">~ 35.7 Triệu / m²</p>
+          </div>
+        </div>
+
+        {/* Image Gallery 1 + 4 */}
+        {post.images && post.images.length > 0 && (
+          <div className="flex flex-col md:flex-row gap-3 h-[300px] sm:h-[400px] lg:h-[460px]">
+            {/* Big Image */}
+            <div 
+              className="w-full md:w-1/2 h-full rounded-2xl overflow-hidden cursor-pointer group relative shrink-0"
+              onClick={() => setSelectedImage(post.images![0])}
             >
-              <Building2 className="w-4 h-4" />
-              <span>{isBuy ? 'Cần mua BĐS' : 'Cần thuê BĐS'}</span>
-            </span>
-
-            <span className="px-2.5 py-1 rounded-lg bg-slate-100 text-slate-600 text-xs font-mono font-bold">
-              Mã tin: #{post.id.padStart(4, '0')}
-            </span>
-          </div>
-
-          <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
-            <span className="flex items-center gap-1">
-              <Calendar className="w-3.5 h-3.5" />
-              <span>Ngày đăng: {post.createdAt}</span>
-            </span>
-            <span className="flex items-center gap-1">
-              <Eye className="w-3.5 h-3.5" />
-              <span>128 lượt xem</span>
-            </span>
-          </div>
-        </div>
-
-        {/* Post Title */}
-        <h1 className="text-xl sm:text-2xl lg:text-3xl font-black text-slate-900 leading-tight">
-          {post.title}
-        </h1>
-
-        {/* Specifications Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3.5 p-5 bg-slate-50 rounded-2xl border border-slate-100 text-xs">
-          <div className="space-y-1">
-            <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-              <Coins className="w-3.5 h-3.5 text-amber-600" />
-              <span>Ngân sách dự kiến</span>
-            </p>
-            <p className="text-sm sm:text-base font-black text-[#143D30]">{post.price}</p>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-              <Ruler className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Diện tích mong muốn</span>
-            </p>
-            <p className="text-sm sm:text-base font-bold text-slate-800">{post.area}</p>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-              <Building2 className="w-3.5 h-3.5 text-slate-600" />
-              <span>Loại Bất động sản</span>
-            </p>
-            <p className="text-sm font-bold text-slate-800">{post.propertyType}</p>
-          </div>
-
-          <div className="space-y-1">
-            <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-              <ShieldCheck className="w-3.5 h-3.5 text-blue-600" />
-              <span>Yêu cầu pháp lý</span>
-            </p>
-            <p className="text-sm font-bold text-slate-800">{post.legal || 'Sổ hồng/Sổ đỏ chính chủ'}</p>
-          </div>
-
-          <div className="col-span-2 space-y-1">
-            <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-              <MapPin className="w-3.5 h-3.5 text-rose-500" />
-              <span>Khu vực tìm kiếm</span>
-            </p>
-            <p className="text-sm font-bold text-slate-800">{post.location}</p>
-          </div>
-
-          {post.direction && (
-            <div className="space-y-1">
-              <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-                <Compass className="w-3.5 h-3.5 text-purple-600" />
-                <span>Hướng nhà đất</span>
-              </p>
-              <p className="text-sm font-bold text-slate-800">{post.direction}</p>
+              <img src={post.images[0]} alt={post.title} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
             </div>
-          )}
 
-          {post.note && (
-            <div className="space-y-1">
-              <p className="text-[11px] text-slate-500 font-semibold flex items-center gap-1">
-                <FileText className="w-3.5 h-3.5 text-slate-500" />
-                <span>Ghi chú riêng</span>
-              </p>
-              <p className="text-xs font-semibold text-slate-700">{post.note}</p>
+            {/* Small Images Grid */}
+            <div className="hidden md:grid w-1/2 h-full grid-cols-2 grid-rows-2 gap-3">
+              {post.images.slice(1, 4).map((img, idx) => (
+                <div 
+                  key={idx} 
+                  className="w-full h-full rounded-2xl overflow-hidden cursor-pointer group relative"
+                  onClick={() => setSelectedImage(img)}
+                >
+                  <img src={img} alt={`${post.title} ${idx + 2}`} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors" />
+                </div>
+              ))}
+              
+              {/* 5th Image with Overlay */}
+              {post.images.length >= 5 && (
+                <div 
+                  className="w-full h-full rounded-2xl overflow-hidden cursor-pointer group relative"
+                  onClick={() => setSelectedImage(post.images![4])}
+                >
+                  <img src={post.images[4]} alt={`${post.title} 5`} className="w-full h-full object-cover" />
+                  <div className="absolute inset-0 bg-slate-900/60 transition-colors flex items-center justify-center">
+                    <span className="text-white font-bold text-sm flex items-center gap-2">
+                      <Eye className="w-5 h-5" />
+                      Xem thêm {post.images.length - 4} ảnh
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
-
-        {/* Detailed Requirement Description */}
-        <div className="space-y-3">
-          <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-2">
-            <FileText className="w-4 h-4 text-[#143D30]" />
-            <span>Mô tả chi tiết yêu cầu</span>
-          </h2>
-          <div className="p-5 bg-white rounded-2xl border border-slate-200 text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line space-y-2">
-            {post.description}
           </div>
-        </div>
+        )}
 
-        {/* Author Contact Box */}
-        <div className="p-6 bg-gradient-to-br from-emerald-50/70 to-emerald-100/30 border border-emerald-200/80 rounded-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="flex items-center gap-4">
-            <div className="w-14 h-14 rounded-2xl bg-[#143D30] text-white flex items-center justify-center font-black text-xl shadow-md uppercase">
-              {post.authorName.charAt(0)}
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="text-base font-extrabold text-slate-900">{post.authorName}</h3>
-                {post.isVerified && (
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-100 text-emerald-800 text-[10px] font-bold">
-                    <CheckCircle2 className="w-3 h-3 text-emerald-600" />
-                    Đã xác minh
-                  </span>
-                )}
+        {/* Main Content & Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6 lg:gap-8 pt-4">
+          
+          {/* LEFT COLUMN - Main Content */}
+          <div className="w-full lg:w-[68%] space-y-6">
+            
+            {/* Quick Specs Cards */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="bg-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm border border-slate-100">
+                <Ruler className="w-6 h-6 text-[#0068FF]" />
+                <p className="text-[11px] text-slate-500 font-bold uppercase">Diện tích</p>
+                <p className="font-black text-slate-900">{post.area}</p>
               </div>
-              <p className="text-xs text-slate-500 font-mono mt-0.5">
-                Mã hội viên: <strong className="text-slate-700">{post.authorCode}</strong>
-              </p>
-              <p className="text-xs font-bold text-[#143D30] font-mono mt-1">{post.authorPhone}</p>
+              
+              {post.bedrooms !== undefined && (
+                <div className="bg-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm border border-slate-100">
+                  <BedDouble className="w-6 h-6 text-[#0068FF]" />
+                  <p className="text-[11px] text-slate-500 font-bold uppercase">Phòng ngủ</p>
+                  <p className="font-black text-slate-900">{post.bedrooms} Phòng</p>
+                </div>
+              )}
+
+              {post.bathrooms !== undefined && (
+                <div className="bg-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm border border-slate-100">
+                  <Bath className="w-6 h-6 text-[#0068FF]" />
+                  <p className="text-[11px] text-slate-500 font-bold uppercase">Phòng tắm</p>
+                  <p className="font-black text-slate-900">{post.bathrooms} WC</p>
+                </div>
+              )}
+
+              <div className="bg-white rounded-2xl p-4 flex flex-col items-center justify-center gap-2 shadow-sm border border-slate-100">
+                <Compass className="w-6 h-6 text-[#0068FF]" />
+                <p className="text-[11px] text-slate-500 font-bold uppercase">Hướng nhà</p>
+                <p className="font-black text-slate-900">{post.direction || 'Không xác định'}</p>
+              </div>
+            </div>
+
+            {/* Description */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+              <h2 className="text-lg font-black text-slate-900 mb-5">Mô Tả Bất Động Sản</h2>
+              <div className="text-sm text-slate-700 leading-relaxed whitespace-pre-line space-y-4">
+                {post.description.split('\n\n').map((paragraph, index) => {
+                  const colonIndex = paragraph.indexOf(':');
+                  if (colonIndex !== -1 && colonIndex < 30) {
+                    return (
+                      <p key={index}>
+                        <strong className="text-slate-900">{paragraph.slice(0, colonIndex + 1)}</strong>
+                        {paragraph.slice(colonIndex + 1)}
+                      </p>
+                    );
+                  }
+                  return <p key={index}>{paragraph}</p>;
+                })}
+              </div>
+            </div>
+
+            {/* Detailed Specs */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+              <h2 className="text-lg font-black text-slate-900 mb-6">Đặc Điểm Chi Tiết</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-y-5 gap-x-8 text-sm">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Loại BĐS:</span>
+                  <span className="font-bold text-slate-900">{post.propertyType}</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Tình trạng pháp lý:</span>
+                  <span className="font-bold text-slate-900">{post.legal || 'Đang cập nhật'}</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Tình trạng nội thất:</span>
+                  <span className="font-bold text-slate-900">{post.interior || 'Cơ bản'}</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Số tầng:</span>
+                  <span className="font-bold text-slate-900">{post.floors || 'Đang cập nhật'}</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Đường trước nhà:</span>
+                  <span className="font-bold text-slate-900">{post.roadWidth || 'Đang cập nhật'}</span>
+                </div>
+                
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <span className="text-slate-500">Mặt tiền:</span>
+                  <span className="font-bold text-slate-900">{post.facade || 'Đang cập nhật'}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Amenities */}
+            {post.amenities && post.amenities.length > 0 && (
+              <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+                <h2 className="text-lg font-black text-slate-900 mb-6">Tiện Ích Đi Kèm</h2>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  {post.amenities.map((item, idx) => (
+                    <div key={idx} className="flex items-center gap-2.5">
+                      <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
+                      <span className="text-sm font-medium text-slate-700">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Map Placeholder */}
+            <div className="bg-white rounded-3xl p-6 sm:p-8 shadow-sm border border-slate-100">
+              <h2 className="text-lg font-black text-slate-900 mb-2">Vị Trí Trên Bản Đồ</h2>
+              <p className="text-sm text-slate-500 mb-6">{post.location}</p>
+              
+              <div className="w-full h-64 bg-slate-100 rounded-2xl flex flex-col items-center justify-center text-slate-400 border border-slate-200">
+                <Map className="w-12 h-12 mb-3 text-slate-300" />
+                <p className="font-bold text-slate-500">Khu vực {post.district}</p>
+                <p className="text-xs">Bản đồ sẽ được hiển thị ở đây</p>
+              </div>
+            </div>
+            
+          </div>
+
+          {/* RIGHT COLUMN - Sticky Sidebar */}
+          <div className="w-full lg:w-[32%]">
+            <div className="sticky top-24 space-y-6">
+              
+              {/* Profile Card */}
+              <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+                <div className="flex items-center gap-4 mb-6">
+                  <div className="w-16 h-16 rounded-full bg-[#143D30] text-white flex items-center justify-center font-black text-2xl shadow-sm uppercase">
+                    {post.authorName.charAt(0)}
+                  </div>
+                  <div>
+                    <h3 className="text-base font-black text-slate-900">{post.authorName}</h3>
+                    {post.isVerified && (
+                      <div className="flex items-center gap-1 text-emerald-600 mt-1">
+                        <CheckCircle2 className="w-3.5 h-3.5" />
+                        <span className="text-xs font-bold">Môi giới xác thực</span>
+                      </div>
+                    )}
+                    {post.memberSince && (
+                      <p className="text-xs text-slate-500 mt-1">Thành viên từ {post.memberSince}</p>
+                    )}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <a
+                    href={`tel:${cleanPhone}`}
+                    className="w-full py-3.5 rounded-xl bg-[#0068FF] hover:bg-[#0054d1] text-white text-sm font-bold flex items-center justify-center gap-2 shadow-sm transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span>Gọi ngay: {post.authorPhone}</span>
+                  </a>
+                  
+                  <a
+                    href={`https://zalo.me/${cleanPhone}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full py-3.5 rounded-xl bg-[#f0f4f8] hover:bg-[#e2e8f0] text-[#0068FF] text-sm font-bold flex items-center justify-center gap-2 transition-colors"
+                  >
+                    <MessageCircle className="w-4 h-4" />
+                    <span>Chat qua Zalo</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Contact Form */}
+              <div className="bg-white rounded-3xl p-6 shadow-sm border border-slate-100">
+                <h3 className="text-sm font-black text-slate-900 mb-4">Đăng ký xem nhà trực tiếp</h3>
+                <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); alert('Đã gửi yêu cầu!'); }}>
+                  <input 
+                    type="text" 
+                    placeholder="Họ và tên của bạn" 
+                    required
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#0068FF] focus:ring-1 focus:ring-[#0068FF] transition-all"
+                  />
+                  <input 
+                    type="tel" 
+                    placeholder="Số điện thoại liên hệ" 
+                    required
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#0068FF] focus:ring-1 focus:ring-[#0068FF] transition-all"
+                  />
+                  <textarea 
+                    placeholder="Thời gian bạn có thể qua xem (VD: Chiều thứ 7...)" 
+                    rows={2}
+                    className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:border-[#0068FF] focus:ring-1 focus:ring-[#0068FF] transition-all resize-none"
+                  />
+                  <button 
+                    type="submit"
+                    className="w-full py-3.5 rounded-xl bg-[#0f2e24] hover:bg-[#143d30] text-white text-sm font-bold shadow-sm transition-colors mt-2"
+                  >
+                    Đặt Lịch Hẹn
+                  </button>
+                </form>
+              </div>
+              
             </div>
           </div>
-
-          <div className="flex flex-wrap items-center gap-3 w-full md:w-auto">
-            <a
-              href={`tel:${cleanPhone}`}
-              className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-[#143D30] hover:bg-[#0f2e24] text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
-            >
-              <Phone className="w-4 h-4" />
-              <span>Gọi trực tiếp</span>
-            </a>
-
-            <a
-              href={`https://zalo.me/${cleanPhone}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 sm:flex-none px-5 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
-            >
-              <MessageCircle className="w-4 h-4" />
-              <span>Chat Zalo</span>
-            </a>
-
-            <button
-              type="button"
-              onClick={() => setQuoteModalPost(post)}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-600 text-slate-900 text-xs font-extrabold flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
-            >
-              <Send className="w-4 h-4" />
-              <span>Gửi báo giá BĐS</span>
-            </button>
-          </div>
+          
         </div>
 
-        {/* Safe Trading Notice */}
-        <div className="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/70 flex items-start gap-3 text-xs text-amber-900">
-          <AlertTriangle className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
-          <div className="space-y-0.5">
-            <p className="font-bold">Lưu ý an toàn khi kết nối giao dịch BĐS</p>
-            <p className="text-amber-800/90 leading-relaxed text-[11px]">
-              King Connect Land là nền tảng kết nối nhu cầu trực tiếp. Quý hội viên và khách hàng vui lòng kiểm tra kỹ giấy tờ pháp lý trước khi đặt cọc hoặc thực hiện bất kỳ giao dịch tài chính nào.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Related Posts */}
-      {relatedPosts.length > 0 && (
-        <div className="space-y-4 pt-6">
-          <div className="flex items-center justify-between">
-            <h3 className="text-base font-extrabold text-slate-900 uppercase tracking-wide">
-              Tin Đăng Cùng Danh Mục
+        {/* Related Posts */}
+        {relatedPosts.length > 0 && (
+          <div className="pt-10 pb-6 border-t border-slate-200 mt-10">
+            <h3 className="text-xl font-black text-slate-900 mb-6">
+              Bất Động Sản Cùng Khu Vực
             </h3>
-            <Link
-              href="/posts"
-              className="text-xs font-bold text-[#143D30] hover:underline"
-            >
-              Xem tất cả
-            </Link>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {relatedPosts.map((rel) => (
-              <PropertyCard
-                key={rel.id}
-                post={rel}
-                onOpenQuote={(p) => setQuoteModalPost(p)}
-              />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+              {relatedPosts.map((rel) => (
+                <PropertyCard
+                  key={rel.id}
+                  post={rel}
+                  onOpenQuote={(p) => setQuoteModalPost(p)}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+
+      </div>
 
       {/* Quote Modal */}
       <QuoteModal
@@ -291,6 +377,30 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
         isOpen={!!quoteModalPost}
         onClose={() => setQuoteModalPost(null)}
       />
+
+      {/* Image Viewer Lightbox */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 sm:p-8 backdrop-blur-sm">
+          <button
+            type="button"
+            className="absolute top-4 right-4 sm:top-8 sm:right-8 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors z-[101]"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="w-6 h-6 sm:w-8 sm:h-8" />
+          </button>
+          <div 
+            className="relative w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center cursor-zoom-out"
+            onClick={() => setSelectedImage(null)}
+          >
+            <img 
+              src={selectedImage} 
+              alt="Zoomed property image" 
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl" 
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
