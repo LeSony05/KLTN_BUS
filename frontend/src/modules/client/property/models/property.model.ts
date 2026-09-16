@@ -25,15 +25,6 @@ export interface PropertyDemand {
   authorCode: string;
   authorPhone: string;
   isVerified?: boolean;
-  memberSince?: string;
-  images?: string[];
-  bedrooms?: number;
-  bathrooms?: number;
-  interior?: string;
-  floors?: string;
-  facade?: string;
-  roadWidth?: string;
-  amenities?: string[];
 }
 
 export interface PropertyFilterState {

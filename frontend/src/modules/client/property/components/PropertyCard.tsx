@@ -32,18 +32,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
   return (
     <div
       onClick={handleCardClick}
-      className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#143D30]/40 shadow-sm hover:shadow-md transition-all duration-200 p-4 sm:p-5 flex flex-col justify-between gap-3.5 cursor-pointer group/card"
+      className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#143D30]/40 shadow-sm hover:shadow-md transition-shadow duration-150 p-4 sm:p-5 flex flex-col justify-between gap-3.5 cursor-pointer group/card"
     >
-      {post.images && post.images.length > 0 && (
-        <div className="w-full h-40 sm:h-48 rounded-xl overflow-hidden shrink-0">
-          <img 
-            src={post.images[0]} 
-            alt={post.title} 
-            className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-105" 
-          />
-        </div>
-      )}
-
       {/* Top Header: Badge + Time */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-2.5">
