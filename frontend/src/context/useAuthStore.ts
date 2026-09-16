@@ -27,11 +27,23 @@ interface AuthState {
   initialize: () => void;
 }
 
+export const MOCK_LOGGED_IN_USER: UserProfile = {
+  id: 'USER-1001',
+  fullName: 'Nguyễn Văn Hùng',
+  phone: '0912.345.678',
+  role: UserRole.MEMBER,
+  memberCode: 'MEM-8821',
+  address: 'Phường Tân Quy, Quận 7, TP. Hồ Chí Minh',
+  isPhonePublic: true,
+  createdAt: '15/05/2026',
+  status: 'ACTIVE',
+};
+
 export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  token: null,
-  isAuthenticated: false,
-  isLoading: true,
+  user: MOCK_LOGGED_IN_USER,
+  token: 'mock-jwt-token-123',
+  isAuthenticated: true,
+  isLoading: false,
 
   login: (token: string, user: UserProfile) => {
     if (typeof window !== 'undefined') {
@@ -73,10 +85,21 @@ export const useAuthStore = create<AuthState>((set) => ({
         const user = JSON.parse(userStr) as UserProfile;
         set({ token, user, isAuthenticated: true, isLoading: false });
       } else {
-        set({ token: null, user: null, isAuthenticated: false, isLoading: false });
+        // Default to mock logged in user for development & testing
+        set({
+          token: 'mock-jwt-token-123',
+          user: MOCK_LOGGED_IN_USER,
+          isAuthenticated: true,
+          isLoading: false,
+        });
       }
     } catch {
-      set({ token: null, user: null, isAuthenticated: false, isLoading: false });
+      set({
+        token: 'mock-jwt-token-123',
+        user: MOCK_LOGGED_IN_USER,
+        isAuthenticated: true,
+        isLoading: false,
+      });
     }
   },
 }));

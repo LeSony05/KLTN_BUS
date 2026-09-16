@@ -3,6 +3,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Building2,
   MapPin,
@@ -20,11 +21,19 @@ interface PropertyCardProps {
 }
 
 export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote }) => {
+  const router = useRouter();
   const isBuy = post.needType === 'BUY';
   const cleanPhone = post.authorPhone.replace(/\./g, '').replace(/\s+/g, '');
 
+  const handleCardClick = () => {
+    router.push(`/posts/${post.id}`);
+  };
+
   return (
-    <div className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#143D30]/40 shadow-sm hover:shadow-md transition-shadow duration-150 p-4 sm:p-5 flex flex-col justify-between gap-3.5">
+    <div
+      onClick={handleCardClick}
+      className="bg-white rounded-2xl border border-slate-200/90 hover:border-[#143D30]/40 shadow-sm hover:shadow-md transition-shadow duration-150 p-4 sm:p-5 flex flex-col justify-between gap-3.5 cursor-pointer group/card"
+    >
       {/* Top Header: Badge + Time */}
       <div>
         <div className="flex items-center justify-between gap-2 mb-2.5">
@@ -46,8 +55,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
         </div>
 
         {/* Title */}
-        <Link href={`/posts/${post.id}`} className="group block">
-          <h3 className="text-sm sm:text-base font-bold text-slate-900 group-hover:text-[#143D30] transition-colors line-clamp-2 leading-snug">
+        <Link href={`/posts/${post.id}`} className="group block" onClick={(e) => e.stopPropagation()}>
+          <h3 className="text-xs sm:text-sm font-bold text-slate-900 group-hover:text-[#143D30] group-hover/card:text-[#143D30] transition-colors line-clamp-2 leading-snug">
             {post.title}
           </h3>
         </Link>
@@ -99,7 +108,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
       <div className="grid grid-cols-3 gap-2 pt-3 border-t border-slate-100">
         <button
           type="button"
-          onClick={() => onOpenQuote?.(post)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onOpenQuote?.(post);
+          }}
           className="col-span-2 py-2 px-3 rounded-xl bg-[#143D30] hover:bg-[#0e2a20] text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-sm transition-colors cursor-pointer"
         >
           <Send className="w-3.5 h-3.5" />
@@ -110,6 +122,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
           href={`https://zalo.me/${cleanPhone}`}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
           className="col-span-1 py-2 px-2 rounded-xl bg-sky-50 hover:bg-sky-100 text-sky-700 border border-sky-200/80 text-xs font-bold flex items-center justify-center gap-1 transition-colors cursor-pointer"
           title="Chat Zalo"
         >

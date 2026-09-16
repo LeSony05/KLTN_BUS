@@ -1,7 +1,8 @@
 // frontend/src/modules/client/property/components/PropertyList.tsx
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect, Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
 import {
   SlidersHorizontal,
   ArrowUpDown,
@@ -15,6 +16,7 @@ import { INITIAL_FILTER_STATE } from '../models/property.model';
 import { PropertyFilterSidebar } from './PropertyFilterSidebar';
 import { PropertyCard } from './PropertyCard';
 import { QuoteModal } from './QuoteModal';
+import { Breadcrumb } from '@/common/components/ui/Breadcrumb';
 
 interface PropertyListProps {
   initialPosts: PropertyDemand[];
@@ -22,11 +24,38 @@ interface PropertyListProps {
 
 const ITEMS_PER_PAGE = 9;
 
-export const PropertyList: React.FC<PropertyListProps> = ({ initialPosts }) => {
-  const [filters, setFilters] = useState<PropertyFilterState>(INITIAL_FILTER_STATE);
+const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
+  const searchParams = useSearchParams();
+  const urlNeedType = searchParams?.get('needType');
+  const urlCategory = searchParams?.get('category');
+  const urlKeyword = searchParams?.get('keyword');
+
+  const [filters, setFilters] = useState<PropertyFilterState>(() => ({
+    ...INITIAL_FILTER_STATE,
+    needType: (urlNeedType === 'BUY' || urlNeedType === 'RENT') ? urlNeedType : 'ALL',
+    propertyType: urlCategory || '',
+    keyword: urlKeyword || '',
+  }));
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [mobileFilterOpen, setMobileFilterOpen] = useState<boolean>(false);
   const [quotePost, setQuotePost] = useState<PropertyDemand | null>(null);
+
+  // Sync filter state when URL search parameters change
+  useEffect(() => {
+    if (urlNeedType === 'BUY' || urlNeedType === 'RENT') {
+      setFilters((prev) => ({ ...prev, needType: urlNeedType }));
+    } else if (urlNeedType === 'ALL') {
+      setFilters((prev) => ({ ...prev, needType: 'ALL' }));
+    }
+    if (urlCategory) {
+      setFilters((prev) => ({ ...prev, propertyType: urlCategory }));
+    }
+    if (urlKeyword !== null && urlKeyword !== undefined) {
+      setFilters((prev) => ({ ...prev, keyword: urlKeyword }));
+    }
+    setCurrentPage(1);
+  }, [urlNeedType, urlCategory, urlKeyword]);
 
   // Filter and sort logic
   const filteredPosts = useMemo(() => {
@@ -140,7 +169,14 @@ export const PropertyList: React.FC<PropertyListProps> = ({ initialPosts }) => {
   }, [filteredPosts, currentPage]);
 
   return (
-    <div className="w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-6 font-sans">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 font-sans space-y-4">
+      {/* Breadcrumb Navigation Trail */}
+      <Breadcrumb
+        items={[
+          { label: filters.needType === 'BUY' ? 'Nhu cầu Cần Mua BĐS' : filters.needType === 'RENT' ? 'Nhu cầu Cần Thuê BĐS' : 'Tất cả nhu cầu BĐS' },
+        ]}
+      />
+
       {/* Main Grid: Sidebar Filter + Results */}
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 xl:gap-8 items-start relative">
         {/* Desktop Sticky Sidebar (1 Col) */}
@@ -283,47 +319,75 @@ export const PropertyList: React.FC<PropertyListProps> = ({ initialPosts }) => {
             </div>
           )}
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="bg-white rounded-2xl border border-slate-200 p-4 shadow-sm flex items-center justify-between">
-              <button
-                type="button"
-                disabled={currentPage === 1}
-                onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold text-slate-700 flex items-center gap-1 transition-colors cursor-pointer"
-              >
-                <ChevronLeft className="w-3.5 h-3.5" />
-                <span>Trang trước</span>
-              </button>
+          {/* Compact Pagination styled EXACTLY like user reference image */}
+          <div className="flex items-center justify-center gap-2 pt-6 pb-2">
+            {/* Previous Arrow */}
+            <button
+              type="button"
+              disabled={currentPage === 1}
+              onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+              className="w-7 h-7 flex items-center justify-center text-slate-400 hover:text-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors cursor-pointer"
+              title="Trang trước"
+            >
+              <ChevronLeft className="w-4 h-4 stroke-[2.5]" />
+            </button>
 
-              <div className="flex items-center gap-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <button
-                    key={page}
-                    type="button"
-                    onClick={() => setCurrentPage(page)}
-                    className={`w-8 h-8 rounded-xl text-xs font-bold transition-colors cursor-pointer ${
-                      currentPage === page
-                        ? 'bg-[#143D30] text-white shadow-sm'
-                        : 'text-slate-600 hover:bg-slate-100'
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
+            {/* Page Numbers */}
+            <div className="flex items-center gap-1.5">
+              {(() => {
+                const getPageNumbers = (current: number, total: number) => {
+                  if (total <= 7) {
+                    return Array.from({ length: total }, (_, i) => i + 1);
+                  }
+                  const pages: (number | string)[] = [];
+                  if (current <= 4) {
+                    pages.push(1, 2, 3, 4, 5, '...', total);
+                  } else if (current >= total - 3) {
+                    pages.push(1, '...', total - 4, total - 3, total - 2, total - 1, total);
+                  } else {
+                    pages.push(1, '...', current - 1, current, current + 1, '...', total);
+                  }
+                  return pages;
+                };
 
-              <button
-                type="button"
-                disabled={currentPage === totalPages}
-                onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed text-xs font-bold text-slate-700 flex items-center gap-1 transition-colors cursor-pointer"
-              >
-                <span>Trang sau</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
+                return getPageNumbers(currentPage, totalPages).map((item, idx) => {
+                  if (typeof item === 'string') {
+                    return (
+                      <span key={`dots-${idx}`} className="w-5 h-7 flex items-center justify-center text-slate-400 text-xs font-bold tracking-widest select-none">
+                        ...
+                      </span>
+                    );
+                  }
+                  const isCurrent = currentPage === item;
+                  return (
+                    <button
+                      key={item}
+                      type="button"
+                      onClick={() => setCurrentPage(item)}
+                      className={`w-7 h-7 rounded-md text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
+                        isCurrent
+                          ? 'bg-[#143D30] text-white font-bold shadow-2xs'
+                          : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/70'
+                      }`}
+                    >
+                      {item}
+                    </button>
+                  );
+                });
+              })()}
             </div>
-          )}
+
+            {/* Next Arrow in soft gray square */}
+            <button
+              type="button"
+              disabled={currentPage === totalPages}
+              onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+              className="w-7 h-7 rounded-md bg-slate-100 hover:bg-slate-200/80 text-slate-600 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center transition-colors cursor-pointer ml-0.5"
+              title="Trang sau"
+            >
+              <ChevronRight className="w-4 h-4 stroke-[2.5]" />
+            </button>
+          </div>
         </div>
       </div>
 
@@ -334,6 +398,14 @@ export const PropertyList: React.FC<PropertyListProps> = ({ initialPosts }) => {
         onClose={() => setQuotePost(null)}
       />
     </div>
+  );
+};
+
+export const PropertyList: React.FC<PropertyListProps> = (props) => {
+  return (
+    <Suspense fallback={<div className="p-8 text-center text-xs text-slate-500">Đang tải danh sách tin...</div>}>
+      <PropertyListContent {...props} />
+    </Suspense>
   );
 };
 

@@ -4,7 +4,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import {
-  ArrowLeft,
   Building2,
   MapPin,
   Calendar,
@@ -26,6 +25,7 @@ import type { PropertyDemand } from '../models/property.model';
 import { MOCK_PROPERTY_DEMANDS } from '../models/property.data';
 import { PropertyCard } from './PropertyCard';
 import { QuoteModal } from './QuoteModal';
+import { Breadcrumb } from '@/common/components/ui/Breadcrumb';
 
 export interface DetailPropertyPostProps {
   post: PropertyDemand;
@@ -52,21 +52,20 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
   ).slice(0, 2);
 
   return (
-    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-6 font-sans">
-      {/* Breadcrumb & Navigation */}
-      <div className="flex items-center justify-between gap-4">
-        <Link
-          href="/posts"
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#143D30] transition-colors"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại danh sách tin đăng</span>
-        </Link>
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4 font-sans">
+      {/* Top Bar: Breadcrumb + Share Button */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <Breadcrumb
+          items={[
+            { label: post.needType === 'BUY' ? 'Nhu cầu cần mua' : 'Nhu cầu cần thuê', href: '/posts' },
+            { label: post.title },
+          ]}
+        />
 
         <button
           type="button"
           onClick={handleShare}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-600 transition-colors shadow-2xs cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-bold text-slate-600 transition-colors shadow-2xs cursor-pointer self-end sm:self-auto"
         >
           {copied ? (
             <>

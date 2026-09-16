@@ -68,7 +68,7 @@ export const CategoryClient: React.FC = () => {
 
   return (
     <section className="py-16 bg-[#F8FAF9]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Danh Mục Nhu Cầu Bất Động Sản

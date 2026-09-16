@@ -29,8 +29,8 @@ export const WhyUsClient: React.FC = () => {
   ];
 
   return (
-    <section className="py-16 bg-[#F8FAF9]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+    <section className="py-16 bg-white border-t border-slate-200/80 font-sans">
+      <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-12">
           <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Vì Sao Chọn King Connect Land?

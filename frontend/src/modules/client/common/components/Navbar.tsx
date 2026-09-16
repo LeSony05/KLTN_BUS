@@ -4,7 +4,8 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
-import { User, Plus, Building2, Menu, X } from 'lucide-react';
+import { User, Plus, Building2, Menu, X, ChevronDown, FileText, Settings, LogOut } from 'lucide-react';
+import { useAuthStore } from '@/context/useAuthStore';
 
 interface NavLinksNavProps {
   onItemClick?: () => void;
@@ -85,10 +86,12 @@ const NavLinksList: React.FC<NavLinksNavProps> = ({ onItemClick, isMobile }) => 
 
 export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const { user, isAuthenticated, logout } = useAuthStore();
 
   return (
     <header className="sticky top-0 z-50 bg-[#113327] text-white border-b border-emerald-900/40 shadow-md font-sans">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-18 flex items-center justify-between">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Logo bên trái */}
         <Link href="/" className="flex items-center gap-2 sm:gap-2.5 min-w-0 mr-2">
           <div className="w-7 h-7 sm:w-8 sm:h-8 flex-shrink-0 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
@@ -108,20 +111,84 @@ export const Navbar: React.FC = () => {
 
         {/* Nút bên phải */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
-          <Link
-            href="/login"
-            className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-slate-200 hover:text-white transition-colors"
-          >
-            <User className="w-4 h-4" />
-            <span>Đăng nhập</span>
-          </Link>
+          {isAuthenticated && user ? (
+            /* User Avatar Dropdown */
+            <div className="relative">
+              <button
+                type="button"
+                onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                className="flex items-center gap-2 p-1.5 sm:pl-3 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition-all cursor-pointer"
+              >
+                <div className="w-7 h-7 rounded-full bg-amber-400 text-slate-900 font-extrabold flex items-center justify-center text-xs shadow-xs flex-shrink-0">
+                  {user.fullName.charAt(0).toUpperCase()}
+                </div>
+                <div className="hidden md:flex flex-col text-left pr-1">
+                  <span className="text-xs font-bold text-white leading-none">
+                    {user.fullName}
+                  </span>
+                </div>
+                <ChevronDown className="w-3.5 h-3.5 text-slate-300" />
+              </button>
+
+              {/* Dropdown Menu Popup */}
+              {userDropdownOpen && (
+                <div
+                  className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-slate-100 py-2 text-slate-800 z-50 animate-in fade-in duration-150"
+                  onClick={() => setUserDropdownOpen(false)}
+                >
+                  <div className="px-4 py-2.5 border-b border-slate-100 bg-slate-50/60 rounded-t-2xl">
+                    <p className="text-xs text-slate-400 font-medium">Đã đăng nhập tài khoản</p>
+                    <p className="text-sm font-bold text-slate-900 truncate">{user.fullName}</p>
+                    <p className="text-xs text-emerald-700 font-semibold">{user.phone}</p>
+                  </div>
+
+                  <div className="py-1">
+                    <Link
+                      href="/my-posts"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+                    >
+                      <FileText className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+                      <span>Quản lý tin đã đăng</span>
+                    </Link>
+
+                    <Link
+                      href="/profile"
+                      className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
+                    >
+                      <Settings className="w-4 h-4 text-slate-400 flex-shrink-0" />
+                      <span>Thông tin cá nhân</span>
+                    </Link>
+                  </div>
+
+                  <div className="border-t border-slate-100 pt-1 mt-1">
+                    <button
+                      type="button"
+                      onClick={() => logout()}
+                      className="w-full flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-rose-600 hover:bg-rose-50 transition-colors text-left cursor-pointer"
+                    >
+                      <LogOut className="w-4 h-4 text-rose-500 flex-shrink-0" />
+                      <span>Đăng xuất</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <Link
+              href="/login"
+              className="hidden sm:flex items-center gap-1.5 text-sm font-medium text-slate-200 hover:text-white transition-colors"
+            >
+              <User className="w-4 h-4" />
+              <span>Đăng nhập</span>
+            </Link>
+          )}
 
           <Link href="/post-property/create">
             <button
               type="button"
-              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-[#F59E0B] hover:bg-[#D97706] text-slate-900 font-bold text-[13px] sm:text-sm shadow-md cursor-pointer transition-colors whitespace-nowrap"
+              className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-slate-950 font-extrabold text-[13px] sm:text-sm shadow-sm cursor-pointer transition-colors whitespace-nowrap"
             >
-              <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />
               <span>Đăng tin</span>
             </button>
           </Link>
@@ -144,15 +211,39 @@ export const Navbar: React.FC = () => {
           <Suspense fallback={null}>
             <NavLinksList isMobile onItemClick={() => setMobileMenuOpen(false)} />
           </Suspense>
-          <div className="pt-2 border-t border-emerald-900/60">
-            <Link
-              href="/login"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-2 px-3 py-2 text-sm text-slate-200 hover:text-white"
-            >
-              <User className="w-4 h-4" />
-              <span>Đăng nhập</span>
-            </Link>
+          <div className="pt-2 border-t border-emerald-900/60 space-y-2">
+            {isAuthenticated && user ? (
+              <>
+                <Link
+                  href="/my-posts"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center gap-2 px-3 py-2 text-sm font-bold text-amber-300 bg-white/5 rounded-lg"
+                >
+                  <FileText className="w-4 h-4" />
+                  <span>Quản lý tin đã đăng</span>
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    logout();
+                    setMobileMenuOpen(false);
+                  }}
+                  className="w-full flex items-center gap-2 px-3 py-2 text-sm text-rose-300"
+                >
+                  <LogOut className="w-4 h-4" />
+                  <span>Đăng xuất ({user.fullName})</span>
+                </button>
+              </>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex items-center gap-2 px-3 py-2 text-sm text-slate-200 hover:text-white"
+              >
+                <User className="w-4 h-4" />
+                <span>Đăng nhập</span>
+              </Link>
+            )}
           </div>
         </div>
       )}

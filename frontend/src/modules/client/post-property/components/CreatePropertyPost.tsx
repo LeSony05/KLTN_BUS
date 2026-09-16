@@ -7,6 +7,7 @@ import { Step1NeedSelection } from './Step1NeedSelection';
 import { Step2RequirementDetails } from './Step2RequirementDetails';
 import { Step4Success } from './Step4Success';
 import { Toast, ToastType } from '@/common/components/ui/Toast';
+import { Breadcrumb } from '@/common/components/ui/Breadcrumb';
 import type {
   CreatePostFormData,
   NeedType,
@@ -140,7 +141,7 @@ export const CreatePropertyPost: React.FC = () => {
   };
 
   return (
-    <div className="bg-[#F8FAF9] min-h-screen py-10 px-4 sm:px-6 font-sans relative">
+    <div className="bg-[#F8FAF9] min-h-screen py-4 px-4 sm:px-6 lg:px-8 font-sans relative">
       {/* Top-Right Toast Notification */}
       <Toast
         isOpen={toast.isOpen}
@@ -149,7 +150,11 @@ export const CreatePropertyPost: React.FC = () => {
         onClose={hideToast}
       />
 
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="w-full max-w-[1360px] mx-auto space-y-4">
+        <Breadcrumb items={[{ label: 'Đăng tin nhu cầu BĐS' }]} />
+
+        <div className="max-w-4xl mx-auto space-y-6">
+
         {/* Title Header */}
         <div className="text-center space-y-2">
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -196,6 +201,7 @@ export const CreatePropertyPost: React.FC = () => {
         {currentStep === 3 && (
           <Step4Success title={formData.title} onReset={handleReset} />
         )}
+        </div>
       </div>
     </div>
   );

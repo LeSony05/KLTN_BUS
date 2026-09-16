@@ -1,34 +1,67 @@
 'use client';
 
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Phone, Lock, Eye, EyeOff, LogIn } from 'lucide-react';
 import { Input } from '@/common/components/ui/Input';
 import { Button } from '@/common/components/ui/Button';
+import { useAuthStore, MOCK_LOGGED_IN_USER } from '@/context/useAuthStore';
 
 export const LoginForm: React.FC = () => {
-  const [phone, setPhone] = useState('');
-  const [password, setPassword] = useState('');
+  const router = useRouter();
+  const { login } = useAuthStore();
+  const [phone, setPhone] = useState('0912.345.678');
+  const [password, setPassword] = useState('123456');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-    // Simulate login API call
+
     setTimeout(() => {
       setIsLoading(false);
-    }, 1500);
+      // Login with mock user profile
+      login('mock-jwt-token-123', {
+        ...MOCK_LOGGED_IN_USER,
+        phone: phone || '0912.345.678',
+      });
+      router.push('/');
+    }, 600);
+  };
+
+  const handleQuickLogin = () => {
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      login('mock-jwt-token-123', MOCK_LOGGED_IN_USER);
+      router.push('/');
+    }, 400);
   };
 
   return (
     <form className="space-y-5" onSubmit={handleSubmit}>
+      {/* Quick Demo Login Banner */}
+      <div className="p-3.5 bg-emerald-50 border border-emerald-200/90 rounded-2xl flex items-center justify-between gap-2 text-xs mb-2">
+        <div>
+          <span className="font-extrabold text-emerald-950 block">⚡ Tài khoản mẫu (Demo):</span>
+          <span className="text-emerald-800 font-medium">Nguyễn Văn Hùng - SĐT: 0912.345.678</span>
+        </div>
+        <button
+          type="button"
+          onClick={handleQuickLogin}
+          className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg cursor-pointer transition-colors shadow-xs whitespace-nowrap"
+        >
+          Vào ngay
+        </button>
+      </div>
+
       <Input
         label="Số điện thoại"
         type="tel"
         placeholder="Nhập số điện thoại..."
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
-        isRequired
         leftIcon={<Phone className="w-5 h-5" />}
       />
 
@@ -39,7 +72,6 @@ export const LoginForm: React.FC = () => {
           placeholder="Nhập mật khẩu..."
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          isRequired
           leftIcon={<Lock className="w-5 h-5" />}
           rightIcon={
             <button
@@ -86,7 +118,7 @@ export const LoginForm: React.FC = () => {
             type="button"
             size="lg"
             className="w-full font-bold bg-[#0068FF] text-white hover:bg-[#005CE6] active:bg-[#0054D1] focus:ring-[#0068FF] shadow-md hover:shadow-lg shadow-[#0068FF]/20 border-none !px-4"
-            onClick={() => console.log('Zalo login')}
+            onClick={handleQuickLogin}
             leftIcon={
               <div className="bg-white text-[#0068FF] rounded-[4px] px-1.5 py-0.5 text-sm font-black tracking-tighter leading-none mr-1 flex items-center justify-center">
                 Zalo

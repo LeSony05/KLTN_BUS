@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { Button } from '../../../../common/components/ui/Button';
 import { Input } from '../../../../common/components/ui/Input';
 import { MapPin, Phone, Mail, Send, CheckCircle2 } from 'lucide-react';
+import { Breadcrumb } from '@/common/components/ui/Breadcrumb';
 
 export const ContactClient: React.FC = () => {
   const [fullName, setFullName] = useState('');
@@ -20,7 +21,11 @@ export const ContactClient: React.FC = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto my-12 px-4 font-sans space-y-8">
+    <div className="w-full max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-4 space-y-4 font-sans">
+      <Breadcrumb items={[{ label: 'Liên hệ BQT' }]} />
+
+      <div className="max-w-5xl mx-auto space-y-6">
+
       <div className="text-center max-w-xl mx-auto space-y-2">
         <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
           Liên Hệ Ban Quản Trị
@@ -134,6 +139,7 @@ export const ContactClient: React.FC = () => {
             </form>
           )}
         </div>
+      </div>
       </div>
     </div>
   );
