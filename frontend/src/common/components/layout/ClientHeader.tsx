@@ -90,12 +90,12 @@ export const ClientHeader: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#113327] text-white border-b border-emerald-900/40 shadow-md font-sans">
+    <header className="sticky top-0 z-50 bg-red-600 text-white border-b border-red-700 shadow-md font-sans">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
         {/* Logo bên trái */}
         <Link href="/" className="flex items-center gap-2.5">
-          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
-            <Bus className="w-5 h-5 text-emerald-400" />
+          <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-brand-light">
+            <Bus className="w-5 h-5 text-brand-light" />
           </div>
           <div className="flex items-center gap-1.5 font-bold text-lg sm:text-xl tracking-tight">
             <span className="text-white">Bus</span>
@@ -138,7 +138,7 @@ export const ClientHeader: React.FC = () => {
                   <div className="px-4 py-2.5 border-b border-slate-100 bg-slate-50/60 rounded-t-2xl">
                     <p className="text-xs text-slate-400 font-medium">Đã đăng nhập tài khoản</p>
                     <p className="text-sm font-bold text-slate-900 truncate">{user.fullName}</p>
-                    <p className="text-xs text-emerald-700 font-semibold">{user.phone}</p>
+                    <p className="text-xs text-brand font-semibold">{user.phone}</p>
                   </div>
 
                   <div className="py-1">
@@ -146,7 +146,7 @@ export const ClientHeader: React.FC = () => {
                       href="/my-posts"
                       className="flex items-center gap-2.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-emerald-50 hover:text-emerald-800 transition-colors"
                     >
-                      <FileText className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+                      <FileText className="w-4 h-4 text-brand flex-shrink-0" />
                       <span>Vé của tôi</span>
                     </Link>
 

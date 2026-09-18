@@ -38,7 +38,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Họ và tên</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="text" defaultValue="Khách Hàng" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="text" defaultValue="Khách Hàng" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
           
@@ -46,7 +46,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Số điện thoại</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="text" defaultValue="0987654321" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="text" defaultValue="0987654321" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
 
@@ -54,7 +54,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Giới tính</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <select className="bg-white border border-slate-200 rounded-md px-3 py-1.5 text-sm outline-none focus:border-[#F5A623]">
+              <select className="bg-white border border-slate-200 rounded-md px-3 py-1.5 text-sm outline-none focus:border-accent">
                 <option value="Nam">Nam</option>
                 <option value="Nữ">Nữ</option>
                 <option value="Khác">Khác</option>
@@ -66,7 +66,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Email</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="email" defaultValue="khachhang@example.com" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="email" defaultValue="khachhang@example.com" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
 
@@ -74,7 +74,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Ngày sinh</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="date" defaultValue="1990-01-01" className="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="date" defaultValue="1990-01-01" className="bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
 
@@ -82,7 +82,7 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Địa chỉ</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="text" placeholder="Nhập địa chỉ" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="text" placeholder="Nhập địa chỉ" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
 
@@ -90,13 +90,13 @@ export const ProfileForm: React.FC = () => {
             <label className="text-sm font-semibold text-slate-600 text-right">Nghề nghiệp</label>
             <div className="font-bold text-slate-900 flex items-center gap-3">
               <span>:</span>
-              <input type="text" placeholder="Nhập nghề nghiệp" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-[#F5A623] focus:outline-none py-1 transition-colors" />
+              <input type="text" placeholder="Nhập nghề nghiệp" className="flex-1 bg-transparent border-b border-transparent hover:border-slate-300 focus:border-accent focus:outline-none py-1 transition-colors" />
             </div>
           </div>
 
           <div className="pt-6 grid grid-cols-[120px_1fr] gap-4">
             <div></div>
-            <button className="w-fit bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] font-black text-sm px-10 py-3 rounded-full shadow-md shadow-amber-500/20 transition-all">
+            <button className="w-fit bg-accent hover:bg-accent-hover text-white font-black text-sm px-10 py-3 rounded-full shadow-md shadow-accent/20 transition-all">
               Cập nhật
             </button>
           </div>

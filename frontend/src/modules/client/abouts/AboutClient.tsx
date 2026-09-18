@@ -20,7 +20,7 @@ export const AboutClient: React.FC = () => {
         
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold tracking-widest uppercase mb-8 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-brand-light text-xs font-bold tracking-widest uppercase mb-8 backdrop-blur-sm">
             <Crown className="w-4 h-4" />
             <span>BusWay</span>
           </div>
@@ -38,7 +38,7 @@ export const AboutClient: React.FC = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/posts" className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-[#FFC700] hover:bg-[#E6B200] text-[#0f2e24] font-black text-[14px] transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center gap-2 group">
+            <Link href="/posts" className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-accent hover:bg-accent-hover text-white font-black text-[14px] transition-all shadow-lg shadow-accent/20 flex items-center justify-center gap-2 group">
               Tìm Chuyến Xe
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </Link>
@@ -102,7 +102,7 @@ export const AboutClient: React.FC = () => {
           <div className="group bg-white p-5 lg:p-6 rounded-[20px] border border-slate-100 shadow-sm hover:shadow-xl hover:border-emerald-200 transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-20 h-20 bg-emerald-50 rounded-bl-[60px] -z-0 transition-transform group-hover:scale-110"></div>
             <div className="relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-[#0f2e24] text-[#FFC700] flex items-center justify-center mb-5 shadow-lg group-hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-[#0f2e24] text-accent flex items-center justify-center mb-5 shadow-lg group-hover:-translate-y-1 transition-transform">
                 <Target className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-black text-slate-900 mb-2">Sứ Mệnh</h3>
@@ -128,7 +128,7 @@ export const AboutClient: React.FC = () => {
           <div className="group bg-white p-5 lg:p-6 rounded-[20px] border border-slate-100 shadow-sm hover:shadow-xl hover:border-amber-200 transition-all duration-300 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-20 h-20 bg-amber-50 rounded-bl-[60px] -z-0 transition-transform group-hover:scale-110"></div>
             <div className="relative z-10">
-              <div className="w-12 h-12 rounded-2xl bg-[#FFC700] text-[#0f2e24] flex items-center justify-center mb-5 shadow-lg shadow-amber-500/30 group-hover:-translate-y-1 transition-transform">
+              <div className="w-12 h-12 rounded-2xl bg-accent text-[#0f2e24] flex items-center justify-center mb-5 shadow-lg shadow-amber-500/30 group-hover:-translate-y-1 transition-transform">
                 <TrendingUp className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-black text-slate-900 mb-2">Giá Trị Cốt Lõi</h3>
@@ -147,7 +147,7 @@ export const AboutClient: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
             
             <div className="w-full lg:w-[60%] space-y-5">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold tracking-widest uppercase">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 text-brand text-xs font-bold tracking-widest uppercase">
                 <ShieldCheck className="w-3.5 h-3.5" /> Lợi ích đặc quyền
               </div>
               <h2 className="text-2xl lg:text-3xl font-black text-[#0f2e24] leading-[1.25]">
@@ -184,7 +184,7 @@ export const AboutClient: React.FC = () => {
               <div className="relative rounded-[24px] overflow-hidden bg-[#0f2e24] aspect-square lg:aspect-[4/3] flex items-center justify-center p-5 shadow-xl">
                 <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 2px 2px, white 1px, transparent 0)', backgroundSize: '20px 20px' }}></div>
                 <div className="relative z-10 text-center space-y-3">
-                  <Building2 className="w-14 h-14 md:w-16 md:h-16 text-[#FFC700] mx-auto opacity-90" />
+                  <Building2 className="w-14 h-14 md:w-16 md:h-16 text-accent mx-auto opacity-90" />
                   <h3 className="text-xl md:text-2xl font-black text-white leading-snug">Đặt Vé Xe Khách <br/> Trực Tuyến</h3>
                 </div>
               </div>

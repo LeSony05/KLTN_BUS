@@ -46,7 +46,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ post, isOpen, onClose })
             {post.title}
           </h4>
           <p className="text-xs text-slate-500 font-medium">
-            {post.location} · Ngân sách <strong className="text-[#143D30] font-bold">{post.price}</strong>
+            {post.location} · Ngân sách <strong className="text-brand font-bold">{post.price}</strong>
           </p>
         </div>
 
@@ -69,7 +69,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ post, isOpen, onClose })
             href={`https://zalo.me/${cleanPhone}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex-1 py-3 px-4 rounded-xl bg-[#143D30] hover:bg-[#0e2a20] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
+            className="flex-1 py-3 px-4 rounded-xl bg-brand hover:bg-brand-hover text-white font-bold text-sm flex items-center justify-center gap-2 shadow-sm transition-colors cursor-pointer"
           >
             <MessageCircle className="w-4 h-4" />
             <span>Kết nối Zalo</span>
@@ -79,7 +79,7 @@ export const QuoteModal: React.FC<QuoteModalProps> = ({ post, isOpen, onClose })
             href={`tel:${cleanPhone}`}
             className="py-3 px-5 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm flex items-center justify-center gap-2 transition-colors cursor-pointer"
           >
-            <Phone className="w-4 h-4 text-[#143D30]" />
+            <Phone className="w-4 h-4 text-brand" />
             <span>Gọi</span>
           </a>
         </div>

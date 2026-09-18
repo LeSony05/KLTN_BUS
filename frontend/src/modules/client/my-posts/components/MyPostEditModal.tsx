@@ -143,7 +143,7 @@ export const MyPostEditModal: React.FC<MyPostEditModalProps> = ({
             </button>
             <button
               type="submit"
-              className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-[#113327] hover:bg-[#0e2a20] text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-6 py-2.5 rounded-xl bg-brand-dark hover:bg-brand-hover text-white font-bold text-xs shadow-md transition-all cursor-pointer"
             >
               <Save className="w-4 h-4" />
               <span>Lưu thay đổi</span>

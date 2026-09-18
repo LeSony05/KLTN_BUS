@@ -44,7 +44,7 @@ export const PopularRoutesClient: React.FC = () => {
     <section className="py-12 bg-white">
       <div className="max-w-[1050px] mx-auto px-4 sm:px-6">
         <div className="text-center mb-8">
-          <h2 className="text-xl md:text-2xl font-black text-[#00613D] uppercase">
+          <h2 className="text-xl md:text-2xl font-black text-brand uppercase">
             Tuyến phổ biến
           </h2>
           <p className="text-sm text-slate-500 font-semibold mt-1">Được khách hàng quan tâm</p>

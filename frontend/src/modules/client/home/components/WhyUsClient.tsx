@@ -6,19 +6,19 @@ import { Building2, Users, Bus } from 'lucide-react';
 export const WhyUsClient: React.FC = () => {
   const stats = [
     {
-      icon: <Users className="w-6 h-6 text-[#F5A623]" />,
+      icon: <Users className="w-6 h-6 text-accent" />,
       title: 'Hơn 40 Triệu',
       subtitle: 'Lượt khách',
       desc: 'BUSWAY phục vụ hơn 40 triệu lượt khách bình quân 1 năm trên toàn quốc'
     },
     {
-      icon: <Building2 className="w-6 h-6 text-[#F5A623]" />,
+      icon: <Building2 className="w-6 h-6 text-accent" />,
       title: 'Hơn 350',
       subtitle: 'Phòng vé - Bưu cục',
       desc: 'Hơn 350 phòng vé, trạm trung chuyển, bến xe... trên toàn hệ thống'
     },
     {
-      icon: <Bus className="w-6 h-6 text-[#F5A623]" />,
+      icon: <Bus className="w-6 h-6 text-accent" />,
       title: 'Hơn 6,500',
       subtitle: 'Chuyến xe',
       desc: 'Phục vụ hơn 6,500 chuyến xe đường dài và liên tỉnh mỗi ngày'
@@ -29,7 +29,7 @@ export const WhyUsClient: React.FC = () => {
     <section className="py-12 bg-white">
       <div className="max-w-[1050px] mx-auto px-4 sm:px-6">
         <div className="text-center mb-10">
-          <h2 className="text-xl md:text-2xl font-black text-[#00613D] uppercase">
+          <h2 className="text-xl md:text-2xl font-black text-brand uppercase">
             BUSWAY - CHẤT LƯỢNG LÀ DANH DỰ
           </h2>
           <p className="text-sm text-slate-500 font-semibold mt-1">23 Năm Vững Tin & Phát Triển</p>

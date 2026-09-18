@@ -22,7 +22,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
         {/* Header Modal */}
         <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
           <div className="flex items-center gap-2.5">
-            <span className="text-xs font-bold text-emerald-900 bg-emerald-100 px-2.5 py-1 rounded-lg">
+            <span className="text-xs font-bold text-brand-dark bg-emerald-100 px-2.5 py-1 rounded-lg">
               {post.id}
             </span>
             <span className="text-slate-300">|</span>
@@ -63,7 +63,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               </span>
             )}
             {post.status === 'APPROVED' && (
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-brand border border-emerald-200/80">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Trạng thái: Đã thanh toán</span>
               </span>
@@ -85,7 +85,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
                 <Coins className="w-4 h-4 text-amber-600 flex-shrink-0" />
                 <span>
                   Giá vé / cước phí:{' '}
-                  <strong className="text-emerald-900 font-extrabold text-sm">{post.priceRange}</strong>
+                  <strong className="text-brand-dark font-extrabold text-sm">{post.priceRange}</strong>
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
@@ -110,10 +110,10 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
-                <Phone className="w-4 h-4 text-emerald-700 flex-shrink-0" />
+                <Phone className="w-4 h-4 text-brand flex-shrink-0" />
                 <span>
                   Số điện thoại:{' '}
-                  <strong className="text-emerald-700 font-bold">{post.contactPhone}</strong>
+                  <strong className="text-brand font-bold">{post.contactPhone}</strong>
                 </span>
               </p>
               <p className="flex items-center gap-1.5">
@@ -160,7 +160,7 @@ export const MyPostDetailModal: React.FC<MyPostDetailModalProps> = ({
               onClose();
               onEdit(post);
             }}
-            className="px-6 py-2.5 rounded-xl bg-[#F59E0B] hover:bg-[#D97706] text-slate-900 font-bold text-xs shadow-md cursor-pointer transition-all"
+            className="px-6 py-2.5 rounded-xl bg-[#F59E0B] hover:bg-accent-hover text-white font-bold text-xs shadow-md cursor-pointer transition-all"
           >
             Chỉnh sửa
           </button>

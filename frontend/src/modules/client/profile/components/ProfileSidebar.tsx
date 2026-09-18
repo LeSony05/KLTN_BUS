@@ -52,11 +52,11 @@ export const ProfileSidebar: React.FC = () => {
                 href={item.href}
                 className={`flex items-center gap-3 px-4 py-3.5 rounded-lg text-sm font-semibold transition-all ${
                   isActive
-                    ? 'bg-white text-[#F5A623] shadow-sm ring-1 ring-slate-200'
+                    ? 'bg-white text-accent shadow-sm ring-1 ring-slate-200'
                     : 'text-slate-600 hover:bg-slate-200/50 hover:text-slate-900'
                 }`}
               >
-                <div className={`${isActive ? 'text-[#F5A623]' : 'text-slate-400'}`}>
+                <div className={`${isActive ? 'text-accent' : 'text-slate-400'}`}>
                   {item.icon}
                 </div>
                 <span>{item.label}</span>

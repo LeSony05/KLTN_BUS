@@ -35,7 +35,7 @@ export const MyPostsClientPage: React.FC = () => {
                   <h2 className="text-xl md:text-2xl font-black text-slate-900">Lịch sử mua vé</h2>
                   <p className="text-sm text-slate-500 mt-1 font-medium">Theo dõi và quản lý quá trình lịch sử mua vé của bạn</p>
                 </div>
-                <Link href="/posts?needType=BUY" className="bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] px-6 py-2 rounded-full text-sm font-black shadow-sm transition-colors">
+                <Link href="/posts?needType=BUY" className="bg-accent hover:bg-accent-hover text-white px-6 py-2 rounded-full text-sm font-black shadow-sm transition-colors">
                   Đặt vé
                 </Link>
               </div>
@@ -44,19 +44,19 @@ export const MyPostsClientPage: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[1fr_1.2fr_1.2fr_1fr_auto] gap-4 mb-6">
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">Mã vé</label>
-                  <input type="text" placeholder="Nhập Mã vé" className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#F5A623] transition-colors" />
+                  <input type="text" placeholder="Nhập Mã vé" className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-accent transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">Thời gian</label>
-                  <input type="date" className="w-full text-sm px-2 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#F5A623] text-slate-500 transition-colors" />
+                  <input type="date" className="w-full text-sm px-2 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-accent text-slate-500 transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">Tuyến đường</label>
-                  <input type="text" className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#F5A623] transition-colors" />
+                  <input type="text" className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-accent transition-colors" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1.5">Trạng thái</label>
-                  <select className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-[#F5A623] bg-white text-slate-500 transition-colors">
+                  <select className="w-full text-sm px-3 py-2 border border-slate-200 rounded-lg focus:outline-none focus:border-accent bg-white text-slate-500 transition-colors">
                     <option value="">Tất cả</option>
                   </select>
                 </div>
@@ -83,7 +83,7 @@ export const MyPostsClientPage: React.FC = () => {
                   <tbody>
                     {tableData.map((row, idx) => (
                       <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-[#FFFBEB]'}>
-                        <td className="px-4 py-3 font-bold text-[#F5A623] whitespace-nowrap">{row.id}</td>
+                        <td className="px-4 py-3 font-bold text-accent whitespace-nowrap">{row.id}</td>
                         <td className="px-4 py-3 font-medium text-slate-700 border-l border-slate-100">{row.count}</td>
                         <td className="px-4 py-3 font-medium text-slate-700 border-l border-slate-100">{row.route}</td>
                         <td className="px-4 py-3 font-medium text-slate-700 border-l border-slate-100">{row.date}</td>
@@ -107,7 +107,7 @@ export const MyPostsClientPage: React.FC = () => {
                 </div>
                 <div className="flex gap-1">
                   <button className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-slate-500 hover:bg-slate-50">&lt;</button>
-                  <button className="w-8 h-8 flex items-center justify-center border border-[#F5A623] bg-[#F5A623] text-white rounded font-bold">1</button>
+                  <button className="w-8 h-8 flex items-center justify-center border border-accent bg-accent text-white rounded font-bold">1</button>
                   <button className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-slate-700 hover:bg-slate-50">2</button>
                   <button className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-slate-500 hover:bg-slate-50">&gt;</button>
                 </div>

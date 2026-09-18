@@ -4,6 +4,7 @@
 import React from 'react';
 import { Navbar } from '../components/Navbar';
 import { Footer } from '../components/Footer';
+import { Chatbot } from '../components/Chatbot';
 
 export interface ClientLayoutProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ export const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
       <Navbar />
       <main className="flex-1">{children}</main>
       <Footer />
+      <Chatbot />
     </div>
   );
 };

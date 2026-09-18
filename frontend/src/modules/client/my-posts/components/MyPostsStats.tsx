@@ -35,12 +35,12 @@ export const MyPostsStats: React.FC<MyPostsStatsProps> = ({
 
       {/* Approved */}
       <div className="bg-white rounded-2xl p-3.5 border border-slate-200/80 shadow-xs flex items-center gap-3">
-        <div className="w-9 h-9 rounded-xl bg-emerald-50 text-emerald-700 flex items-center justify-center flex-shrink-0">
+        <div className="w-9 h-9 rounded-xl bg-emerald-50 text-brand flex items-center justify-center flex-shrink-0">
           <CheckCircle2 className="w-4 h-4" />
         </div>
         <div>
           <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Đã thanh toán</p>
-          <p className="text-lg font-extrabold text-emerald-700">{approvedCount}</p>
+          <p className="text-lg font-extrabold text-brand">{approvedCount}</p>
         </div>
       </div>
 

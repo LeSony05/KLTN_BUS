@@ -23,7 +23,7 @@ export const DonateClient: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Tài khoản 1 */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-4">
-          <div className="flex items-center gap-2 text-sm font-bold text-[#143D30] border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2 text-sm font-bold text-brand border-b border-slate-100 pb-3">
             <Building2 className="w-4 h-4 text-amber-600" />
             <span>Tài Khoản Số 1 (Vietcombank)</span>
           </div>
@@ -51,7 +51,7 @@ export const DonateClient: React.FC = () => {
 
         {/* Tài khoản 2 */}
         <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-[0_1px_3px_rgba(0,0,0,0.03)] space-y-4">
-          <div className="flex items-center gap-2 text-sm font-bold text-[#143D30] border-b border-slate-100 pb-3">
+          <div className="flex items-center gap-2 text-sm font-bold text-brand border-b border-slate-100 pb-3">
             <Building2 className="w-4 h-4 text-amber-600" />
             <span>Tài Khoản Số 2 (MB Bank)</span>
           </div>

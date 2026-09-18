@@ -13,7 +13,7 @@ export const PromotionsClient: React.FC = () => {
   return (
     <section className="py-10 bg-[#F5F5F5]">
       <div className="max-w-[1050px] mx-auto px-4 sm:px-6">
-        <h2 className="text-xl md:text-2xl font-black text-[#00613D] text-center uppercase mb-8">
+        <h2 className="text-xl md:text-2xl font-black text-brand text-center uppercase mb-8">
           Khuyến mãi nổi bật
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
@@ -30,7 +30,7 @@ export const PromotionsClient: React.FC = () => {
           ))}
         </div>
         <div className="flex justify-center gap-2 mt-6">
-          <span className="w-8 h-2 rounded-full bg-[#F5A623]"></span>
+          <span className="w-8 h-2 rounded-full bg-accent"></span>
           <span className="w-2 h-2 rounded-full bg-slate-300"></span>
           <span className="w-2 h-2 rounded-full bg-slate-300"></span>
         </div>
