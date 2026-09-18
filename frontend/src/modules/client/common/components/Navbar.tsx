@@ -4,7 +4,7 @@
 import React, { useState, Suspense } from 'react';
 import Link from 'next/link';
 import { usePathname, useSearchParams, useRouter } from 'next/navigation';
-import { User, Bus, Menu, X, ChevronDown, FileText, Settings, LogOut } from 'lucide-react';
+import { User, Bus, Menu, X, ChevronDown, FileText, Settings, LogOut, Award, Globe } from 'lucide-react';
 import { useAuthStore } from '@/context/useAuthStore';
 import { ConfirmModal } from '@/common/components/ui/ConfirmModal';
 
@@ -21,8 +21,9 @@ const NavLinksList: React.FC<NavLinksNavProps> = ({ onItemClick, isMobile }) => 
   const navLinks = [
     { href: '/', label: 'Trang chủ' },
     { href: '/posts?needType=BUY', label: 'Chuyến xe' },
-    { href: '/posts?needType=RENT', label: 'Gửi hàng' },
+    { href: '/send-freight', label: 'Gửi hàng' },
     { href: '/tra-cuu-ve', label: 'Tra cứu vé' },
+    { href: '/cancel-ticket', label: 'Hủy vé' },
     { href: '/about', label: 'Giới thiệu' },
     { href: '/contact', label: 'Liên hệ' },
   ];
@@ -94,12 +95,12 @@ export const Navbar: React.FC = () => {
   const { user, isAuthenticated, logout } = useAuthStore();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#113327] text-white border-b border-emerald-900/40 shadow-md font-sans">
+    <header className="sticky top-0 z-50 bg-red-600 text-white border-b border-red-700 shadow-md font-sans">
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo bên trái */}
         <Link href="/" className="flex items-center gap-2 sm:gap-3 min-w-0 mr-2">
-          <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
-            <Bus className="w-5 h-5 sm:w-6 sm:h-6 text-emerald-400" />
+          <div className="w-8 h-8 sm:w-10 sm:h-10 flex-shrink-0 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-brand-light">
+            <Bus className="w-5 h-5 sm:w-6 sm:h-6 text-brand-light" />
           </div>
           <div className="flex items-center gap-1 sm:gap-1.5 font-bold text-lg sm:text-2xl tracking-tight truncate">
             <span className="text-white truncate">Bus</span>
@@ -114,6 +115,11 @@ export const Navbar: React.FC = () => {
 
         {/* Nút bên phải */}
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
+          {/* Nút chuyển đổi ngôn ngữ */}
+          <button className="hidden sm:flex items-center gap-1.5 p-1.5 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 transition-all text-sm font-semibold text-slate-100 px-3 cursor-pointer">
+            <Globe className="w-4 h-4 text-slate-200" />
+            VI
+          </button>
           {isAuthenticated && user ? (
             /* User Avatar Dropdown */
             <div className="relative">
@@ -140,6 +146,16 @@ export const Navbar: React.FC = () => {
                   onClick={() => setUserDropdownOpen(false)}
                 >
                   <div className="flex flex-col">
+                    <Link
+                      href="/loyalty"
+                      className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-9 h-9 rounded-full bg-amber-400 flex items-center justify-center shrink-0">
+                        <Award className="w-4 h-4 text-white" />
+                      </div>
+                      <span className="text-sm font-bold text-slate-700 group-hover:text-amber-600 transition-colors">Hạng thành viên</span>
+                    </Link>
+
                     <Link
                       href="/profile"
                       className="flex items-center gap-3 px-4 py-2.5 hover:bg-slate-50 transition-colors group"

@@ -71,7 +71,7 @@ export const CategoryClient: React.FC = () => {
               Gợi ý tuyến có nhiều khách đặt và còn chuyến trong ngày.
             </p>
           </div>
-          <Link href="/posts" className="text-sm font-black text-[#143D30] hover:text-[#0e2a20]">
+          <Link href="/posts" className="text-sm font-black text-brand hover:text-[#0e2a20]">
             Xem tất cả tuyến
           </Link>
         </div>
@@ -81,14 +81,14 @@ export const CategoryClient: React.FC = () => {
             <Link
               key={route.id}
               href="/posts?needType=BUY"
-              className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:shadow-md hover:border-[#143D30]/40 transition-all"
+              className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm hover:shadow-md hover:border-brand/40 transition-all"
             >
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <h3 className="font-black text-slate-950 text-sm">{route.title}</h3>
                   <p className="text-xs text-slate-500 font-semibold mt-1">{route.desc}</p>
                 </div>
-                <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 text-[#143D30] flex items-center justify-center">
+                <div className="w-9 h-9 rounded-lg bg-emerald-50 border border-emerald-100 text-brand flex items-center justify-center">
                   <Bus className="w-5 h-5" />
                 </div>
               </div>
@@ -111,7 +111,7 @@ export const CategoryClient: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-3">
             {steps.map((step, idx) => (
               <div key={step.title} className="rounded-lg border border-slate-200 bg-slate-50/70 p-4">
-                <div className="w-9 h-9 rounded-lg bg-[#143D30] text-white flex items-center justify-center mb-3">
+                <div className="w-9 h-9 rounded-lg bg-brand text-white flex items-center justify-center mb-3">
                   {step.icon}
                 </div>
                 <p className="text-[11px] font-black text-amber-700">Bước {idx + 1}</p>
@@ -129,7 +129,7 @@ export const CategoryClient: React.FC = () => {
             ['Thông báo chủ động', 'Nhắc lịch và cảnh báo khi chuyến thay đổi.'],
           ].map(([title, desc]) => (
             <div key={title} className="rounded-lg border border-slate-200 bg-white p-4 flex items-start gap-3">
-              <div className="w-9 h-9 rounded-lg bg-emerald-50 text-[#143D30] flex items-center justify-center">
+              <div className="w-9 h-9 rounded-lg bg-emerald-50 text-brand flex items-center justify-center">
                 <PackageCheck className="w-5 h-5" />
               </div>
               <div>

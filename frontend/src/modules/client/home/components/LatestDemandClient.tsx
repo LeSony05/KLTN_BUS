@@ -47,7 +47,7 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
               onClick={() => setPostFilterTab('ALL')}
               className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'ALL'
-                  ? 'bg-[#143D30] text-white shadow-xs'
+                  ? 'bg-brand text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -58,7 +58,7 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
               onClick={() => setPostFilterTab('BUY')}
               className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'BUY'
-                  ? 'bg-[#143D30] text-white shadow-xs'
+                  ? 'bg-brand text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -69,7 +69,7 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
               onClick={() => setPostFilterTab('RENT')}
               className={`px-4 py-2 rounded-md text-xs font-bold cursor-pointer transition-colors ${
                 postFilterTab === 'RENT'
-                  ? 'bg-[#143D30] text-white shadow-xs'
+                  ? 'bg-brand text-white shadow-xs'
                   : 'text-slate-600 hover:text-slate-900'
               }`}
             >
@@ -96,7 +96,7 @@ export const LatestDemandClient: React.FC<LatestDemandClientProps> = ({
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-bold text-sm shadow-xs cursor-pointer transition-colors"
             >
               <span>Xem tất cả chuyến xe</span>
-              <ArrowRight className="w-4 h-4 text-[#143D30]" />
+              <ArrowRight className="w-4 h-4 text-brand" />
             </button>
           </Link>
         </div>

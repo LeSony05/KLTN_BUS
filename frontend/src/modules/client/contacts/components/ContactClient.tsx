@@ -37,7 +37,7 @@ export const ContactClient: React.FC = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Thông tin liên hệ */}
-        <div className="bg-[#113327] text-white p-6 rounded-2xl space-y-6 flex flex-col justify-between">
+        <div className="bg-brand-dark text-white p-6 rounded-2xl space-y-6 flex flex-col justify-between">
           <div className="space-y-4">
             <h3 className="text-base font-bold text-amber-400">Thông Tin Liên Hệ</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
@@ -127,7 +127,7 @@ export const ContactClient: React.FC = () => {
                   value={message}
                   onChange={(e) => setMessage(e.target.value)}
                   placeholder="Nhập nội dung cần hỗ trợ chi tiết..."
-                  className="w-full bg-white text-slate-900 text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-[#143D30] outline-none"
+                  className="w-full bg-white text-slate-900 text-xs sm:text-sm p-3 rounded-xl border border-slate-300 focus:border-brand outline-none"
                   required
                 />
               </div>

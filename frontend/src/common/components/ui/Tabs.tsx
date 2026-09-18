@@ -38,7 +38,7 @@ export const Tabs: React.FC<TabsProps> = ({
               ${size === 'lg' ? 'px-5 py-2.5 text-base min-h-[46px]' : 'px-3.5 py-2 text-sm min-h-[40px]'}
               ${
                 isActive
-                  ? 'bg-[#143D30] text-white shadow-md'
+                  ? 'bg-brand text-white shadow-md'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
               }
             `}

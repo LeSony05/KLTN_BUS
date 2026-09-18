@@ -50,7 +50,7 @@ export const LoginForm: React.FC = () => {
         <button
           type="button"
           onClick={handleQuickLogin}
-          className="px-3 py-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-lg cursor-pointer transition-colors shadow-xs whitespace-nowrap"
+          className="px-3 py-1.5 bg-brand-hover hover:bg-emerald-800 text-white font-bold rounded-lg cursor-pointer transition-colors shadow-xs whitespace-nowrap"
         >
           Vào ngay
         </button>
@@ -84,7 +84,7 @@ export const LoginForm: React.FC = () => {
           }
         />
         <div className="flex items-center justify-end mt-2">
-          <a href="#" className="text-sm font-semibold text-[#143D30] hover:text-[#0e2a20] transition-colors">
+          <a href="#" className="text-sm font-semibold text-brand hover:text-[#0e2a20] transition-colors">
             Quên mật khẩu?
           </a>
         </div>

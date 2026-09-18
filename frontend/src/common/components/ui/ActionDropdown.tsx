@@ -108,9 +108,9 @@ export const ActionDropdown: React.FC<ActionDropdownProps> = ({
       case 'warning':
         return 'text-amber-700 hover:bg-amber-50 hover:text-amber-800 font-bold';
       case 'success':
-        return 'text-emerald-800 hover:bg-emerald-50 hover:text-emerald-900 font-bold';
+        return 'text-emerald-800 hover:bg-emerald-50 hover:text-brand-dark font-bold';
       default:
-        return 'text-slate-700 hover:bg-emerald-50/60 hover:text-emerald-900 font-semibold';
+        return 'text-slate-700 hover:bg-emerald-50/60 hover:text-brand-dark font-semibold';
     }
   };
 

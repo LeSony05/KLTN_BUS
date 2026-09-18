@@ -55,7 +55,7 @@ export const Badge: React.FC<BadgeProps> = ({
       <span
         className={`inline-flex items-center px-3.5 py-1 rounded-full text-sm font-extrabold uppercase tracking-wide border shadow-sm ${
           isBuy
-            ? 'bg-[#143D30] text-white border-[#143D30]'
+            ? 'bg-brand text-white border-brand'
             : 'bg-[#D97706] text-white border-[#D97706]'
         } ${className}`}
       >

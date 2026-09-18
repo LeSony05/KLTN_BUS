@@ -9,7 +9,7 @@ export const RegisterClientPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white flex font-sans">
       {/* Left side - Decorative */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-[#143D30] overflow-hidden">
+      <div className="hidden lg:flex lg:w-1/2 relative bg-brand overflow-hidden">
         {/* Background Image & Gradient overlay */}
         <div 
           className="absolute inset-0 bg-[url('/images/bg-register.jpg')] bg-cover bg-center opacity-30 mix-blend-overlay"
@@ -26,14 +26,14 @@ export const RegisterClientPage: React.FC = () => {
           </div>
           
           <div className="space-y-8 max-w-xl">
-            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-[#143D30] text-sm font-bold shadow-lg shadow-black/10">
+            <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-brand text-sm font-bold shadow-lg shadow-black/10">
               <Bus className="w-5 h-5" />
               <span>BUSWAY</span>
             </div>
             
             <h1 className="text-4xl lg:text-5xl xl:text-6xl font-bold leading-[1.1] tracking-tight">
               Bắt đầu hành trình <br />
-              <span className="text-emerald-400">mới</span> của bạn.
+              <span className="text-brand-light">mới</span> của bạn.
             </h1>
             
             <p className="text-lg text-emerald-100/90 leading-relaxed font-medium">
@@ -47,7 +47,7 @@ export const RegisterClientPage: React.FC = () => {
                 'Quản lý vé và lịch sử đi lại dễ dàng'
               ].map((feature, idx) => (
                 <div key={idx} className="flex items-center gap-3">
-                  <CheckCircle2 className="w-6 h-6 text-emerald-400 shrink-0" />
+                  <CheckCircle2 className="w-6 h-6 text-brand-light shrink-0" />
                   <span className="text-emerald-50 font-medium text-lg">{feature}</span>
                 </div>
               ))}
@@ -68,7 +68,7 @@ export const RegisterClientPage: React.FC = () => {
         <div className="w-full max-w-md mx-auto">
           {/* Logo on Mobile Only */}
           <div className="flex flex-col items-center lg:items-start text-center lg:text-left mb-6 mt-12 lg:mt-0 lg:mb-8">
-             <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-[#143D30] flex items-center justify-center border border-emerald-100 shadow-sm lg:hidden">
+             <div className="w-16 h-16 rounded-2xl bg-emerald-50 text-brand flex items-center justify-center border border-emerald-100 shadow-sm lg:hidden">
               <Bus className="w-8 h-8" />
             </div>
           </div>
@@ -86,7 +86,7 @@ export const RegisterClientPage: React.FC = () => {
 
           <p className="mt-8 text-center text-sm text-slate-600">
             Đã có tài khoản?{' '}
-            <Link href="/login" className="font-semibold text-[#143D30] hover:text-[#0e2a20] transition-colors underline underline-offset-4 decoration-2 decoration-emerald-200 hover:decoration-[#143D30]">
+            <Link href="/login" className="font-semibold text-brand hover:text-[#0e2a20] transition-colors underline underline-offset-4 decoration-2 decoration-emerald-200 hover:decoration-[#143D30]">
               Đăng nhập ngay
             </Link>
           </p>

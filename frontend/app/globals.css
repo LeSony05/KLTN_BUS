@@ -9,6 +9,16 @@
   --color-forest-deep: #0b221a;
   --color-amber-gold: #f59e0b;
   --color-amber-dark: #d97706;
+
+  /* New Brand Theme Colors */
+  --color-brand: #1A56DB;
+  --color-brand-hover: #1E429F;
+  --color-brand-light: #EBF5FF;
+  --color-brand-dark: #0F172A;
+  
+  --color-accent: #FF5A1F;
+  --color-accent-hover: #E04711;
+  --color-accent-light: #FFF0EB;
 }
 
 :root {

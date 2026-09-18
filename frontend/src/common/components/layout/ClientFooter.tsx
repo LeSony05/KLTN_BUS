@@ -10,14 +10,14 @@ import {
 
 export const ClientFooter: React.FC = () => {
   return (
-    <footer className="bg-[#113327] text-slate-300 pt-16 pb-8 border-t border-emerald-950">
+    <footer className="bg-red-600 text-slate-300 pt-16 pb-8 border-t border-red-700">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         {/* 4 Cột chính */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-14 border-b border-red-700 pb-12">
           {/* Cột 1: Logo & Mô tả */}
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-lg bg-amber-500 text-[#113327] flex items-center justify-center font-bold">
+              <div className="w-8 h-8 rounded-lg bg-amber-500 text-brand-dark flex items-center justify-center font-bold">
                 <Bus className="w-5 h-5" />
               </div>
               <span className="text-xl font-bold text-white tracking-tight">

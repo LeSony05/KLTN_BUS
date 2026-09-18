@@ -35,7 +35,7 @@ export const ProfilePasswordClientPage: React.FC = () => {
                     <input 
                       type="password" 
                       placeholder="Nhập mật khẩu cũ" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#F5A623] transition-colors"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-accent transition-colors"
                     />
                     <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                       <EyeOff className="w-5 h-5" />
@@ -51,7 +51,7 @@ export const ProfilePasswordClientPage: React.FC = () => {
                     <input 
                       type="password" 
                       placeholder="Nhập mật khẩu mới" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#F5A623] transition-colors"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-accent transition-colors"
                     />
                     <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                       <EyeOff className="w-5 h-5" />
@@ -67,7 +67,7 @@ export const ProfilePasswordClientPage: React.FC = () => {
                     <input 
                       type="password" 
                       placeholder="Nhập lại mật khẩu" 
-                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-[#F5A623] transition-colors"
+                      className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-accent transition-colors"
                     />
                     <button type="button" className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600">
                       <EyeOff className="w-5 h-5" />
@@ -84,7 +84,7 @@ export const ProfilePasswordClientPage: React.FC = () => {
                   </button>
                   <button 
                     type="button"
-                    className="px-8 py-2.5 bg-[#FFC700] text-[#113327] rounded-full font-black hover:bg-[#E6B200] shadow-md shadow-amber-500/20 transition-all"
+                    className="px-8 py-2.5 bg-accent text-white rounded-full font-black hover:bg-accent-hover shadow-md shadow-accent/20 transition-all"
                   >
                     Xác nhận
                   </button>

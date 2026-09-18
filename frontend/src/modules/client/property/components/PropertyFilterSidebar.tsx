@@ -91,7 +91,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
-          <Filter className="w-4 h-4 text-[#143D30]" />
+          <Filter className="w-4 h-4 text-brand" />
           <h2 className="text-sm font-extrabold text-slate-900 uppercase tracking-wide">
             Lọc chuyến
           </h2>
@@ -115,7 +115,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             onClick={() => handleChange('needType', 'ALL')}
             className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'ALL'
-                ? 'bg-[#143D30] text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -126,7 +126,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             onClick={() => handleChange('needType', 'BUY')}
             className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'BUY'
-                ? 'bg-[#143D30] text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -137,7 +137,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             onClick={() => handleChange('needType', 'RENT')}
             className={`py-2 text-xs font-bold rounded-md transition-colors cursor-pointer ${
               filters.needType === 'RENT'
-                ? 'bg-[#143D30] text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -156,7 +156,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
             value={filters.keyword}
             onChange={(e) => handleChange('keyword', e.target.value)}
             placeholder="Điểm đi, điểm đến, loại xe..."
-            className="w-full pl-9 pr-3 py-2.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent"
+            className="w-full pl-9 pr-3 py-2.5 text-xs rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent"
           />
         </div>
       </div>
@@ -164,13 +164,13 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       {/* Property Type */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-          <Bus className="w-3.5 h-3.5 text-[#143D30]" />
+          <Bus className="w-3.5 h-3.5 text-brand" />
           <span>Loại xe / dịch vụ</span>
         </label>
         <select
           value={filters.propertyType}
           onChange={(e) => handleChange('propertyType', e.target.value)}
-          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent text-slate-700 font-medium"
         >
           {PROPERTY_TYPES.map((type) => (
             <option key={type} value={type === 'Tất cả loại xe' ? '' : type}>
@@ -185,13 +185,13 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
       {/* Price Range */}
       <div className="space-y-1.5">
         <label className="text-xs font-bold text-slate-700 flex items-center gap-1.5">
-          <Clock3 className="w-3.5 h-3.5 text-[#143D30]" />
+          <Clock3 className="w-3.5 h-3.5 text-brand" />
           <span>Khung giờ</span>
         </label>
         <select
           value={filters.direction}
           onChange={(e) => handleChange('direction', e.target.value)}
-          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent text-slate-700 font-medium"
         >
           {TIME_SLOTS.map((item) => (
             <option key={item.value} value={item.value}>
@@ -210,7 +210,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
         <select
           value={filters.priceRange}
           onChange={(e) => handleChange('priceRange', e.target.value)}
-          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent text-slate-700 font-medium"
         >
           {priceOptions.map((item) => (
             <option key={item.value} value={item.value}>
@@ -229,7 +229,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
         <select
           value={filters.areaRange}
           onChange={(e) => handleChange('areaRange', e.target.value)}
-          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-[#143D30] focus:border-transparent text-slate-700 font-medium"
+          className="w-full px-3 py-2.5 text-xs rounded-lg border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-brand focus:border-transparent text-slate-700 font-medium"
         >
           {AREA_RANGES.map((item) => (
             <option key={item.value} value={item.value}>
@@ -244,7 +244,7 @@ export const PropertyFilterSidebar: React.FC<PropertyFilterSidebarProps> = ({
         <div className="space-y-2">
           {['Chọn trước chỗ ngồi', 'Có trung chuyển', 'Có mã giảm giá', 'Hủy vé linh hoạt'].map((label) => (
             <label key={label} className="flex items-center gap-2 text-xs font-semibold text-slate-600">
-              <input type="checkbox" className="accent-[#143D30]" />
+              <input type="checkbox" className="accent-brand" />
               <span>{label}</span>
             </label>
           ))}

@@ -201,7 +201,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
           </div>
           <div className="grid grid-cols-3 gap-2 text-center">
             <div className="rounded-lg bg-emerald-50 border border-emerald-100 px-3 py-2">
-              <p className="text-base font-black text-[#143D30]">{filteredPosts.length}</p>
+              <p className="text-base font-black text-brand">{filteredPosts.length}</p>
               <p className="text-[10px] font-bold text-emerald-800">kết quả</p>
             </div>
             <div className="rounded-lg bg-amber-50 border border-amber-100 px-3 py-2">
@@ -234,13 +234,13 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
         {/* Mobile Filter Toggle Button */}
         <div className="lg:hidden flex items-center justify-between gap-3 bg-white p-3.5 rounded-2xl border border-slate-200 shadow-sm">
           <div className="flex items-center gap-2 text-xs font-bold text-slate-800">
-            <SlidersHorizontal className="w-4 h-4 text-[#143D30]" />
+            <SlidersHorizontal className="w-4 h-4 text-brand" />
             <span>Bộ lọc tìm kiếm ({activeChips.length})</span>
           </div>
           <button
             type="button"
             onClick={() => setMobileFilterOpen(!mobileFilterOpen)}
-            className="px-3 py-1.5 rounded-xl bg-[#143D30] text-white text-xs font-bold flex items-center gap-1 shadow-sm cursor-pointer"
+            className="px-3 py-1.5 rounded-xl bg-brand text-white text-xs font-bold flex items-center gap-1 shadow-sm cursor-pointer"
           >
             <span>{mobileFilterOpen ? 'Đóng bộ lọc' : 'Mở bộ lọc'}</span>
           </button>
@@ -267,7 +267,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
           <div className="bg-white rounded-lg border border-slate-200 p-4 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="text-xs font-bold text-slate-700">
-                Tìm thấy <strong className="text-[#143D30] font-black text-sm">{filteredPosts.length}</strong> chuyến/dịch vụ phù hợp
+                Tìm thấy <strong className="text-brand font-black text-sm">{filteredPosts.length}</strong> chuyến/dịch vụ phù hợp
               </span>
             </div>
 
@@ -283,7 +283,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
                   setFilters({ ...filters, sortBy: e.target.value as PropertyFilterState['sortBy'] });
                   setCurrentPage(1);
                 }}
-                className="px-3 py-1.5 text-xs font-bold text-slate-800 bg-slate-50 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#143D30] cursor-pointer"
+                className="px-3 py-1.5 text-xs font-bold text-slate-800 bg-slate-50 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-brand cursor-pointer"
               >
                 <option value="NEWEST">Mới cập nhật</option>
                 <option value="PRICE_ASC">Giá tăng dần</option>
@@ -296,7 +296,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
           {/* Active Filter Chips */}
           {activeChips.length > 0 && (
             <div className="flex flex-wrap items-center gap-2 bg-emerald-50/50 p-3 rounded-lg border border-emerald-100">
-              <span className="text-[11px] font-bold text-[#143D30] uppercase tracking-wider">
+              <span className="text-[11px] font-bold text-brand uppercase tracking-wider">
                 Đang lọc:
               </span>
               {activeChips.map((chip) => (
@@ -351,7 +351,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="px-4 py-2 rounded-xl bg-[#143D30] text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm hover:bg-[#0e2a20] transition-colors cursor-pointer"
+                className="px-4 py-2 rounded-xl bg-brand text-white text-xs font-bold inline-flex items-center gap-2 shadow-sm hover:bg-brand-hover transition-colors cursor-pointer"
               >
                 <span>Đặt lại tất cả bộ lọc</span>
               </button>
@@ -405,7 +405,7 @@ const PropertyListContent: React.FC<PropertyListProps> = ({ initialPosts }) => {
                       onClick={() => setCurrentPage(item)}
                       className={`w-7 h-7 rounded-md text-xs font-semibold transition-all cursor-pointer flex items-center justify-center ${
                         isCurrent
-                          ? 'bg-[#143D30] text-white font-bold shadow-2xs'
+                          ? 'bg-brand text-white font-bold shadow-2xs'
                           : 'text-slate-500 hover:text-slate-900 hover:bg-slate-100/70'
                       }`}
                     >

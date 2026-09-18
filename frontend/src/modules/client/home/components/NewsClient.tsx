@@ -31,12 +31,12 @@ export const NewsClient: React.FC = () => {
       <div className="max-w-[1050px] mx-auto px-4 sm:px-6">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
           <div className="text-center md:text-left flex-1">
-            <h2 className="text-xl md:text-2xl font-black text-[#00613D] uppercase">
+            <h2 className="text-xl md:text-2xl font-black text-brand uppercase">
               TIN TỨC MỚI
             </h2>
             <p className="text-sm text-slate-500 font-semibold mt-1">Cập nhật những thông tin mới từ BUSWAY</p>
           </div>
-          <Link href="#" className="text-sm font-bold text-[#F5A623] hover:underline flex items-center justify-center md:justify-end gap-1">
+          <Link href="#" className="text-sm font-bold text-accent hover:underline flex items-center justify-center md:justify-end gap-1">
             Xem tất cả
           </Link>
         </div>
@@ -53,13 +53,13 @@ export const NewsClient: React.FC = () => {
               </div>
               <div className="p-4 flex flex-col flex-1 justify-between">
                 <div>
-                  <h3 className="text-sm font-black text-slate-900 group-hover:text-[#F5A623] transition-colors line-clamp-2 uppercase">
+                  <h3 className="text-sm font-black text-slate-900 group-hover:text-accent transition-colors line-clamp-2 uppercase">
                     {news.title}
                   </h3>
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <span className="text-xs text-slate-500 font-medium">{news.date}</span>
-                  <span className="text-xs font-bold text-[#F5A623] flex items-center gap-0.5">
+                  <span className="text-xs font-bold text-accent flex items-center gap-0.5">
                     Chi tiết <ChevronRight className="w-3 h-3" />
                   </span>
                 </div>
@@ -69,7 +69,7 @@ export const NewsClient: React.FC = () => {
         </div>
         
         <div className="flex justify-center gap-2 mt-8">
-          <span className="w-8 h-2 rounded-full bg-[#F5A623]"></span>
+          <span className="w-8 h-2 rounded-full bg-accent"></span>
           <span className="w-2 h-2 rounded-full bg-slate-300"></span>
           <span className="w-2 h-2 rounded-full bg-slate-300"></span>
         </div>

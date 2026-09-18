@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   Armchair,
   Bus,
@@ -24,10 +25,12 @@ export interface DetailPropertyPostProps {
 }
 
 export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) => {
+  const router = useRouter();
   const isTicket = post.needType === 'BUY';
   const [deckFilter, setDeckFilter] = useState<'all' | 'lower' | 'upper'>('all');
   const [selectedSeats, setSelectedSeats] = useState<string[]>(['B04', 'B05', 'B07', 'B08']);
   const [showTripInfoModal, setShowTripInfoModal] = useState(false);
+  const [isAcceptedTerms, setIsAcceptedTerms] = useState(false);
   const descriptionLines = post.description
     .split('\n')
     .map((line) => line.trim())
@@ -103,9 +106,9 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
     <div className="min-h-screen bg-[#F8FAF9] font-sans pb-12">
       <div className="bg-white border-b border-slate-200">
         <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center gap-2 text-xs font-semibold text-slate-500">
-          <Link href="/" className="hover:text-[#143D30]">Trang chủ</Link>
+          <Link href="/" className="hover:text-brand">Trang chủ</Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
-          <Link href="/posts" className="hover:text-[#143D30]">Chuyến xe</Link>
+          <Link href="/posts" className="hover:text-brand">Chuyến xe</Link>
           <ChevronRight className="w-3.5 h-3.5 text-slate-300" />
           <span className="text-slate-900 font-bold">{post.id.padStart(4, '0')}</span>
         </div>
@@ -119,7 +122,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                 <div className="space-y-3">
                   <div className="flex items-center gap-6">
                     <h2 className="text-xl font-black text-slate-950">Chọn ghế</h2>
-                    <button type="button" className="text-xs font-bold text-[#F5A623] hover:underline">
+                    <button type="button" className="text-xs font-bold text-accent hover:underline">
                       Thông tin xe
                     </button>
                   </div>
@@ -135,7 +138,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                         onClick={() => setDeckFilter(value as 'all' | 'lower' | 'upper')}
                         className={`h-8 px-3 rounded-md text-xs font-black transition-colors ${
                           deckFilter === value
-                            ? 'bg-[#143D30] text-white shadow-sm'
+                            ? 'bg-brand text-white shadow-sm'
                             : 'text-slate-600 hover:text-slate-900'
                         }`}
                       >
@@ -182,37 +185,37 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                     <span className="text-xs font-bold text-slate-700">Họ và tên <span className="text-red-500">*</span></span>
                     <div className="mt-1.5 relative">
                       <User className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-[#EF5222]" defaultValue="Nguyễn Văn Hùng" />
+                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-accent" defaultValue="Nguyễn Văn Hùng" />
                     </div>
                   </label>
                   <label className="block">
                     <span className="text-xs font-bold text-slate-700">Số điện thoại <span className="text-red-500">*</span></span>
                     <div className="mt-1.5 relative">
                       <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-[#EF5222]" defaultValue="0912.345.678" />
+                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-accent" defaultValue="0912.345.678" />
                     </div>
                   </label>
                   <label className="block">
                     <span className="text-xs font-bold text-slate-700">Email <span className="text-red-500">*</span></span>
                     <div className="mt-1.5 relative">
                       <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
-                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-[#EF5222]" defaultValue="nguyenvanhung@gmail.com" />
+                      <input className="h-11 w-full rounded-lg border border-slate-300 pl-9 pr-3 text-sm font-semibold outline-none focus:border-accent" defaultValue="nguyenvanhung@gmail.com" />
                     </div>
                   </label>
                 </div>
               </div>
 
               <div className="p-4 md:p-5">
-                <h2 className="text-base font-black text-[#EF5222] mb-4">Điều khoản & lưu ý</h2>
+                <h2 className="text-base font-black text-accent mb-4">Điều khoản & lưu ý</h2>
                 <div className="space-y-3 text-xs font-semibold text-slate-700 leading-relaxed">
-                  <p className="text-[#EF5222] font-black">
+                  <p className="text-accent font-black">
                     Quý khách vui lòng đăng nhập tài khoản để nhận chương trình khuyến mãi và tích điểm.
                   </p>
                   <p>
                     Quý khách vui lòng có mặt tại bến xuất phát trước ít nhất 20 phút. Vé điện tử sẽ được gửi qua email hoặc SMS sau khi thanh toán thành công.
                   </p>
                   <p>
-                    Nếu có nhu cầu trung chuyển, vui lòng liên hệ tổng đài <strong className="text-[#EF5222]">1900 6789</strong> để được hỗ trợ.
+                    Nếu có nhu cầu trung chuyển, vui lòng liên hệ tổng đài <strong className="text-accent">1900 6789</strong> để được hỗ trợ.
                   </p>
                   {paragraphs.slice(0, 1).map((line) => (
                     <p key={line}>{line}</p>
@@ -224,13 +227,13 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
             <div className="p-4 md:p-5 border-b border-slate-200">
               <h2 className="text-base font-black text-slate-950 mb-4 flex items-center gap-2">
                 Thông đón trả
-                <Info className="w-4 h-4 text-[#EF5222]" />
+                <Info className="w-4 h-4 text-accent" />
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div className="space-y-3">
                   <h3 className="text-xs font-black text-slate-700 uppercase">Điểm đón</h3>
                   <div className="flex items-center gap-4 text-xs font-bold text-slate-600">
-                    <label className="inline-flex items-center gap-1.5 text-[#EF5222]">
+                    <label className="inline-flex items-center gap-1.5 text-accent">
                       <input type="radio" name="pickup" defaultChecked className="accent-[#EF5222]" />
                       Bến xe/VP
                     </label>
@@ -239,7 +242,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                       Trung chuyển
                     </label>
                   </div>
-                  <select className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#EF5222]">
+                  <select className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm font-bold text-slate-900 outline-none focus:border-accent">
                     <option>{post.province}</option>
                     <option>Bến xe Miền Tây</option>
                     <option>Bến xe Miền Đông mới</option>
@@ -252,7 +255,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                 <div className="space-y-3">
                   <h3 className="text-xs font-black text-slate-700 uppercase">Điểm trả</h3>
                   <div className="flex items-center gap-4 text-xs font-bold text-slate-600">
-                    <label className="inline-flex items-center gap-1.5 text-[#EF5222]">
+                    <label className="inline-flex items-center gap-1.5 text-accent">
                       <input type="radio" name="dropoff" defaultChecked className="accent-[#EF5222]" />
                       Bến xe/VP
                     </label>
@@ -261,7 +264,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                       Trung chuyển
                     </label>
                   </div>
-                  <select className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#EF5222]">
+                  <select className="h-11 w-full rounded-lg border border-slate-300 bg-white px-3 text-sm font-bold text-slate-900 outline-none focus:border-accent">
                     <option>{post.district}</option>
                     <option>Trung tâm thành phố</option>
                     <option>Bến xe gần nhất</option>
@@ -273,10 +276,31 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
               </div>
             </div>
 
+            <div className="p-4 md:p-5 border-b border-slate-200 flex items-center justify-center">
+              <label className="flex items-center gap-2.5 cursor-pointer select-none">
+                <div className={`w-5 h-5 rounded-md border-[1.5px] flex items-center justify-center transition-colors ${isAcceptedTerms ? 'bg-accent border-accent' : 'bg-white border-slate-300'}`}>
+                  {isAcceptedTerms && (
+                    <svg xmlns="http://www.w3.org/2000/svg" className="w-3.5 h-3.5 text-white" viewBox="0 0 20 20" fill="currentColor">
+                      <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                    </svg>
+                  )}
+                </div>
+                <input 
+                  type="checkbox" 
+                  className="hidden" 
+                  checked={isAcceptedTerms}
+                  onChange={(e) => setIsAcceptedTerms(e.target.checked)}
+                />
+                <span className="text-[13px] md:text-sm text-slate-800">
+                  <span className="text-accent font-bold underline underline-offset-2">Chấp nhận điều khoản</span> đặt vé & chính sách bảo mật thông tin của BusWay
+                </span>
+              </label>
+            </div>
+
             <div className="p-4 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="inline-flex px-2 py-1 rounded-md bg-[#143D30] text-white text-[10px] font-black">BUSWAY</span>
+                  <span className="inline-flex px-2 py-1 rounded-md bg-brand text-white text-[10px] font-black">BUSWAY</span>
                   <span className="text-xs font-bold text-slate-500">Tổng tiền</span>
                 </div>
                 <p className="text-2xl font-black text-red-600">{totalFareText}đ</p>
@@ -285,21 +309,41 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                 <button type="button" className="h-11 px-8 rounded-full border border-slate-300 text-slate-700 text-sm font-bold hover:bg-slate-50 transition-colors">
                   Hủy
                 </button>
-                <button type="button" className="h-11 px-8 rounded-full bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] text-sm font-black transition-colors">
+                <button 
+                  type="button" 
+                  onClick={() => {
+                    if (!isAcceptedTerms) {
+                      alert('Vui lòng chấp nhận điều khoản đặt vé & chính sách bảo mật để tiếp tục.');
+                      return;
+                    }
+                    const query = new URLSearchParams({
+                      totalFare: totalFare.toString(),
+                      baseFare: baseFareNumber.toString(),
+                      seats: selectedSeatText,
+                      count: selectedSeats.length.toString(),
+                      route: post.title || 'TP. Hồ Chí Minh - Đà Lạt',
+                      departureTime: '22:30 17/09/2026',
+                      pickup: 'Bến xe Miền Đông mới',
+                      dropoff: 'Bến xe trung tâm Đà Lạt',
+                    });
+                    router.push(`/payment?${query.toString()}`);
+                  }}
+                  className="h-11 px-8 rounded-full bg-accent hover:bg-accent-hover text-white text-sm font-black transition-colors"
+                >
                   Thanh toán
                 </button>
               </div>
             </div>
           </section>
 
-          <aside className="space-y-4">
+          <aside className="space-y-4 lg:sticky lg:top-24">
             <section className="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
               <div className="flex items-center justify-between gap-3 mb-4">
                 <h2 className="text-base font-black text-slate-950">Thông tin chuyến đi</h2>
                 <button
                   type="button"
                   onClick={() => setShowTripInfoModal(true)}
-                  className="text-xs font-black text-[#F5A623] hover:underline"
+                  className="text-xs font-black text-accent hover:underline"
                 >
                   Chi tiết
                 </button>
@@ -331,7 +375,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
             <section className="bg-white rounded-lg border border-slate-200 shadow-sm p-4">
               <h2 className="text-base font-black text-slate-950 mb-4 flex items-center gap-1.5">
                 Chi tiết giá
-                <Info className="w-5 h-5 text-[#F5A623]" />
+                <Info className="w-5 h-5 text-accent" />
               </h2>
               <div className="space-y-3 text-sm pb-4 border-b border-slate-100">
                 <div className="flex justify-between gap-3">
@@ -366,7 +410,7 @@ export const DetailPropertyPost: React.FC<DetailPropertyPostProps> = ({ post }) 
                 <h2 className="text-base font-black text-slate-950">
                   Thông tin chuyến đi (1)
                 </h2>
-                <span className="w-5 h-5 rounded-full border-[1.5px] border-[#F5A623] text-[#F5A623] flex items-center justify-center font-black text-[10px]">
+                <span className="w-5 h-5 rounded-full border-[1.5px] border-accent text-accent flex items-center justify-center font-black text-[10px]">
                   i
                 </span>
               </div>

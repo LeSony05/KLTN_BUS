@@ -6,15 +6,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {
   ArrowRight,
-  Bus,
   CalendarClock,
   CheckCircle2,
   MapPin,
   Armchair,
   Coins,
   Clock,
-  ShieldCheck,
-  Star,
   Ticket,
 } from 'lucide-react';
 import type { PropertyDemand } from '../models/property.model';
@@ -28,6 +25,21 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
   const router = useRouter();
   const isBuy = post.needType === 'BUY';
 
+  const locationParts = post.location.split(' - ');
+  const pickup = locationParts[0];
+  const dropoff = locationParts.length > 1 ? locationParts.slice(1).join(' - ') : 'Chưa xác định';
+  
+  const getArrivalTime = (timeStr?: string) => {
+    if (!timeStr) return '10:00';
+    const [h, m] = timeStr.split(':').map(Number);
+    if (isNaN(h) || isNaN(m)) return '10:00';
+    const newH = (h + 2) % 24;
+    return `${newH.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+  };
+  
+  const arrivalTime = getArrivalTime(post.direction);
+  const departureTime = post.direction || '08:00';
+
   const handleCardClick = () => {
     router.push(`/posts/${post.id}`);
   };
@@ -35,81 +47,54 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
   return (
     <div
       onClick={handleCardClick}
-      className="bg-white rounded-lg border border-slate-200 hover:border-[#143D30]/40 shadow-sm hover:shadow-md transition-all duration-150 p-4 cursor-pointer group/card"
+      className="group/card overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm transition-all duration-150 hover:-translate-y-0.5 hover:border-brand/40 hover:shadow-md cursor-pointer p-3 sm:p-4"
     >
-      <div className="grid grid-cols-1 lg:grid-cols-[1.25fr_1fr_auto] gap-4 lg:items-center">
-        <div className="space-y-3">
+      <div className="flex flex-col gap-3">
+        {/* Top: Header & Tags */}
+        <div className="flex flex-wrap items-center justify-between gap-2">
           <div className="flex flex-wrap items-center gap-2">
-            <span
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-extrabold uppercase ${
-                isBuy
-                  ? 'bg-emerald-50 text-emerald-800 border border-emerald-200'
-                  : 'bg-sky-50 text-sky-800 border border-sky-200'
-              }`}
-            >
-              {isBuy ? <Bus className="w-3.5 h-3.5" /> : <ShieldCheck className="w-3.5 h-3.5" />}
-              {isBuy ? 'Chuyến xe' : 'Vận đơn'}
-            </span>
-            <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md bg-amber-50 text-amber-800 border border-amber-100 text-[11px] font-extrabold">
-              <Star className="w-3.5 h-3.5 fill-amber-500 text-amber-500" />
-              4.8
-            </span>
-            <span className="text-[11px] font-bold text-slate-500">{post.authorName}</span>
-          </div>
-
-          <Link href={`/posts/${post.id}`} className="block" onClick={(e) => e.stopPropagation()}>
-            <h3 className="text-base font-black text-slate-950 group-hover/card:text-[#143D30] transition-colors">
-              {post.title}
-            </h3>
-          </Link>
-
-          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs font-semibold text-slate-600">
-            <span className="inline-flex items-center gap-1.5">
-              <MapPin className="w-4 h-4 text-rose-500" />
-              {post.location}
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <Bus className="w-4 h-4 text-[#143D30]" />
+            <span className="text-sm font-extrabold text-slate-700">{post.authorName}</span>
+            <span className="rounded-md bg-brand-light px-2 py-0.5 text-[11px] font-extrabold text-brand">
               {post.propertyType}
             </span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-3 gap-2 rounded-lg bg-slate-50 border border-slate-100 p-3">
-          <div>
-            <p className="text-[10px] font-extrabold text-slate-400 uppercase">Giờ đi</p>
-            <p className="mt-1 text-sm font-black text-slate-950 flex items-center gap-1">
-              <CalendarClock className="w-4 h-4 text-[#143D30]" />
-              {post.direction || '08:00'}
-            </p>
-          </div>
-          <div>
-            <p className="text-[10px] font-extrabold text-slate-400 uppercase">Còn chỗ</p>
-            <p className="mt-1 text-sm font-black text-slate-950 flex items-center gap-1">
-              <Armchair className="w-4 h-4 text-amber-600" />
+            <span className="flex items-center gap-1 rounded-md bg-amber-50 border border-amber-100 px-2 py-0.5 text-[11px] font-extrabold text-amber-700">
+              <Armchair className="h-3 w-3" />
               {post.area}
-            </p>
+            </span>
           </div>
-          <div>
-            <p className="text-[10px] font-extrabold text-slate-400 uppercase">Chính sách</p>
-            <p className="mt-1 text-sm font-black text-slate-950 flex items-center gap-1">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-              {post.legal || 'Linh hoạt'}
-            </p>
+          <div className="flex items-center gap-3">
+            <div className="text-right flex items-center gap-1.5">
+              <span className="text-xs font-bold text-slate-500">Giá từ</span>
+              <span className="text-lg font-black text-brand">{post.price.split(' - ')[0]}</span>
+            </div>
           </div>
         </div>
 
-        <div className="lg:text-right space-y-3">
-          <div>
-            <p className="text-[11px] font-bold text-slate-400">Giá từ</p>
-            <p className="text-xl font-black text-[#143D30] flex lg:justify-end items-center gap-1">
-              <Coins className="w-5 h-5 text-amber-600" />
-              {post.price.split(' - ')[0]}
-            </p>
-            <p className="text-[11px] font-semibold text-slate-500 flex lg:justify-end items-center gap-1">
-              <Clock className="w-3.5 h-3.5" />
-              {post.timeAgo}
-            </p>
+        {/* Title */}
+        <Link href={`/posts/${post.id}`} className="block" onClick={(e) => e.stopPropagation()}>
+          <h3 className="text-base leading-snug font-black text-slate-950 transition-colors group-hover/card:text-brand line-clamp-1">
+            {post.title}
+          </h3>
+        </Link>
+
+        {/* Bottom: Timeline and Action */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-2 border-t border-slate-100">
+          <div className="flex items-center gap-3 flex-1 w-full max-w-lg">
+            <div className="flex flex-col flex-1 overflow-hidden">
+              <span className="text-base font-black text-slate-900">{departureTime}</span>
+              <span className="text-[11px] font-semibold text-slate-500 line-clamp-1">{pickup}</span>
+            </div>
+            
+            <div className="flex items-center w-12 sm:w-16 shrink-0">
+              <div className="w-1.5 h-1.5 rounded-full bg-brand" />
+              <div className="flex-1 h-[1.5px] bg-slate-300" />
+              <div className="w-1.5 h-1.5 rounded-full bg-rose-500" />
+            </div>
+
+            <div className="flex flex-col flex-1 text-right overflow-hidden">
+              <span className="text-base font-black text-slate-900">{arrivalTime}</span>
+              <span className="text-[11px] font-semibold text-slate-500 line-clamp-1">{dropoff}</span>
+            </div>
           </div>
 
           <button
@@ -122,11 +107,10 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ post, onOpenQuote })
               }
               onOpenQuote?.(post);
             }}
-            className="w-full lg:w-auto h-10 px-5 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] text-sm font-black inline-flex items-center justify-center gap-2"
+            className="inline-flex h-9 shrink-0 w-full sm:w-auto items-center justify-center gap-1.5 rounded-lg bg-accent px-5 text-sm font-black text-white shadow-sm transition-colors hover:bg-accent-hover"
           >
-            <Ticket className="w-4 h-4" />
-            {isBuy ? 'Đặt vé' : 'Tạo vận đơn'}
-            <ArrowRight className="w-4 h-4" />
+            <Ticket className="h-4 w-4" />
+            {isBuy ? 'Đặt vé' : 'Tạo đơn'}
           </button>
         </div>
       </div>

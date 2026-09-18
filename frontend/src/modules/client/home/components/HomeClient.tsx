@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import { HeroClient } from './HeroClient';
 import { PromotionsClient } from './PromotionsClient';
 import { PopularRoutesClient } from './PopularRoutesClient';
-import { WhyUsClient } from './WhyUsClient';
 import { NewsClient } from './NewsClient';
 import { EcosystemClient } from './EcosystemClient';
 
@@ -33,8 +32,6 @@ export const HomeClient: React.FC = () => {
       <PromotionsClient />
       
       <PopularRoutesClient />
-      
-      <WhyUsClient />
       
       <NewsClient />
       

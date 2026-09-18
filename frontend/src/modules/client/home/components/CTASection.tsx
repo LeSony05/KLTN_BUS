@@ -7,7 +7,7 @@ import { Search, ArrowRight } from 'lucide-react';
 
 export const CTASection: React.FC = () => {
   return (
-    <section className="py-10 bg-[#113327] text-white">
+    <section className="py-10 bg-brand-dark text-white">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="rounded-lg border border-white/15 bg-white/10 p-5 md:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5">
           <div>
@@ -23,7 +23,7 @@ export const CTASection: React.FC = () => {
             <Link href="/posts?needType=BUY">
               <button
                 type="button"
-                className="w-full sm:w-auto h-11 px-5 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] font-black text-sm flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full sm:w-auto h-11 px-5 rounded-lg bg-accent hover:bg-accent-hover text-white font-black text-sm flex items-center justify-center gap-2 cursor-pointer"
               >
                 <Search className="w-4 h-4" />
                 Tìm chuyến xe

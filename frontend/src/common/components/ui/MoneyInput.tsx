@@ -63,7 +63,7 @@ export const MoneyInput: React.FC<MoneyInputProps> = ({
           onChange={handleChange}
           placeholder={placeholder}
           className={`w-full bg-white text-slate-900 text-base font-semibold min-h-[50px] px-4 pr-16 rounded-xl border transition-colors outline-none
-            ${error ? 'border-rose-500 focus:border-rose-600 focus:ring-2 focus:ring-rose-200' : 'border-slate-300 hover:border-slate-400 focus:border-[#143D30] focus:ring-2 focus:ring-[#143D30]/20'}
+            ${error ? 'border-rose-500 focus:border-rose-600 focus:ring-2 focus:ring-rose-200' : 'border-slate-300 hover:border-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/20'}
             ${className}
           `}
         />
@@ -79,7 +79,7 @@ export const MoneyInput: React.FC<MoneyInputProps> = ({
             <Coins className="w-3.5 h-3.5 flex-shrink-0" />
             <span>Bằng chữ:</span>
           </span>
-          <span className="text-[#143D30] font-extrabold text-base">
+          <span className="text-brand font-extrabold text-base">
             {formatCurrency(numericVal)}
           </span>
         </div>

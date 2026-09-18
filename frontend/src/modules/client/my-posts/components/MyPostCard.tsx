@@ -64,7 +64,7 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
 
             {/* Status Badges */}
             {post.status === 'APPROVED' && (
-              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200/80">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-bold bg-emerald-50 text-brand border border-emerald-200/80">
                 <ShieldCheck className="w-3 h-3" />
                 <span>Đã thanh toán</span>
               </span>
@@ -132,7 +132,7 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
             <span className="inline-flex items-center gap-1.5">
               <Coins className="w-4 h-4 text-amber-600 flex-shrink-0" />
               <span>
-                Giá/cước: <strong className="text-emerald-900 font-extrabold">{post.priceRange}</strong>
+                Giá/cước: <strong className="text-brand-dark font-extrabold">{post.priceRange}</strong>
               </span>
             </span>
             <span className="inline-flex items-center gap-1.5">
@@ -190,7 +190,7 @@ export const MyPostCard: React.FC<MyPostCardProps> = ({
             <button
               type="button"
               onClick={() => onToggleHide(post)}
-              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-emerald-700 hover:bg-emerald-50 border border-emerald-200 transition-colors cursor-pointer"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-bold text-brand hover:bg-emerald-50 border border-emerald-200 transition-colors cursor-pointer"
               title="Khôi phục yêu cầu"
             >
               <Eye className="w-3.5 h-3.5" />

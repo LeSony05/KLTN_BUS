@@ -33,7 +33,7 @@ export const Toast: React.FC<ToastProps> = ({
 
   const typeConfig = {
     success: {
-      border: 'border-emerald-200 bg-white text-emerald-900 shadow-emerald-950/5',
+      border: 'border-emerald-200 bg-white text-brand-dark shadow-emerald-950/5',
       icon: <CheckCircle2 className="w-5 h-5 text-emerald-600 flex-shrink-0" />,
       badge: 'Thành công',
       badgeClass: 'bg-emerald-100 text-emerald-800',

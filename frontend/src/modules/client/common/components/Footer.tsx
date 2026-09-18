@@ -14,14 +14,14 @@ import {
 
 export const Footer: React.FC = () => {
   return (
-    <footer className="bg-[#113327] text-slate-300 pt-14 pb-8 border-t border-emerald-950 font-sans">
+    <footer className="bg-red-600 text-slate-300 pt-14 pb-8 border-t border-red-700 font-sans">
       <div className="max-w-[1360px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-emerald-900/60">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-red-700">
           {/* Cột 1: Thông tin thương hiệu */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-emerald-400">
-                <Bus className="w-5 h-5 text-emerald-400" />
+              <div className="w-8 h-8 rounded-lg bg-white/10 border border-white/20 flex items-center justify-center text-brand-light">
+                <Bus className="w-5 h-5 text-brand-light" />
               </div>
               <div className="text-xl font-extrabold tracking-tight">
                 <span className="text-white">Bus</span>{' '}

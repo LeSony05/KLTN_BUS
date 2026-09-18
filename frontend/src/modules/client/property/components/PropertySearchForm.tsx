@@ -35,7 +35,7 @@ export const PropertySearchForm: React.FC = () => {
             onClick={() => setActiveSearchTab('BUY')}
             className={`h-10 px-4 rounded-md text-sm font-extrabold flex items-center gap-2 ${
               activeSearchTab === 'BUY'
-                ? 'bg-[#143D30] text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -47,7 +47,7 @@ export const PropertySearchForm: React.FC = () => {
             onClick={() => setActiveSearchTab('RENT')}
             className={`h-10 px-4 rounded-md text-sm font-extrabold flex items-center gap-2 ${
               activeSearchTab === 'RENT'
-                ? 'bg-[#143D30] text-white shadow-sm'
+                ? 'bg-brand text-white shadow-sm'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
@@ -63,7 +63,7 @@ export const PropertySearchForm: React.FC = () => {
               name="tripTypeSearch"
               checked={tripType === 'one-way'}
               onChange={() => setTripType('one-way')}
-              className="accent-[#143D30] w-4 h-4 cursor-pointer"
+              className="accent-brand w-4 h-4 cursor-pointer"
             />
             Một chiều
           </label>
@@ -73,7 +73,7 @@ export const PropertySearchForm: React.FC = () => {
               name="tripTypeSearch"
               checked={tripType === 'round-trip'}
               onChange={() => setTripType('round-trip')}
-              className="accent-[#143D30] w-4 h-4 cursor-pointer"
+              className="accent-brand w-4 h-4 cursor-pointer"
             />
             Khứ hồi
           </label>
@@ -85,7 +85,7 @@ export const PropertySearchForm: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-3 lg:contents">
           <div className="flex-1 space-y-1.5">
             <label className="text-[11px] font-extrabold text-slate-500 uppercase flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+              <MapPin className="w-3.5 h-3.5 text-brand" />
               Điểm đi
             </label>
             <input
@@ -94,7 +94,7 @@ export const PropertySearchForm: React.FC = () => {
               onChange={(e) => setSelectedProvince(e.target.value)}
               placeholder="Nhập điểm đi"
               list="origin-options-search"
-              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#143D30]"
+              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-brand"
             />
             <datalist id="origin-options-search">
               <option value="TP. Hồ Chí Minh" />
@@ -110,7 +110,7 @@ export const PropertySearchForm: React.FC = () => {
             <button
               type="button"
               onClick={swapRoute}
-              className="w-11 h-11 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-[#143D30] flex items-center justify-center transition-colors cursor-pointer shrink-0"
+              className="w-11 h-11 rounded-lg border border-slate-200 bg-slate-50 hover:bg-slate-100 text-brand flex items-center justify-center transition-colors cursor-pointer shrink-0"
               title="Đổi chiều tuyến"
             >
               <ArrowRightLeft className="w-5 h-5" />
@@ -128,7 +128,7 @@ export const PropertySearchForm: React.FC = () => {
               onChange={(e) => setSelectedDistrict(e.target.value)}
               placeholder="Nhập điểm đến"
               list="destination-options-search"
-              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#143D30]"
+              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-brand"
             />
             <datalist id="destination-options-search">
               <option value="Đà Lạt" />
@@ -145,35 +145,35 @@ export const PropertySearchForm: React.FC = () => {
         <div className="flex flex-col md:flex-row gap-3 lg:contents">
           <div className="flex-1 space-y-1.5">
             <label className="text-[11px] font-extrabold text-slate-500 uppercase flex items-center gap-1.5">
-              <CalendarDays className="w-3.5 h-3.5 text-[#143D30]" />
+              <CalendarDays className="w-3.5 h-3.5 text-brand" />
               Ngày đi
             </label>
             <input
               type="date"
               value={selectedPrice}
               onChange={(e) => setSelectedPrice(e.target.value)}
-              className="h-12 w-full border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#143D30]"
+              className="h-12 w-full border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-brand"
             />
           </div>
 
           {tripType === 'round-trip' && (
             <div className="flex-1 space-y-1.5">
               <label className="text-[11px] font-extrabold text-slate-500 uppercase flex items-center gap-1.5">
-                <CalendarDays className="w-3.5 h-3.5 text-[#143D30]" />
+                <CalendarDays className="w-3.5 h-3.5 text-brand" />
                 Ngày về
               </label>
               <input
                 type="date"
                 value={returnDate}
                 onChange={(e) => setReturnDate(e.target.value)}
-                className="h-12 w-full border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#143D30]"
+                className="h-12 w-full border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-brand"
               />
             </div>
           )}
 
           <div className="flex-1 md:w-28 md:flex-none lg:w-28 lg:flex-none space-y-1.5">
             <label className="text-[11px] font-extrabold text-slate-500 uppercase flex items-center gap-1.5">
-              <Users className="w-3.5 h-3.5 text-[#143D30]" />
+              <Users className="w-3.5 h-3.5 text-brand" />
               Số vé
             </label>
             <input
@@ -182,7 +182,7 @@ export const PropertySearchForm: React.FC = () => {
               max={20}
               value={ticketCount}
               onChange={(e) => setTicketCount(Math.max(1, Number(e.target.value) || 1))}
-              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-[#143D30]"
+              className="h-12 w-full bg-white border border-slate-300 rounded-lg px-3 text-sm font-bold text-slate-900 outline-none focus:border-brand"
             />
           </div>
         </div>
@@ -195,7 +195,7 @@ export const PropertySearchForm: React.FC = () => {
         >
           <button
             type="button"
-            className="w-full sm:w-auto h-12 px-7 rounded-lg bg-[#FFC700] hover:bg-[#E6B200] text-[#113327] font-black text-sm flex items-center justify-center gap-2 shadow-sm cursor-pointer"
+            className="w-full sm:w-auto h-12 px-7 rounded-lg bg-accent hover:bg-accent-hover text-white font-black text-sm flex items-center justify-center gap-2 shadow-sm cursor-pointer"
           >
             <Search className="w-4 h-4" />
             Tìm chuyến

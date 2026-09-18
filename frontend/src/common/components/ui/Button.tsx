@@ -35,17 +35,17 @@ export const Button: React.FC<ButtonProps> = ({
 
   const variantStyles = {
     primary:
-      'bg-[#143D30] text-white hover:bg-[#0e2a20] active:bg-[#081a13] focus:ring-[#143D30] shadow-md hover:shadow-lg',
+      'bg-brand text-white hover:bg-brand-hover active:bg-brand-dark focus:ring-brand shadow-md hover:shadow-lg',
     accent:
-      'bg-[#FFC700] text-[#113327] hover:bg-[#E6B200] active:bg-[#D4A100] focus:ring-[#FFC700] shadow-md hover:shadow-lg',
+      'bg-accent text-white hover:bg-accent-hover active:bg-accent-hover focus:ring-[#FFC700] shadow-md hover:shadow-lg',
     success:
-      'bg-emerald-600 text-white hover:bg-emerald-700 active:bg-emerald-800 focus:ring-emerald-600 shadow-md',
+      'bg-brand text-white hover:bg-brand-hover active:bg-emerald-800 focus:ring-emerald-600 shadow-md',
     danger:
       'bg-rose-600 text-white hover:bg-rose-700 active:bg-rose-800 focus:ring-rose-600 shadow-md',
     outline:
-      'border-2 border-[#143D30] text-[#143D30] bg-transparent hover:bg-[#143D30]/5 active:bg-[#143D30]/10 focus:ring-[#143D30]',
+      'border-2 border-brand text-brand bg-transparent hover:bg-brand/5 active:bg-brand/10 focus:ring-brand',
     ghost:
-      'text-[#143D30] bg-transparent hover:bg-slate-100 active:bg-slate-200 focus:ring-slate-300',
+      'text-brand bg-transparent hover:bg-slate-100 active:bg-slate-200 focus:ring-slate-300',
   };
 
   return (
