@@ -5,10 +5,11 @@ import { Download, Mail, Printer, QrCode, ArrowLeft, CheckCircle2 } from 'lucide
 import Link from 'next/link';
 import ClientLayout from '@/modules/client/common/layouts/ClientLayout';
 
-export default function InvoicePage({ params }: { params: { id: string } }) {
+export default function InvoicePage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = React.use(params);
   // Mock data for the ticket
   const ticket = {
-    code: params.id || 'BW-888999',
+    code: resolvedParams.id || 'BW-888999',
     passenger: 'Nguyễn Văn Hùng',
     phone: '0912345678',
     route: 'TP. Hồ Chí Minh đi Đà Lạt',
